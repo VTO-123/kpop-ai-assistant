@@ -1,0 +1,19 @@
+node_modules
+npm-debug.log*
+pnpm-debug.log*
+
+.git
+.github
+.gitignore
+
+# 本地密钥绝不进镜像
+.env
+.env.local
+.env.*.local
+
+docs
+scripts
+.tmp*
+
+.DS_Store
+Thumbs.db
