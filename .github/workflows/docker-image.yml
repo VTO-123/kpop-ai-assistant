@@ -1,0 +1,47 @@
+name: build & push docker image
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    name: Smoke test + Docker image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 1) 先跑现有的 CI 检查，失败就不构建镜像
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Smoke test
+        run: npm run smoke
+
+      # 2) 构建并推送镜像到 Docker Hub
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: vtobbb/kpop-ai-assistant:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
