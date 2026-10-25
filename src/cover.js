@@ -10,6 +10,7 @@
  */
 import { config } from './config.js';
 import { findGroup, normalizeName } from './groups.js';
+import { fetchQQArtist } from './qqmusic.js';
 
 const HIT_TTL = 6 * 60 * 60 * 1000;
 const MISS_TTL = 10 * 60 * 1000;
@@ -51,10 +52,9 @@ export async function resolveCover(rawName) {
   if (hit) return hit;
   if (inflight.has(key)) return inflight.get(key);
 
-  const task = lookupArtistPhoto(rawName)
-    .then((url) => {
-      const result = url ? { url, source: 'netease' } : { url: '', source: 'none' };
-      remember(key, result, url ? HIT_TTL : MISS_TTL);
+  const task = resolveRemoteCover(rawName)
+    .then((result) => {
+      remember(key, result, result.url ? HIT_TTL : MISS_TTL);
       return result;
     })
     .catch(() => {
@@ -66,6 +66,19 @@ export async function resolveCover(rawName) {
 
   inflight.set(key, task);
   return task;
+}
+
+/** 先问网易云，再问 QQ 音乐；两边都没有才返回空。 */
+async function resolveRemoteCover(rawName) {
+  const netease = await lookupArtistPhoto(rawName).catch(() => '');
+  if (netease) return { url: netease, source: 'netease' };
+
+  if (config.coverQqLookup) {
+    const qq = await fetchQQArtist(rawName).catch(() => null);
+    if (qq?.picUrl) return { url: qq.picUrl, source: 'qqmusic' };
+  }
+
+  return { url: '', source: 'none' };
 }
 
 function remember(key, result, ttl) {

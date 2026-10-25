@@ -60,23 +60,26 @@
           </div>
         </div>
 
-        <p class="archive-note" id="archiveNote" hidden>
-          由 AI 检索公开资料整理，如有出入以官方为准。
-        </p>
-
         <div class="error-box" id="errorBox" role="alert" hidden>
           <span id="errorText"></span>
           <button class="btn btn-small" id="retryBtn" type="button">重试</button>
         </div>
 
         <article class="prose" id="output" aria-live="polite"></article>
-      </section>
 
-      <footer class="footer">
-        <span>作品仅供学习与交流 · 曲目信息请以官方平台为准</span>
-        <span class="footer-meta" id="footerMeta"></span>
-      </footer>
+        <div class="not-found" id="notFound" hidden>
+          <div class="not-found__icon" aria-hidden="true">🔍</div>
+          <h2>未收录这位歌手</h2>
+          <p class="not-found__message" id="notFoundMessage">
+            目前无法确认这是真实存在的歌手/团体。
+          </p>
+          <div class="not-found__similar" id="notFoundSimilar"></div>
+          <a class="btn btn-ghost not-found__back" href="/">换个名字再搜</a>
+        </div>
+      </section>
     </div>
+
+    <div class="vto-mark" aria-hidden="true">© VTO</div>
 
     <script src="/artist.js" type="module"></script>
   </body>

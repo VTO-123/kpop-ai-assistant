@@ -80,6 +80,10 @@ export const config = {
   coverEnabled: process.env.COVER_LOOKUP !== '0',
   coverApiBase: trimTrailingSlash(process.env.COVER_API_BASE || 'https://music.163.com'),
   coverTimeoutMs: Number.parseInt(process.env.COVER_TIMEOUT_MS || '2500', 10),
+  coverQqLookup: process.env.COVER_QQ_LOOKUP !== '0',
+
+  // AI 生成前是否先抓网易云真实资料作为上下文（测试时可关掉）
+  profileLookup: process.env.PROFILE_LOOKUP !== '0',
 };
 
 export default config;

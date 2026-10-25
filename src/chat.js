@@ -1,6 +1,8 @@
 import { config } from './config.js';
 import { streamDemo } from './demo.js';
+import { fetchArtistProfile, profileToContext } from './netease.js';
 import { buildMessages, sanitizeGroup } from './prompt.js';
+import { fetchQQArtist, qqToContext } from './qqmusic.js';
 import { resolveSource } from './sources.js';
 import { sendJson } from './static.js';
 
@@ -118,7 +120,38 @@ export async function handleChat(req, res) {
         { expected: true },
       );
     } else {
-      await streamUpstream({ group, send, signal: controller.signal });
+      // 先抓网易云 + QQ 音乐的真实资料，合并后作为上下文喂给模型
+      let context = '';
+      let profileName = '';
+      const sources = [];
+      if (config.profileLookup) {
+        const [netease, qq] = await Promise.allSettled([
+          fetchArtistProfile(group),
+          fetchQQArtist(group),
+        ]);
+        const ne = netease.status === 'fulfilled' ? netease.value : null;
+        const qqProfile = qq.status === 'fulfilled' ? qq.value : null;
+
+        const parts = [];
+        if (ne) {
+          parts.push(`【网易云音乐资料】\n${profileToContext(ne)}`);
+          sources.push('netease');
+        }
+        if (qqProfile) {
+          parts.push(`【QQ 音乐资料】\n${qqToContext(qqProfile)}`);
+          sources.push('qqmusic');
+        }
+        context = parts.join('\n\n');
+        profileName = ne?.name || qqProfile?.name || '';
+      }
+
+      send({ type: 'context', grounded: Boolean(context), profileName, sources });
+      await streamUpstream({
+        group,
+        send,
+        signal: controller.signal,
+        profileContext: context,
+      });
     }
 
     send({ type: 'done' });
@@ -140,7 +173,7 @@ export async function handleChat(req, res) {
   }
 }
 
-async function streamUpstream({ group, send, signal }) {
+async function streamUpstream({ group, send, signal, profileContext = '' }) {
   // 客户端断开或超时，两条路径最终都收敛到同一个 AbortSignal
   const timeoutController = new AbortController();
   const onAbort = () => timeoutController.abort();
@@ -159,7 +192,7 @@ async function streamUpstream({ group, send, signal }) {
       },
       body: JSON.stringify({
         model: config.model,
-        messages: buildMessages(group),
+        messages: buildMessages(group, profileContext),
         stream: true,
         temperature: 0.75,
         max_tokens: 1400,

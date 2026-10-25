@@ -101,7 +101,7 @@ export function renderMarkdown(text, options = {}) {
   return out.join('');
 }
 
-/** 只在「热门歌曲 / 必听」小节里把歌名做成链接（统一跳 B 站搜索页）。 */
+/** 只在「热门歌曲 / 必听」小节里把歌名做成链接：有 BV 走视频页，没有回退 B 站搜索页。 */
 function renderSongItem(item, section, songLinks, artist) {
   if (!/必听|热门歌曲/.test(section)) return inline(item);
 
@@ -110,15 +110,18 @@ function renderSongItem(item, section, songLinks, artist) {
 
   const title = match[1].trim();
   const hit = songLinks[normalizeTitle(title)];
+  const bvid = hit && /^BV[0-9A-Za-z]{6,}$/.test(hit.bvid || '') ? hit.bvid : '';
   // 已知歌曲用曲库里的歌手名，未知歌曲用当前页面的歌手名，提高搜索命中率
   const keyword = `${title} ${hit?.artist || artist}`.trim();
-  const href = `https://search.bilibili.com/all?keyword=${encodeURIComponent(keyword)}`;
+  const href = bvid
+    ? `https://www.bilibili.com/video/${bvid}`
+    : `https://search.bilibili.com/all?keyword=${encodeURIComponent(keyword)}`;
 
   const rest = inline(item.slice(match[0].length));
 
   return (
     `<a class="song-link" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer"` +
-    ` title="在 B 站搜索这首歌">` +
+    ` title="${bvid ? '在 B 站看这首歌' : '在 B 站搜索这首歌'}">` +
     `<strong>${escapeHtml(title)}</strong></a>${rest}`
   );
 }

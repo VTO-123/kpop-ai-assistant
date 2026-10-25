@@ -13,6 +13,7 @@ import path from 'node:path';
 import { setTimeout as delay } from 'node:timers/promises';
 import { fileURLToPath } from 'node:url';
 import { parseEnv } from '../src/config.js';
+import { SYSTEM_PROMPT } from '../src/prompt.js';
 import { renderMarkdown } from '../public/js/md.js';
 
 const root = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
@@ -67,12 +68,14 @@ async function collectStream(response) {
   let done = false;
   let error = '';
   let meta = null;
+  let context = null;
 
   const consumeLine = (line) => {
     if (!line.startsWith('data: ')) return;
     try {
       const event = JSON.parse(line.slice(6));
       if (event.type === 'meta') meta = event;
+      if (event.type === 'context') context = event;
       if (event.type === 'delta') {
         deltas += 1;
         text += event.text;
@@ -96,7 +99,7 @@ async function collectStream(response) {
   }
   consumeLine(buffer.trim());
 
-  return { text, deltas, done, error, meta };
+  return { text, deltas, done, error, meta, context };
 }
 
 const postChat = (base, group) =>
@@ -188,6 +191,8 @@ function envSuite() {
   check('.env 解析：去掉 BOM', parsed.AI_API_KEY === 'sk-test', parsed.AI_API_KEY);
   check('.env 解析：注释被忽略', Object.keys(parsed).length === 3, Object.keys(parsed).join(','));
   check('.env 解析：成对引号被去掉', parsed.AI_MODEL === 'deepseek-chat', parsed.AI_MODEL);
+  check('提示词：未收录使用固定标记', SYSTEM_PROMPT.includes('## 未收录'));
+  check('提示词：要求标注相近真实艺人', SYSTEM_PROMPT.includes('相近的真实艺人'));
 }
 
 async function demoSuite() {
@@ -196,6 +201,7 @@ async function demoSuite() {
     DEMO_MODE: '1',
     AI_API_KEY: '',
     COVER_API_BASE: `http://127.0.0.1:${coverApi.port}`,
+    COVER_QQ_LOOKUP: '0',
   });
   try {
     check('DEMO 服务启动', app.up, app.up ? '' : serverLog.slice(0, 300));
@@ -231,6 +237,8 @@ async function demoSuite() {
     check('首页引用 FlexCarousel 样式', htmlText.includes('/flex-carousel.css'));
     check('首页不再有「试试这些」', !htmlText.includes('试试这些') && !htmlText.includes('data-group='));
     check('首页不再有内置资料说明', !htmlText.includes('会由 AI 实时生成'));
+    check('首页有 VTO 版权标识', htmlText.includes('class="vto-mark"'));
+    check('首页不再有页脚文案', !htmlText.includes('作品仅供学习与交流'));
     check('首页有搜索联想容器', htmlText.includes('id="suggestPanel"'));
 
     const artistsRes = await fetch(`${app.base}/api/artists`);
@@ -252,6 +260,8 @@ async function demoSuite() {
       '详情页顶部是歌手照片',
       artistText.includes('data-cover-img') && artistText.includes('banner-meta'),
     );
+    check('歌手页有 VTO 标识', artistText.includes('class="vto-mark"'));
+    check('歌手页不再有页脚与来源提示', !artistText.includes('作品仅供学习与交流') && !artistText.includes('archive-note'));
     check('详情页不再有轮播', !artistText.includes('coverCarousel'));
     check('详情页不引用轮播脚本', !artistText.includes('/flex-carousel.css'));
     check(
@@ -414,10 +424,9 @@ async function demoSuite() {
       },
     );
     check(
-      '渲染：歌名跳 B 站搜索页',
-      /https:\/\/search\.bilibili\.com\/all\?keyword=/.test(rendered),
+      '渲染：有 BV 的歌跳视频页',
+      /https:\/\/www\.bilibili\.com\/video\/BV[0-9A-Za-z]+/.test(rendered),
     );
-    check('渲染：歌名不跳具体视频', !rendered.includes('/video/'));
     check('渲染：成员名链接到个人页', rendered.includes('href="/artist/Jennie"'));
     check('渲染：成员括号说明不丢', rendered.includes('（主唱）'));
 
@@ -425,7 +434,8 @@ async function demoSuite() {
       songLinks: {},
       artist: 'BLACKPINK',
     });
-    check('渲染：未知歌曲也能跳到 B 站搜索', fallback.includes('search.bilibili.com'));
+    check('渲染：无 BV 的歌回退搜索页', fallback.includes('search.bilibili.com/all?keyword='));
+    check('渲染：无 BV 时不跳视频页', !fallback.includes('/video/'));
 
     // AI 用 [[成员名]] 标记时，成员名单要变成个人页链接
     const marked = renderMarkdown(
@@ -446,6 +456,7 @@ async function demoSuite() {
       songHtml.includes(firstSong.title) && songHtml.includes(firstSong.artist),
     );
     check('歌曲页有两个入口', songHtml.includes('id="artistLink"') && songHtml.includes('id="biliLink"'));
+    check('歌曲页有 VTO 标识', songHtml.includes('class="vto-mark"'));
     check(
       '歌曲页歌手入口指向档案页',
       songHtml.includes(`href="/artist/${encodeURIComponent(firstSong.artist)}"`),
@@ -513,6 +524,7 @@ async function liveSuite() {
     AI_BASE_URL: `http://127.0.0.1:${fake.port}/v1`,
     AI_MODEL: 'fake-model',
     DEMO_MODE: '',
+    PROFILE_LOOKUP: '0',
   });
 
   try {
@@ -535,6 +547,11 @@ async function liveSuite() {
     check('LIVE 转发模型名', fakeModel === 'fake-model', fakeModel);
     check('LIVE 携带 Bearer Key', fakeAuth === 'Bearer test-key', fakeAuth);
     check('LIVE 收到 done', ai.done);
+    check(
+      'LIVE 生成前有资料上下文事件',
+      ai.context && ai.context.grounded === false,
+      JSON.stringify(ai.context),
+    );
     check('LIVE 正文完整', ai.deltas === FAKE_PARTS.length && ai.text === FAKE_PARTS.join(''), `deltas=${ai.deltas}`);
 
     const failRes = await postChat(app.base, '触发401');

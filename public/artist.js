@@ -17,8 +17,9 @@ const els = {
   errorBox: document.getElementById('errorBox'),
   errorText: document.getElementById('errorText'),
   retry: document.getElementById('retryBtn'),
-  footerMeta: document.getElementById('footerMeta'),
-  archiveNote: document.getElementById('archiveNote'),
+  notFound: document.getElementById('notFound'),
+  notFoundMessage: document.getElementById('notFoundMessage'),
+  notFoundSimilar: document.getElementById('notFoundSimilar'),
 };
 
 const state = {
@@ -29,6 +30,7 @@ const state = {
   ticker: null,
   frame: 0,
   stick: true,
+  notFound: false,
 };
 
 let songLinks = {};
@@ -124,13 +126,13 @@ async function hydrateCover() {
     if (!res.ok) return;
     const data = await res.json();
     if (!data || !data.url) return;
-    applyCover(data.url);
+    applyCover(data.url, data.source);
   } catch {
     /* 拿不到封面就继续用占位，不影响正文 */
   }
 }
 
-function applyCover(url) {
+function applyCover(url, source) {
   const img = document.createElement('img');
   img.className = 'banner-img';
   img.src = url;
@@ -150,7 +152,10 @@ function applyCover(url) {
   banner.classList.remove('banner--empty');
 
   const credit = document.querySelector('.banner-credit');
-  if (credit) credit.textContent = '封面：网易云音乐 · 自动匹配';
+  if (credit) {
+    const label = source === 'qqmusic' ? 'QQ 音乐' : '网易云音乐';
+    credit.textContent = `封面：${label} · 自动匹配`;
+  }
 }
 
 
@@ -162,9 +167,12 @@ async function start() {
   state.busy = true;
   state.raw = '';
   state.stick = true;
+  state.notFound = false;
   state.startedAt = performance.now();
   state.controller = new AbortController();
 
+  els.notFound.hidden = true;
+  els.output.hidden = false;
   els.output.innerHTML =
     '<div class="thinking"><i></i><i></i><i></i><em>正在写档案，请稍等…</em></div>';
   els.copy.disabled = true;
@@ -179,13 +187,20 @@ async function start() {
   try {
     const body = await postChat(artist, { signal: state.controller.signal });
     await consumeStream(body, handleEvent);
-    finish('完成');
+
+    const missing = parseNotFound(state.raw);
+    if (missing) {
+      state.notFound = true;
+      showNotFound(missing);
+      finish('未收录');
+    } else {
+      finish('完成');
+    }
   } catch (err) {
     if (err?.name === 'AbortError') {
       finish('已停止');
     } else {
       els.sourceChip.hidden = true;
-      if (els.archiveNote) els.archiveNote.hidden = true;
       finish('出错');
       showError(err?.message || '网络异常，请稍后重试');
     }
@@ -195,8 +210,8 @@ async function start() {
     state.busy = false;
     state.controller = null;
     els.stop.hidden = true;
-    els.copy.disabled = !state.raw;
-    els.download.disabled = !state.raw;
+    els.copy.disabled = state.notFound || !state.raw;
+    els.download.disabled = state.notFound || !state.raw;
   }
 }
 
@@ -208,10 +223,10 @@ function handleEvent(event) {
     els.sourceChip.hidden = false;
     els.sourceChip.dataset.source = builtin ? 'builtin' : 'ai';
     els.sourceChip.textContent = builtin ? '内置档案' : 'AI 检索生成';
-    if (els.archiveNote) els.archiveNote.hidden = builtin;
-    if (event.model) els.footerMeta.textContent = `模型 ${event.model}`;
     return;
   }
+
+  if (event.type === 'context') return;
 
   if (event.type === 'delta' && typeof event.text === 'string') {
     if (!state.raw) els.output.innerHTML = '';
@@ -268,14 +283,61 @@ function finish(label) {
   const seconds = ((performance.now() - state.startedAt) / 1000).toFixed(1);
   const chars = countChars(state.raw);
 
-  if (state.raw) {
+  if (state.notFound) {
+    els.output.hidden = true;
+    els.output.innerHTML = '';
+  } else if (state.raw) {
     paint();
   } else {
     els.output.innerHTML = '';
   }
 
-  setStatus(chars ? `${label} · ${chars} 字 · ${seconds}s` : label);
-  setCardState(label === '出错' ? 'error' : 'done');
+  setStatus(state.notFound ? '未收录' : chars ? `${label} · ${chars} 字 · ${seconds}s` : label);
+  setCardState(state.notFound ? 'done' : label === '出错' ? 'error' : 'done');
+  els.copy.disabled = state.notFound || !state.raw;
+  els.download.disabled = state.notFound || !state.raw;
+}
+
+/** AI 判定「不是真实存在的歌手」时，渲染一个信息页，而不是空白/假档案。 */
+function parseNotFound(raw) {
+  const text = String(raw || '').trim();
+  if (!text.startsWith('## 未收录')) return null;
+
+  const body = text.replace(/^## 未收录\s*/, '').trim();
+  const lines = body.split('\n').map((line) => line.trim()).filter(Boolean);
+  const messageLine = lines.find((line) => line.startsWith('说明')) || lines[0] || '';
+  const similarLine = lines.find((line) => line.includes('相近')) || '';
+  const similar = [...similarLine.matchAll(/\[\[([^\]]+)\]\]/g)]
+    .map((match) => match[1].trim())
+    .filter(Boolean);
+
+  return {
+    message: messageLine.replace(/^说明[:：]\s*/, '') || '目前无法确认这是真实存在的歌手/团体。',
+    similar,
+  };
+}
+
+function showNotFound({ message, similar }) {
+  els.notFound.hidden = false;
+  els.notFoundMessage.textContent = message;
+  els.notFoundSimilar.replaceChildren();
+
+  // AI 偶尔会把「男团 / 组合」这类通用词也标成相近艺人，过滤掉
+  const blocked = /^(男团|女团|组合|团体|歌手|艺人|偶像|solo|unknown)$/i;
+  similar
+    .filter((name) => name && !blocked.test(name))
+    .slice(0, 2)
+    .forEach((name) => {
+      const link = document.createElement('a');
+      link.className = 'not-found__chip';
+      link.href = `/artist/${encodeURIComponent(name)}`;
+      link.textContent = name;
+      els.notFoundSimilar.append(link);
+    });
+
+  els.sourceChip.hidden = false;
+  els.sourceChip.dataset.source = 'ai';
+  els.sourceChip.textContent = 'AI 检索生成';
 }
 
 function showError(message) {

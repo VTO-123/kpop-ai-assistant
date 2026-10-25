@@ -7,7 +7,6 @@ const recentWrap = document.getElementById('recentWrap');
 const recentList = document.getElementById('recentList');
 const modeBadge = document.getElementById('modeBadge');
 const modeText = document.getElementById('modeText');
-const footerMeta = document.getElementById('footerMeta');
 
 const artistUrl = (name) => `/artist/${encodeURIComponent(name)}`;
 
@@ -185,10 +184,8 @@ async function loadConfig() {
 
     if (data.demo) {
       modeText.textContent = 'DEMO · 内置数据 + 无 Key 提示';
-      footerMeta.textContent = '演示模式：配置 AI_API_KEY 后，未收录团体将由 AI 实时生成';
     } else {
       modeText.textContent = `LIVE · ${data.model}`;
-      footerMeta.textContent = `模型 ${data.model} · ${data.provider || 'AI'}`;
     }
   } catch {
     modeBadge.hidden = true;

@@ -823,19 +823,6 @@ body::before {
   }
 }
 
-/* ---------- 页脚 ---------- */
-
-.footer {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 26px;
-  padding: 0 6px;
-  font-size: 12.5px;
-  color: #6f6890;
-}
-
 /* ---------- 详情页：返回、封面 banner、来源标记 ---------- */
 
 .back-link {
@@ -976,10 +963,65 @@ body::before {
   scroll-margin-top: 20px;
 }
 
-.archive-note {
-  margin: 12px 0 0;
-  font-size: 12px;
-  color: #8d86aa;
+/* 未收录：给出信息页，而不是空白或假档案 */
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 42px 20px 38px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.not-found__icon {
+  font-size: 34px;
+  opacity: 0.7;
+}
+
+.not-found h2 {
+  margin: 0;
+  font-size: 20px;
+  color: var(--ink);
+}
+
+.not-found__message {
+  max-width: 46ch;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.not-found__similar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.not-found__chip {
+  padding: 7px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: all 0.18s ease;
+}
+
+.not-found__chip:hover {
+  color: #fff;
+  border-color: rgba(255, 61, 139, 0.6);
+  background: rgba(255, 61, 139, 0.12);
+}
+
+.not-found__back {
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  margin-top: 8px;
+  text-decoration: none;
 }
 
 /* ---------- 首页：热门团体 3D 轮播 ---------- */
@@ -1073,10 +1115,6 @@ body::before {
 
 .home-page .composer {
   width: 100%;
-}
-
-.home-page .footer {
-  margin-top: 32px;
 }
 
 /* WebGL2 不可用 / ogl 未安装时的降级图片墙 */
@@ -1230,8 +1268,19 @@ body::before {
   align-items: center;
 }
 
-.song-page .footer {
-  margin-top: 36px;
+/* ---------- VTO 版权水印 ---------- */
+
+.vto-mark {
+  position: fixed;
+  right: 18px;
+  bottom: 14px;
+  z-index: 20;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.34);
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 /* ---------- 响应式 ---------- */
@@ -1316,6 +1365,12 @@ body::before {
   .song-actions .btn {
     flex: 1 1 auto;
     justify-content: center;
+  }
+
+  .vto-mark {
+    right: 12px;
+    bottom: 10px;
+    font-size: 10px;
   }
 }
 
