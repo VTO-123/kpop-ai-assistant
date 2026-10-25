@@ -1,0 +1,27 @@
+{
+  "name": "kpop-ai-assistant",
+  "version": "0.1.0",
+  "private": true,
+  "description": "K-POP 档案室：输入团体名，AI 流式生成团体介绍与必听曲目推荐。",
+  "type": "module",
+  "engines": {
+    "node": ">=18.17"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "keywords": [
+    "kpop",
+    "ai",
+    "streaming",
+    "sse",
+    "deepseek",
+    "openai"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "ogl": "^1.0.11"
+  }
+}

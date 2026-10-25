@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{TITLE}}</title>
+    <meta name="description" content="{{ARTIST_NAME}} 的 K-POP 入坑档案：一句话定性、团体档案、三首必听、入坑观看与冷知识，由 AI 实时生成。" />
+    {{OG_META}}
+    <meta name="theme-color" content="#07060e" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="artist-page" data-artist="{{ARTIST_NAME}}" data-cover="{{COVER_URL}}">
+    <div class="glow" aria-hidden="true">
+      <span class="glow-a"></span>
+      <span class="glow-b"></span>
+      <span class="glow-c"></span>
+    </div>
+
+    <div class="shell">
+      <header class="topbar">
+        <a class="brand" href="/">
+          <span class="brand-mark" aria-hidden="true">K</span>
+          <span class="brand-text">
+            <strong>K-POP 档案室</strong>
+            <small>{{ARTIST_NAME}} 的入坑档案</small>
+          </span>
+        </a>
+        <a class="back-link" href="/">← 返回搜索</a>
+      </header>
+
+      <section class="{{BANNER_CLASS}}" id="banner"{{COVER_LOOKUP}}>
+        {{COVER_BLOCK}}
+        <div class="banner-fallback" aria-hidden="true">
+          <span class="banner-fallback-name">{{ARTIST_NAME}}</span>
+          <span class="banner-fallback-sub">暂无封面图</span>
+        </div>
+        <div class="banner-shade" aria-hidden="true"></div>
+        <div class="banner-meta">
+          <h1>{{ARTIST_NAME}}</h1>
+          <p class="banner-sub">{{BANNER_SUB}}</p>
+        </div>
+        <span class="banner-credit">{{COVER_CREDIT}}</span>
+      </section>
+
+      <section class="card detail-card" id="archive" aria-labelledby="detailTitle">
+        <h2 class="sr-only" id="detailTitle">{{ARTIST_NAME}} 的入坑档案</h2>
+        <div class="result-head">
+          <div class="result-title">
+            <span class="status">
+              <i class="status-dot" id="statusDot" aria-hidden="true"></i>
+              <span id="status">准备中…</span>
+            </span>
+            <span class="source-chip" id="sourceChip" hidden></span>
+          </div>
+          <div class="tools">
+            <button class="btn btn-small" id="stopBtn" type="button" hidden>停止</button>
+            <button class="btn btn-small" id="copyBtn" type="button" disabled>复制</button>
+            <button class="btn btn-small" id="downloadBtn" type="button" disabled>下载 .md</button>
+          </div>
+        </div>
+
+        <p class="archive-note" id="archiveNote" hidden>
+          由 AI 检索公开资料整理，如有出入以官方为准。
+        </p>
+
+        <div class="error-box" id="errorBox" role="alert" hidden>
+          <span id="errorText"></span>
+          <button class="btn btn-small" id="retryBtn" type="button">重试</button>
+        </div>
+
+        <article class="prose" id="output" aria-live="polite"></article>
+      </section>
+
+      <footer class="footer">
+        <span>作品仅供学习与交流 · 曲目信息请以官方平台为准</span>
+        <span class="footer-meta" id="footerMeta"></span>
+      </footer>
+    </div>
+
+    <script src="/artist.js" type="module"></script>
+  </body>
+</html>

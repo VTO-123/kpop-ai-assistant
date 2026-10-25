@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>K-POP 档案室 · 搜索一个团体，生成入坑档案</title>
+    <meta
+      name="description"
+      content="输入任意 K-POP 团体名，进入专属档案页：AI 流式生成团体介绍、三首必听、入坑观看与冷知识。"
+    />
+    <meta name="theme-color" content="#07060e" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/flex-carousel.css" />
+  </head>
+  <body class="home-page">
+    <div class="glow" aria-hidden="true">
+      <span class="glow-a"></span>
+      <span class="glow-b"></span>
+      <span class="glow-c"></span>
+    </div>
+
+    <div class="shell">
+      <header class="topbar">
+        <a class="brand" href="/">
+          <span class="brand-mark" aria-hidden="true">K</span>
+          <span class="brand-text">
+            <strong>K-POP 档案室</strong>
+            <small>搜索任意团体，进入它的专属档案页</small>
+          </span>
+        </a>
+        <span class="mode-badge" id="modeBadge" hidden>
+          <i class="mode-dot" id="modeDot" aria-hidden="true"></i>
+          <span id="modeText">检测中…</span>
+        </span>
+      </header>
+
+      <main>
+        <section class="composer card" aria-labelledby="composerTitle">
+          <h1 id="composerTitle" class="hero-title">
+            想知道 <em>哪个团体</em> 值不值得入坑？
+          </h1>
+          <p class="hero-sub">
+            输入团体名，进入它的专属页面：一句话定性、团体档案、三首必听、入坑观看、冷知识。
+          </p>
+
+          <form id="askForm" class="ask-form" autocomplete="off">
+            <label class="sr-only" for="groupInput">团体名称</label>
+            <div class="input-wrap">
+              <span class="input-icon" aria-hidden="true">🎧</span>
+              <input
+                id="groupInput"
+                name="group"
+                type="text"
+                maxlength="40"
+                placeholder="例如 BLACKPINK、NewJeans、Bigbang…"
+                spellcheck="false"
+                autocomplete="off"
+                enterkeyhint="search"
+                role="combobox"
+                aria-autocomplete="list"
+                aria-expanded="false"
+                aria-controls="suggestPanel"
+              />
+              <div class="suggest-panel" id="suggestPanel" role="listbox" hidden></div>
+            </div>
+            <button class="btn btn-primary" id="searchBtn" type="submit">
+              <span class="btn-label">搜索</span>
+            </button>
+          </form>
+
+          <div class="recent" id="recentWrap" hidden>
+            <span class="suggest-label">最近查过</span>
+            <div class="recent-list" id="recentList"></div>
+          </div>
+        </section>
+
+        <section class="home-showcase" aria-labelledby="showcaseTitle">
+          <div class="home-showcase__head">
+            <h2 id="showcaseTitle">热门视频</h2>
+            <p>热门 K-POP 歌曲 MV · 拖动 / 滚轮 / ← → 切换 · 点击卡片进入歌曲页</p>
+          </div>
+          <div class="home-showcase__stage">
+            <div class="flex-carousel" id="hotSongsCarousel" aria-label="热门 K-POP 歌曲视频"></div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span>作品仅供学习与交流 · 曲目信息请以官方平台为准</span>
+        <span class="footer-meta" id="footerMeta"></span>
+      </footer>
+    </div>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

@@ -1,0 +1,952 @@
+{
+  "version": 2,
+  "updatedAt": "2026-10-25",
+  "note": "歌手库：name 为英文名、nameZh 为中文名，两者都参与搜索；cover 为网易云歌手照片（经 /api/proxy 直连加载）；members 用于档案页成员名跳转；bvid 为该团体的代表视频（可选）。",
+  "groups": [
+    {
+      "key": "blackpink",
+      "name": "BLACKPINK",
+      "nameZh": "粉墨",
+      "type": "group",
+      "aliases": [
+        "粉墨",
+        "블랙핑크",
+        "bp"
+      ],
+      "members": [
+        "Jisoo",
+        "Jennie",
+        "Rosé",
+        "Lisa"
+      ],
+      "cover": "https://p2.music.126.net/Gl21MaKKL6_LUa2fWN2VwQ==/109951172945542040.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "BV15chL62Egs",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "bts",
+      "name": "BTS",
+      "nameZh": "防弹少年团",
+      "type": "group",
+      "aliases": [
+        "防弹少年团",
+        "防弹",
+        "방탄소년단"
+      ],
+      "members": [
+        "RM",
+        "Jin",
+        "SUGA",
+        "j-hope",
+        "Jimin",
+        "V",
+        "Jungkook"
+      ],
+      "cover": "https://p2.music.126.net/iuOHZKWUBFMA-qi_jKZX9g==/109951166161837643.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "BV19k4y1u7FW",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "newjeans",
+      "name": "NewJeans",
+      "nameZh": "新牛仔裤",
+      "type": "group",
+      "aliases": [
+        "뉴진스",
+        "nj"
+      ],
+      "members": [
+        "Minji",
+        "Hanni",
+        "Danielle",
+        "Haerin",
+        "Hyein"
+      ],
+      "cover": "https://p2.music.126.net/pBbRxEysXaKRr2Lvoyj_OA==/109951168165015954.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "BV1wE8t6fEaV",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "twice",
+      "name": "TWICE",
+      "nameZh": "兔瓦斯",
+      "type": "group",
+      "aliases": [
+        "兔瓦斯",
+        "트와이스"
+      ],
+      "members": [
+        "Nayeon",
+        "Jeongyeon",
+        "Momo",
+        "Sana",
+        "Jihyo",
+        "Mina",
+        "Dahyun",
+        "Chaeyoung",
+        "Tzuyu"
+      ],
+      "cover": "https://p2.music.126.net/vEboEKvo5d3fFovH0mVVDQ==/109951172132303381.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "BV1FE411a72Q",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "aespa",
+      "name": "aespa",
+      "nameZh": "爱斯帕",
+      "type": "group",
+      "aliases": [
+        "吒",
+        "에스파"
+      ],
+      "members": [
+        "Karina",
+        "Giselle",
+        "Winter",
+        "Ningning"
+      ],
+      "cover": "https://p2.music.126.net/8nKTd5vdBthCmfJotzjcGA==/109951171467169368.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "BV1UZuB6JEZq",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "ive",
+      "name": "IVE",
+      "nameZh": "芙",
+      "type": "group",
+      "aliases": [
+        "芙",
+        "아이브"
+      ],
+      "members": [
+        "Yujin",
+        "Gaeul",
+        "Rei",
+        "Wonyoung",
+        "Liz",
+        "Leeseo"
+      ],
+      "cover": "https://p2.music.126.net/7o9C8NEIz4IB5FC4pEiZOQ==/109951174118144338.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "BV1tAhR6mEbA",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "seventeen",
+      "name": "SEVENTEEN",
+      "nameZh": "赛文婷",
+      "type": "group",
+      "aliases": [
+        "赛文婷",
+        "세븐틴",
+        "十七"
+      ],
+      "members": [
+        "S.Coups",
+        "Jeonghan",
+        "Joshua",
+        "Jun",
+        "Hoshi",
+        "Wonwoo",
+        "Woozi",
+        "DK",
+        "Mingyu",
+        "The8",
+        "Seungkwan",
+        "Vernon",
+        "Dino"
+      ],
+      "cover": "https://p2.music.126.net/68kwvS99Fb2ITz5ETsNQhQ==/109951168850272055.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "BV1A24y1U7Vc",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "straykids",
+      "name": "Stray Kids",
+      "nameZh": "流浪儿童",
+      "type": "group",
+      "aliases": [
+        "스트레이 키즈",
+        "迷"
+      ],
+      "members": [
+        "Bang Chan",
+        "Lee Know",
+        "Changbin",
+        "Hyunjin",
+        "Han",
+        "Felix",
+        "Seungmin",
+        "I.N"
+      ],
+      "cover": "https://p2.music.126.net/G0m96B5TFAqqfGZQ8Ljv7Q==/109951173705126874.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "BV1Xaut64EVW",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "enhypen",
+      "name": "ENHYPEN",
+      "nameZh": "符",
+      "type": "group",
+      "aliases": [
+        "엔하이픈"
+      ],
+      "members": [
+        "Jungwon",
+        "Heeseung",
+        "Jay",
+        "Jake",
+        "Sunghoon",
+        "Sunoo",
+        "Ni-ki"
+      ],
+      "cover": "https://p2.music.126.net/NKQb4aw37-zMemB4ra3Gsw==/109951172613682248.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "tomorrow-x-together",
+      "name": "TOMORROW X TOGETHER",
+      "nameZh": "明日之子",
+      "type": "group",
+      "aliases": [
+        "TXT",
+        "투바투"
+      ],
+      "members": [
+        "Soobin",
+        "Yeonjun",
+        "Beomgyu",
+        "Taehyun",
+        "Huening Kai"
+      ],
+      "cover": "https://p1.music.126.net/p0r2AslRKOSONEhzOYEOGQ==/109951168717268064.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "nct",
+      "name": "NCT",
+      "nameZh": "NCT",
+      "type": "group",
+      "aliases": [
+        "엔시티"
+      ],
+      "members": [
+        "Taeyong",
+        "Mark",
+        "Doyoung",
+        "Jaehyun",
+        "Haechan",
+        "Jeno",
+        "Jaemin",
+        "Chenle",
+        "Jisung"
+      ],
+      "cover": "https://p1.music.126.net/oH-XvPeBnbyPj0uBo8nStg==/109951168859602784.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "le-sserafim",
+      "name": "LE SSERAFIM",
+      "nameZh": "炽",
+      "type": "group",
+      "aliases": [
+        "르세라핌"
+      ],
+      "members": [
+        "Kim Chaewon",
+        "Sakura",
+        "Huh Yunjin",
+        "Kazuha",
+        "Hong Eunchae"
+      ],
+      "cover": "https://p1.music.126.net/9ZhGbPI4z8e_dQDMmOzLLA==/109951169927412734.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "itzy",
+      "name": "ITZY",
+      "nameZh": "一击",
+      "type": "group",
+      "aliases": [
+        "있지"
+      ],
+      "members": [
+        "Yeji",
+        "Lia",
+        "Ryujin",
+        "Chaeryeong",
+        "Yuna"
+      ],
+      "cover": "https://p2.music.126.net/32hj7c1jgLN_Eux8SdTXCw==/109951173202821065.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "g-i-dle",
+      "name": "(G)I-DLE",
+      "nameZh": "女娃",
+      "type": "group",
+      "aliases": [
+        "아이들",
+        "GIDLE"
+      ],
+      "members": [
+        "Miyeon",
+        "Minnie",
+        "Soyeon",
+        "Yuqi",
+        "Shuhua"
+      ],
+      "cover": "https://p2.music.126.net/34DvxAQF3STYmvuUmK5kyw==/109951174034790875.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "red-velvet",
+      "name": "Red Velvet",
+      "nameZh": "红毛",
+      "type": "group",
+      "aliases": [
+        "레드벨벳"
+      ],
+      "members": [
+        "Irene",
+        "Seulgi",
+        "Wendy",
+        "Joy",
+        "Yeri"
+      ],
+      "cover": "https://p1.music.126.net/tu-ADMGzdzcI1-JViPUrgQ==/109951170290687645.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "exo",
+      "name": "EXO",
+      "nameZh": "茶蛋",
+      "type": "group",
+      "aliases": [
+        "엑소"
+      ],
+      "members": [
+        "Xiumin",
+        "Suho",
+        "Lay",
+        "Baekhyun",
+        "Chen",
+        "Chanyeol",
+        "D.O.",
+        "Kai",
+        "Sehun"
+      ],
+      "cover": "https://p2.music.126.net/vY_0HYqgraysBLWXuJ5tIQ==/109951168721913427.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "shinee",
+      "name": "SHINee",
+      "nameZh": "闪",
+      "type": "group",
+      "aliases": [
+        "샤이니"
+      ],
+      "members": [
+        "Onew",
+        "Key",
+        "Minho",
+        "Taemin"
+      ],
+      "cover": "https://p2.music.126.net/cBVLSq_tTa0QqgAUk3DDZw==/109951168695082856.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "bigbang",
+      "name": "BIGBANG",
+      "nameZh": "大棒",
+      "type": "group",
+      "aliases": [
+        "빅뱅"
+      ],
+      "members": [
+        "G-Dragon",
+        "Taeyang",
+        "Daesung",
+        "T.O.P"
+      ],
+      "cover": "https://p1.music.126.net/YZ7_zYI5e5kJdd8tcKjlGw==/109951173904581661.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "2ne1",
+      "name": "2NE1",
+      "nameZh": "2NE1",
+      "type": "group",
+      "aliases": [
+        "투애니원"
+      ],
+      "members": [
+        "CL",
+        "Bom",
+        "Dara",
+        "Minzy"
+      ],
+      "cover": "https://p2.music.126.net/5Ownga3tCwMzYQJ0NoEoyQ==/109951169806308197.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "girls-generation",
+      "name": "Girls' Generation",
+      "nameZh": "少女时代",
+      "type": "group",
+      "aliases": [
+        "SNSD",
+        "소녀시대"
+      ],
+      "members": [
+        "Taeyeon",
+        "Sunny",
+        "Tiffany",
+        "Hyoyeon",
+        "Yuri",
+        "Sooyoung",
+        "Yoona",
+        "Seohyun"
+      ],
+      "cover": "https://p2.music.126.net/_HYJgCgSQTcYezK79BXDDw==/109951167749851415.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "super-junior",
+      "name": "SUPER JUNIOR",
+      "nameZh": "老少年",
+      "type": "group",
+      "aliases": [
+        "슈퍼주니어",
+        "SJ"
+      ],
+      "cover": "https://p1.music.126.net/cxmFAAPwt3HNNhVD213O0A==/109951169677026088.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "monsta-x",
+      "name": "MONSTA X",
+      "nameZh": "芒叉",
+      "type": "group",
+      "aliases": [
+        "몬스타엑스"
+      ],
+      "cover": "https://p1.music.126.net/yjXTQI65EPdJwglR6tykwA==/109951173788795230.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "ateez",
+      "name": "ATEEZ",
+      "nameZh": "梯",
+      "type": "group",
+      "aliases": [
+        "에이티즈"
+      ],
+      "cover": "https://p1.music.126.net/f3DnvCaWS8Zf05SZ3kw27A==/109951173408383487.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "got7",
+      "name": "GOT7",
+      "nameZh": "搞七",
+      "type": "group",
+      "aliases": [
+        "갓세븐"
+      ],
+      "cover": "https://p1.music.126.net/WsQt-7IFvdal8r_VP8pAwg==/109951167394488494.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "mamamoo",
+      "name": "MAMAMOO",
+      "nameZh": "妈妈木",
+      "type": "group",
+      "aliases": [
+        "마마무"
+      ],
+      "members": [
+        "Solar",
+        "Moonbyul",
+        "Wheein",
+        "Hwasa"
+      ],
+      "cover": "https://p1.music.126.net/VMOSTY5p3-6aCve1WytbZQ==/109951171008236154.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "winner",
+      "name": "WINNER",
+      "nameZh": "拿",
+      "type": "group",
+      "aliases": [
+        "위너"
+      ],
+      "cover": "https://p2.music.126.net/guuxT37zbF0aCfJFBr_9SA==/109951167699927480.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "ikon",
+      "name": "iKON",
+      "nameZh": "康",
+      "type": "group",
+      "aliases": [
+        "아이콘"
+      ],
+      "cover": "https://p1.music.126.net/EaYQtN7eVqgCDTcdzqujWQ==/109951167699866387.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "nmixx",
+      "name": "NMIXX",
+      "nameZh": "恩米克斯",
+      "type": "group",
+      "aliases": [
+        "엔믹스"
+      ],
+      "cover": "https://p2.music.126.net/VCM3Gk6yr7QjW87OU2kYLw==/109951174117076575.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "kep1er",
+      "name": "Kep1er",
+      "nameZh": "葡",
+      "type": "group",
+      "aliases": [
+        "케플러"
+      ],
+      "cover": "https://p2.music.126.net/4S8LFKhgcEenRwoVmKPIag==/109951173114913621.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "babymonster",
+      "name": "BABYMONSTER",
+      "nameZh": "宝怪",
+      "type": "group",
+      "aliases": [
+        "베이비몬스터"
+      ],
+      "cover": "https://p2.music.126.net/iy67u-2s7nfwI1CJWcRpQw==/109951173460219603.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "illit",
+      "name": "ILLIT",
+      "nameZh": "礼",
+      "type": "group",
+      "aliases": [
+        "아일릿"
+      ],
+      "cover": "https://p2.music.126.net/YaVGP1k5hzRTYrY2fN6wBw==/109951170610841384.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "riize",
+      "name": "RIIZE",
+      "nameZh": "赖子",
+      "type": "group",
+      "aliases": [
+        "라이즈"
+      ],
+      "cover": "https://p1.music.126.net/COfuMUk983T2SsLPHHQLxg==/109951169697125367.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "zerobaseone",
+      "name": "ZEROBASEONE",
+      "nameZh": "菊",
+      "type": "group",
+      "aliases": [
+        "제로베이스원",
+        "ZB1"
+      ],
+      "cover": "https://p1.music.126.net/XedNkyYDW-4EeW6_b83ftg==/109951173367982202.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "boynextdoor",
+      "name": "BOYNEXTDOOR",
+      "nameZh": "门童",
+      "type": "group",
+      "aliases": [
+        "보이넥스트도어"
+      ],
+      "cover": "https://p2.music.126.net/oqcgJBPdgdq100ZRwLDtTg==/109951173351176045.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "tws",
+      "name": "TWS",
+      "nameZh": "吐司",
+      "type": "group",
+      "aliases": [
+        "투어스"
+      ],
+      "cover": "https://p1.music.126.net/2vJiuqU4kvsqU3vY0ZXeDg==/109951169230924560.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "kiss-of-life",
+      "name": "KISS OF LIFE",
+      "nameZh": "吻",
+      "type": "group",
+      "aliases": [
+        "키스오브라이프"
+      ],
+      "cover": "https://p2.music.126.net/c7caxzNdolyNl9XeSTUq8A==/109951172236895252.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "stayc",
+      "name": "STAYC",
+      "nameZh": "思黛西",
+      "type": "group",
+      "aliases": [
+        "스테이씨"
+      ],
+      "cover": "https://p1.music.126.net/_K9HqT_lc7N1uFSFPvQJdQ==/109951173348753620.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "everglow",
+      "name": "EVERGLOW",
+      "nameZh": "阁楼",
+      "type": "group",
+      "aliases": [
+        "에버글로우"
+      ],
+      "cover": "https://p1.music.126.net/uww8je_xB5hti6omVfKNMg==/109951166680094244.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "iu",
+      "name": "IU",
+      "nameZh": "李知恩",
+      "type": "solo",
+      "aliases": [
+        "아이유"
+      ],
+      "cover": "https://p1.music.126.net/7sJ9hIFwUvqWZMfqWAfXcA==/109951173919715488.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "hyuna",
+      "name": "HyunA",
+      "nameZh": "金泫雅",
+      "type": "solo",
+      "aliases": [
+        "泫雅",
+        "현아"
+      ],
+      "cover": "https://p2.music.126.net/BV_3s0JSN9yfQYGv9YJVww==/109951173974984350.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "taeyeon",
+      "name": "Taeyeon",
+      "nameZh": "金泰妍",
+      "type": "solo",
+      "aliases": [
+        "泰妍",
+        "태연"
+      ],
+      "cover": "https://p2.music.126.net/hrydlBZ5ljXuy-03iPjhmg==/109951170152102361.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "j-y-park",
+      "name": "J.Y. Park",
+      "nameZh": "朴振英",
+      "type": "solo",
+      "aliases": [
+        "朴振英",
+        "JYP"
+      ],
+      "cover": "https://p1.music.126.net/RpLyXtOWXx3aMVXvxkbASw==/109951173601873045.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "jennie",
+      "name": "Jennie",
+      "nameZh": "金珍妮",
+      "type": "solo",
+      "aliases": [
+        "제니"
+      ],
+      "cover": "https://p2.music.126.net/0KYkhGO7PpDOuf43V-nFCw==/109951173627697180.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "lisa",
+      "name": "Lisa",
+      "nameZh": "拉莉莎",
+      "type": "solo",
+      "aliases": [
+        "리사"
+      ],
+      "cover": "https://p1.music.126.net/z3Wf7AQ7aqAN-zYfkkcYIg==/109951173886267456.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "ros",
+      "name": "Rosé",
+      "nameZh": "朴彩英",
+      "type": "solo",
+      "aliases": [
+        "로제"
+      ],
+      "cover": "https://p1.music.126.net/yIs2q-eA1ZXf2mS8MYwlRQ==/109951174106994287.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "jisoo",
+      "name": "Jisoo",
+      "nameZh": "金智秀",
+      "type": "solo",
+      "aliases": [
+        "지수"
+      ],
+      "cover": "https://p1.music.126.net/cYhPJco5A-lnghLL04JKSA==/109951168573664732.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "minji",
+      "name": "Minji",
+      "nameZh": "金敏智",
+      "type": "solo",
+      "aliases": [
+        "민지"
+      ],
+      "cover": "https://p2.music.126.net/KoP1numkPWDhhKJEnvOFRw==/109951168753857704.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "hanni",
+      "name": "Hanni",
+      "nameZh": "哈尼",
+      "type": "solo",
+      "aliases": [
+        "하니"
+      ],
+      "cover": "https://p2.music.126.net/PWCOra8RdtVDDXnpUFfzCw==/109951168753860525.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "wonyoung",
+      "name": "Wonyoung",
+      "nameZh": "张元英",
+      "type": "solo",
+      "aliases": [
+        "원영"
+      ],
+      "cover": "https://p2.music.126.net/NQt-YfRT4JViy_Im1WHtkw==/109951173125476441.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "karina",
+      "name": "Karina",
+      "nameZh": "柳智敏",
+      "type": "solo",
+      "aliases": [
+        "카리나"
+      ],
+      "cover": "https://p2.music.126.net/KdDAb_SQ2pNre_GtrimlDA==/109951170048176491.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "winter",
+      "name": "Winter",
+      "nameZh": "金旼炡",
+      "type": "solo",
+      "aliases": [
+        "윈터"
+      ],
+      "cover": "https://p2.music.126.net/zi92lOQEBvjGrU7NBzK3CA==/109951170048181359.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "hwasa",
+      "name": "Hwasa",
+      "nameZh": "华莎",
+      "type": "solo",
+      "aliases": [
+        "화사"
+      ],
+      "cover": "https://p2.music.126.net/xqgWr8qsvruKmBv0v0ZYbg==/109951166291998635.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "sunmi",
+      "name": "Sunmi",
+      "nameZh": "宣美",
+      "type": "solo",
+      "aliases": [
+        "선미"
+      ],
+      "cover": "https://p1.music.126.net/hPiTOtkoOcLXA9XKGTs5Gg==/109951172237096577.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "zico",
+      "name": "Zico",
+      "nameZh": "禹智皓",
+      "type": "solo",
+      "aliases": [
+        "지코"
+      ],
+      "cover": "https://p1.music.126.net/uDSofJiC2ErBDE5u45W6AQ==/109951165102431660.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "baekhyun",
+      "name": "Baekhyun",
+      "nameZh": "边伯贤",
+      "type": "solo",
+      "aliases": [
+        "백현"
+      ],
+      "cover": "https://p1.music.126.net/s48NSIDub9lw6UMJv64x_g==/109951170984103139.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "g-dragon",
+      "name": "G-Dragon",
+      "nameZh": "权志龙",
+      "type": "solo",
+      "aliases": [
+        "지드래곤"
+      ],
+      "cover": "https://p2.music.126.net/0qLOLAN7XxmfcnADNaikdg==/109951170699826542.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "taemin",
+      "name": "Taemin",
+      "nameZh": "李泰民",
+      "type": "solo",
+      "aliases": [
+        "태민"
+      ],
+      "cover": "https://p1.music.126.net/PTyRjyUduOBNc2l0Rqxykw==/109951167739181085.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "somi",
+      "name": "Somi",
+      "nameZh": "全昭弥",
+      "type": "solo",
+      "aliases": [
+        "전소미"
+      ],
+      "cover": "https://p2.music.126.net/hdODXNV8ewyakT04z5G4UQ==/109951171490648100.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "",
+      "coverCredit": "NetEase Cloud Music artist photo"
+    }
+  ]
+}

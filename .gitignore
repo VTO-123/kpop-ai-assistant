@@ -1,7 +1,16 @@
-﻿node_modules/
+node_modules/
 .next/
 dist/
+coverage/
+
+# 本地密钥，绝不提交
 .env
 .env.local
+.env.*.local
+
 *.log
+npm-debug.log*
+pnpm-debug.log*
+
 .DS_Store
+Thumbs.db

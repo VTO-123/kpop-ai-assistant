@@ -1,0 +1,453 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-25",
+  "note": "图片取自 B 站公开视频封面（i0.hdslb.com，国内可直连），仅用于个人作品集的展示；版权归原视频作者与版权方所有，如介意可替换为你拥有的素材。",
+  "groups": [
+    {
+      "key": "blackpink",
+      "name": "BLACKPINK",
+      "aliases": [
+        "粉墨",
+        "블랙핑크",
+        "bp"
+      ],
+      "images": [
+        {
+          "src": "https://i1.hdslb.com/bfs/archive/7c022e481b9832b7340ce0e88b4ec3e3072c1dbb.jpg@800w_450h_1c.webp",
+          "title": "BLACKPINK",
+          "caption": "【4K60帧】BLACKPINK.zip丨出道至今打歌舞台精选集锦丨4K舞台纯享丨舞台成长史",
+          "source": "Bilibili · BV15chL62Egs"
+        },
+        {
+          "src": "https://i1.hdslb.com/bfs/archive/349e2eb2771a3ed5f534168728ebbf2809cf5534.png@800w_450h_1c.webp",
+          "title": "BLACKPINK",
+          "caption": "BLACKPINK《뛰어(JUMP)》MV首发！粉墨高燃回归，舞台魅力全开",
+          "source": "Bilibili · BV1i8np6CEeZ"
+        },
+        {
+          "src": "https://i1.hdslb.com/bfs/archive/fb848e8cbd8cdc92d2fa853cd64abe6a75efd3d9.jpg@800w_450h_1c.webp",
+          "title": "BLACKPINK",
+          "caption": "【BLACKPINK】粉墨出道以来打歌舞台+颁奖典礼+节目舞台高清合集（更新至210404人气歌谣 on the gro",
+          "source": "Bilibili · BV14b411k7dT"
+        },
+        {
+          "src": "https://i2.hdslb.com/bfs/archive/cd1442a95e50c4682df9a00870ce4afa237d6cc4.jpg@800w_450h_1c.webp",
+          "title": "BLACKPINK",
+          "caption": "【绝美初舞台系列】【BLACKPINK】出道至今回归主打 现场合集（1080P收藏向）",
+          "source": "Bilibili · BV18E411b7B2"
+        },
+        {
+          "src": "https://i1.hdslb.com/bfs/archive/1f12ef6d457a99e5ed4e503aa6633cb043fdae32.jpg@800w_450h_1c.webp",
+          "title": "BLACKPINK",
+          "caption": "【BLACKPINK】出道至今打歌舞台合集",
+          "source": "Bilibili · BV1PE411N76W"
+        }
+      ]
+    },
+    {
+      "key": "bts",
+      "name": "BTS",
+      "aliases": [],
+      "images": [
+        {
+          "src": "https://p1.music.126.net/G8BM1OLQEc1TEo1taru7cw==/109951173578769253.jpg?param=800y800",
+          "title": "BTS",
+          "caption": "NORMAL",
+          "source": "NetEase Cloud Music · artist 783124 · album 387568518"
+        },
+        {
+          "src": "https://p2.music.126.net/H8Y-y31HPqJXbUT3lxQcxA==/109951173373725648.jpg?param=800y800",
+          "title": "BTS",
+          "caption": "Come Over",
+          "source": "NetEase Cloud Music · artist 783124 · album 381401516"
+        },
+        {
+          "src": "https://p2.music.126.net/P8s5yYJRx1z-3mHisLKsag==/109951173075058980.jpg?param=800y800",
+          "title": "BTS",
+          "caption": "SWIM (Spring Waves Remix)",
+          "source": "NetEase Cloud Music · artist 783124 · album 371589684"
+        },
+        {
+          "src": "https://p2.music.126.net/Y5d27mr84-S3rTEIi_ldrw==/109951173027764396.jpg?param=800y800",
+          "title": "BTS",
+          "caption": "SWIM (Underwater Remix)",
+          "source": "NetEase Cloud Music · artist 783124 · album 370378681"
+        }
+      ]
+    },
+    {
+      "key": "newjeans",
+      "name": "NewJeans",
+      "aliases": [],
+      "images": [
+        {
+          "src": "https://p1.music.126.net/wcBURsEb8f2ivg9Se_8fdg==/109951169707452510.jpg?param=800y800",
+          "title": "NewJeans",
+          "caption": "Supernatural",
+          "source": "NetEase Cloud Music · artist 53457899 · album 239908894"
+        },
+        {
+          "src": "https://p1.music.126.net/Lj2NK3BIGsueF7voXc9sJA==/109951169620856327.jpg?param=800y800",
+          "title": "NewJeans",
+          "caption": "How Sweet",
+          "source": "NetEase Cloud Music · artist 53457899 · album 197228343"
+        },
+        {
+          "src": "https://p1.music.126.net/LUFD56qxH53EsdcAQLzhBw==/109951169174828710.jpg?param=800y800",
+          "title": "NewJeans",
+          "caption": "NJWMX",
+          "source": "NetEase Cloud Music · artist 53457899 · album 181447804"
+        },
+        {
+          "src": "https://p1.music.126.net/Gt1pfmxX10oLPLT2W_VGkg==/109951173445777409.jpg?param=800y800",
+          "title": "NewJeans",
+          "caption": "NewJeans X 마이데몬",
+          "source": "NetEase Cloud Music · artist 53457899 · album 179747913"
+        }
+      ]
+    },
+    {
+      "key": "ive",
+      "name": "IVE",
+      "aliases": [],
+      "images": [
+        {
+          "src": "https://p1.music.126.net/4f0hUw_FO3L7KklVhU2yGg==/109951174118110318.jpg?param=800y800",
+          "title": "IVE",
+          "caption": "Looks Can Kill",
+          "source": "NetEase Cloud Music · artist 50377945 · album 404318763"
+        },
+        {
+          "src": "https://p1.music.126.net/oiuVB_cAg4bqNPNYkavQUg==/109951173459546721.jpg?param=800y800",
+          "title": "IVE",
+          "caption": "LUCID DREAM (Shin Sakiura Remix)",
+          "source": "NetEase Cloud Music · artist 50377945 · album 383783734"
+        },
+        {
+          "src": "https://p1.music.126.net/ZNRgeJirGBfEkFR0vHehMw==/109951173416735096.jpg?param=800y800",
+          "title": "IVE",
+          "caption": "LUCID DREAM (☆Taku Takahashi Remix)",
+          "source": "NetEase Cloud Music · artist 50377945 · album 382432197"
+        },
+        {
+          "src": "https://p1.music.126.net/m07pch1b-GNB4zVj2VhSyw==/109951173213168300.jpg?param=800y800",
+          "title": "IVE",
+          "caption": "LUCID DREAM",
+          "source": "NetEase Cloud Music · artist 50377945 · album 376071281"
+        }
+      ]
+    },
+    {
+      "key": "aespa",
+      "name": "aespa",
+      "aliases": [],
+      "images": [
+        {
+          "src": "https://p2.music.126.net/iunsGRgb6XJ1ViIP9cO2Og==/109951173942266585.jpg?param=800y800",
+          "title": "aespa",
+          "caption": "SYNK : COMPLaeXITY - 2026 Special Digital Single",
+          "source": "NetEase Cloud Music · artist 37351063 · album 398440995"
+        },
+        {
+          "src": "https://p2.music.126.net/T4bXPJWpDxxWT3rKxr1neQ==/109951173728313464.jpg?param=800y800",
+          "title": "aespa",
+          "caption": "SYNK : aeXIS LINE - 2026 Special Digital Single",
+          "source": "NetEase Cloud Music · artist 37351063 · album 391812955"
+        },
+        {
+          "src": "https://p2.music.126.net/OfPcfEZ8TGuwSts42m6aPQ==/109951173627559562.jpg?param=800y800",
+          "title": "aespa",
+          "caption": "KISS N TELL",
+          "source": "NetEase Cloud Music · artist 37351063 · album 388731932"
+        },
+        {
+          "src": "https://p1.music.126.net/qeTbUQpEnYq2MhDxMlzK2A==/109951173570497963.jpg?param=800y800",
+          "title": "aespa",
+          "caption": "LEMONADE (Zedd Extended Mix)",
+          "source": "NetEase Cloud Music · artist 37351063 · album 387409065"
+        }
+      ]
+    },
+    {
+      "key": "twice",
+      "name": "TWICE",
+      "aliases": [
+        "兔瓦斯",
+        "트와이스"
+      ],
+      "images": [
+        {
+          "src": "https://i0.hdslb.com/bfs/archive/2180c6a5fdc01f2ffda0dfa5d1bcd567ea83e75a.png@800w_450h_1c.webp",
+          "title": "TWICE",
+          "caption": "【绝美初舞台系列】【TWICE】出道至今回归主打 现场合集（1080P收藏向）",
+          "source": "Bilibili · BV1FE411a72Q"
+        },
+        {
+          "src": "https://i2.hdslb.com/bfs/archive/14b24412745a9f07a0e974999d454e6ab5de4310.jpg@800w_450h_1c.webp",
+          "title": "TWICE",
+          "caption": "【4K60帧】TWICE.zip丨出道至今打歌舞台精选集锦丨4K舞台纯享丨舞台成长史",
+          "source": "Bilibili · BV1MAto61Ewy"
+        },
+        {
+          "src": "https://i1.hdslb.com/bfs/archive/ac4075e9c964f78b9f6cf4c1e5b64a127eba4e68.jpg@800w_450h_1c.webp",
+          "title": "TWICE",
+          "caption": "【TWICE】精美舞台混剪合集，让你一次看个够！",
+          "source": "Bilibili · BV1P4411g7qR"
+        },
+        {
+          "src": "https://i1.hdslb.com/bfs/archive/154d80edd28611d4e9884f7e6b0703d62f58a953.jpg@800w_450h_1c.webp",
+          "title": "TWICE",
+          "caption": "TWICE 81 首绝美现场【1080P 高清中字｜分集播放】世巡演唱会 + 打歌舞台精选",
+          "source": "Bilibili · BV1sCaV6AEdq"
+        },
+        {
+          "src": "https://i0.hdslb.com/bfs/archive/a874b5d27b33df3fb0a129cc2cb264ff3902ee19.jpg@800w_450h_1c.webp",
+          "title": "TWICE",
+          "caption": "TWICE &#x27;Strategy&#x27; 4k舞台+直拍合集 (更新至241215人歌)",
+          "source": "Bilibili · BV1igizYKE9x"
+        }
+      ]
+    },
+    {
+      "key": "seventeen",
+      "name": "SEVENTEEN",
+      "aliases": [],
+      "images": [
+        {
+          "src": "https://p2.music.126.net/AAcSMC6mo2oKuozH14e10w==/109951172826406182.jpg?param=800y800",
+          "title": "SEVENTEEN",
+          "caption": "Tiny Light",
+          "source": "NetEase Cloud Music · artist 1080132 · album 364264407"
+        },
+        {
+          "src": "https://p2.music.126.net/LUe0of6N8pLCGAroaHkI7Q==/109951172378717512.jpg?param=800y800",
+          "title": "SEVENTEEN",
+          "caption": "Bad Influence (Prod. by Pharrell Williams) (Explicit Ver.)",
+          "source": "NetEase Cloud Music · artist 1080132 · album 352994396"
+        },
+        {
+          "src": "https://p2.music.126.net/A9m2TxHzih3g-VYQlcMEWg==/109951171458138932.jpg?param=800y800",
+          "title": "SEVENTEEN",
+          "caption": "Where love passed",
+          "source": "NetEase Cloud Music · artist 1080132 · album 278255658"
+        },
+        {
+          "src": "https://p2.music.126.net/jvrkTJhzvruTm6lMyeeWMQ==/109951171034240319.jpg?param=800y800",
+          "title": "SEVENTEEN",
+          "caption": "SEVENTEEN 5th Album 'HAPPY BURSTDAY'",
+          "source": "NetEase Cloud Music · artist 1080132 · album 273241640"
+        }
+      ]
+    },
+    {
+      "key": "stray kids",
+      "name": "Stray Kids",
+      "aliases": [],
+      "images": [
+        {
+          "src": "https://p1.music.126.net/Q3SVOyUIk_sV4ICZnwwR8g==/109951173913590401.jpg?param=800y800",
+          "title": "Stray Kids",
+          "caption": "November 11th",
+          "source": "NetEase Cloud Music · artist 12647860 · album 397548031"
+        },
+        {
+          "src": "https://p1.music.126.net/a9WDUBUOB67UGQlEuK3BqQ==/109951173729709816.jpg?param=800y800",
+          "title": "Stray Kids",
+          "caption": "This & That (That Remixes)",
+          "source": "NetEase Cloud Music · artist 12647860 · album 391971563"
+        },
+        {
+          "src": "https://p1.music.126.net/2g9xk0qLOsnTGAIpBxjN6Q==/109951173711003646.jpg?param=800y800",
+          "title": "Stray Kids",
+          "caption": "This & That (This Remixes)",
+          "source": "NetEase Cloud Music · artist 12647860 · album 391324474"
+        },
+        {
+          "src": "https://p1.music.126.net/th_yvzcB4iFsF1nalvTVRg==/109951173697450249.jpg?param=800y800",
+          "title": "Stray Kids",
+          "caption": "THIS & THAT",
+          "source": "NetEase Cloud Music · artist 12647860 · album 390886295"
+        }
+      ]
+    },
+    {
+      "key": "enhypen",
+      "name": "ENHYPEN",
+      "aliases": [],
+      "images": [
+        {
+          "src": "https://i1.hdslb.com/bfs/archive/38596e242bc8fa2a64fca0763d00c158366c2e34.jpg@800w_450h_1c.webp",
+          "title": "ENHYPEN",
+          "caption": "【ENHYPEN】一镜到底4K《Bloody Paradise》打歌初舞台合集 260821",
+          "source": "Bilibili · BV1j88q6VEfi"
+        },
+        {
+          "src": "https://i0.hdslb.com/bfs/archive/0264e25e321b83fcf72774067b694928df0f7a56.jpg@800w_450h_1c.webp",
+          "title": "ENHYPEN",
+          "caption": "【4K】ENHYPEN《Bite Me》舞台230604",
+          "source": "Bilibili · BV1BqnJ63EMV"
+        },
+        {
+          "src": "https://i0.hdslb.com/bfs/archive/393f7cd8299bb7c4adce8d172cd310abce62769c.jpg@800w_450h_1c.webp",
+          "title": "ENHYPEN",
+          "caption": "241115 ENHYPEN 音乐银行 No Doubt 舞台直拍合集 4K",
+          "source": "Bilibili · BV1z5UYYpErD"
+        },
+        {
+          "src": "https://i0.hdslb.com/bfs/archive/7cb5ad39c89eb54c9aaa9baaa65661be651e9b21.jpg@800w_450h_1c.webp",
+          "title": "ENHYPEN",
+          "caption": "【ENHYPEN】油管破五百万舞台合集",
+          "source": "Bilibili · BV1te4y1H7KN"
+        },
+        {
+          "src": "https://i1.hdslb.com/bfs/archive/d07046fba8e4f7954ae4362740160e7f565ea709.jpg@800w_450h_1c.webp",
+          "title": "ENHYPEN",
+          "caption": "【ENHYPEN】出道至今舞台精编版 241213 SBS官方更新",
+          "source": "Bilibili · BV1anBgYQEqi"
+        }
+      ]
+    },
+    {
+      "key": "txt",
+      "name": "TXT",
+      "aliases": [],
+      "images": [
+        {
+          "src": "https://i2.hdslb.com/bfs/archive/a6fcdf5f01dac0d37ac43b2a53c1bac11de98043.jpg@800w_450h_1c.webp",
+          "title": "TXT",
+          "caption": "TXT新曲Love Language一镜到底版舞台",
+          "source": "Bilibili · BV1bcVVzTEVi"
+        },
+        {
+          "src": "https://i2.hdslb.com/bfs/archive/4ab18423f0fac64feecc61c80655b6fd555d7ec5.jpg@800w_450h_1c.webp",
+          "title": "TXT",
+          "caption": "【TXT】TXT舞台合集",
+          "source": "Bilibili · BV1S64y1v7z9"
+        },
+        {
+          "src": "https://i0.hdslb.com/bfs/archive/37d9ffcb99391f531a19afc632d96cfe5787f2cf.png@800w_450h_1c.webp",
+          "title": "TXT",
+          "caption": "【4K 舞台】TXT《 Deja Vu 》Mnet 20240404",
+          "source": "Bilibili · BV1wt421H7nf"
+        },
+        {
+          "src": "https://i2.hdslb.com/bfs/archive/8cb50c93b35f00418aefedcf160c2381eaf30aff.jpg@800w_450h_1c.webp",
+          "title": "TXT",
+          "caption": "末放就离谱！TXT《Good Boy Gone Bad》220522 人气歌谣 打歌舞台",
+          "source": "Bilibili · BV1Rt4y1W7JJ"
+        },
+        {
+          "src": "https://i2.hdslb.com/bfs/archive/86007fb22831c8cb91c467798cff219909b53a9e.jpg@800w_450h_1c.webp",
+          "title": "TXT",
+          "caption": "【TXT】舞台太多补不完？看一键换装就好",
+          "source": "Bilibili · BV1rM411z75V"
+        }
+      ]
+    },
+    {
+      "key": "nct",
+      "name": "NCT",
+      "aliases": [],
+      "images": [
+        {
+          "src": "https://p1.music.126.net/vpphvnSqAkoXFN0fClxoMQ==/109951168926548699.jpg?param=800y800",
+          "title": "NCT",
+          "caption": "Golden Age - The 4th Album",
+          "source": "NetEase Cloud Music · artist 11991182 · album 173523675"
+        },
+        {
+          "src": "https://p1.music.126.net/Vc3ewRMqtw81NFsIjowHMA==/109951167554724558.jpg?param=800y800",
+          "title": "NCT",
+          "caption": "Universe – The 3rd Album",
+          "source": "NetEase Cloud Music · artist 11991182 · album 137474492"
+        },
+        {
+          "src": "https://p1.music.126.net/RA3JjhD8hz1s7BQ2rQM70A==/109951165491513756.jpg?param=800y800",
+          "title": "NCT",
+          "caption": "NCT - The 2nd Album RESONANCE Pt.2",
+          "source": "NetEase Cloud Music · artist 11991182 · album 98659138"
+        },
+        {
+          "src": "https://p1.music.126.net/ltUCFWxeLWGyYlRsVAZfyg==/109951167677669641.jpg?param=800y800",
+          "title": "NCT",
+          "caption": "NCT - The 2nd Album RESONANCE Pt.1",
+          "source": "NetEase Cloud Music · artist 11991182 · album 96680161"
+        }
+      ]
+    },
+    {
+      "key": "bigbang",
+      "name": "BIGBANG",
+      "aliases": [],
+      "images": [
+        {
+          "src": "https://i2.hdslb.com/bfs/archive/e15477c9525f4bd1cb6200e924052cdbf9b5c02b.jpg@800w_450h_1c.webp",
+          "title": "BIGBANG",
+          "caption": "1080P超清带字幕 BIGBANG 2024合体MAMA舞台完整版",
+          "source": "Bilibili · BV16ZBxYCESP"
+        },
+        {
+          "src": "https://i1.hdslb.com/bfs/archive/03cd9ea06b4dfc24ce0e9345f222d8797279fd29.png@800w_450h_1c.webp",
+          "title": "BIGBANG",
+          "caption": "BIGBANG经典神曲MV合集",
+          "source": "Bilibili · BV1Ak4y1C7me"
+        },
+        {
+          "src": "https://i1.hdslb.com/bfs/archive/36703bb16d2cf42dff75e7e42e07bf4846fa2cfb.jpg@800w_450h_1c.webp",
+          "title": "BIGBANG",
+          "caption": "BIGBANG-‘ FANTASTIC BABY’ 打歌舞台",
+          "source": "Bilibili · BV1aa41137Gv"
+        },
+        {
+          "src": "https://i2.hdslb.com/bfs/archive/539a1d80f574978183777d25e52e0f8cb9e151ab.jpg@800w_450h_1c.webp",
+          "title": "BIGBANG",
+          "caption": "【4K全场】BIGBANG十周年演唱会最终场",
+          "source": "Bilibili · BV1f84y1F7zV"
+        },
+        {
+          "src": "https://i2.hdslb.com/bfs/archive/b135323e3bb97096b908ab5bc4545fb18380e484.jpg@800w_450h_1c.webp",
+          "title": "BIGBANG",
+          "caption": "【BIGBANG】梦回2015之 BANG BANG BANG 超燃开场！",
+          "source": "Bilibili · BV1Y7411d7H9"
+        }
+      ]
+    },
+    {
+      "key": "redvelvet",
+      "name": "Red Velvet",
+      "aliases": [],
+      "images": [
+        {
+          "src": "https://i0.hdslb.com/bfs/archive/bf5a9b0bd65b93e9c11c87a45c511581058df797.jpg@800w_450h_1c.webp",
+          "title": "Red Velvet",
+          "caption": "值得一看！Red Velvet的非主打舞台（持续更新）",
+          "source": "Bilibili · BV1oE411X7yP"
+        },
+        {
+          "src": "https://i2.hdslb.com/bfs/archive/37fa92cc7aa0d3fc826ddfc0cad26d51bb28a91a.jpg@800w_450h_1c.webp",
+          "title": "Red Velvet",
+          "caption": "【Red Velvet】260802 A Day In Red＆Velvet 舞台合集",
+          "source": "Bilibili · BV1rSMQ6uEgB"
+        },
+        {
+          "src": "https://i1.hdslb.com/bfs/archive/5ea5f70fb88ef669673355a2787b53533d5f1eb6.jpg@800w_450h_1c.webp",
+          "title": "Red Velvet",
+          "caption": "【Red Velvet】出道至今中字MV合集(持更)",
+          "source": "Bilibili · BV1SD4y1D7Uy"
+        },
+        {
+          "src": "https://i2.hdslb.com/bfs/archive/2616bfc6e1e962e28d1645a96069f9077e22dad5.jpg@800w_450h_1c.webp",
+          "title": "Red Velvet",
+          "caption": "【Red Velvet】Red Velvet MMA 全员+个人 八连发 161119",
+          "source": "Bilibili · BV1ts411W7ds"
+        },
+        {
+          "src": "https://i2.hdslb.com/bfs/archive/b369187028fc5a3c46ba6da1f762c7b239bc54a9.jpg@800w_450h_1c.webp",
+          "title": "Red Velvet",
+          "caption": "Red Velvet《俄罗斯转盘》MCD全体舞台直拍",
+          "source": "Bilibili · BV1ex411L7nE"
+        }
+      ]
+    }
+  ]
+}

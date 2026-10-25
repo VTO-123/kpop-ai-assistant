@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{TITLE}}</title>
+    <meta name="description" content="{{SONG_TITLE}} · {{ARTIST_NAME}}：MV 封面、歌曲简介与两个入口（歌手档案 / B 站视频）。" />
+    {{OG_META}}
+    <meta name="theme-color" content="#07060e" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="song-page">
+    <div class="glow" aria-hidden="true">
+      <span class="glow-a"></span>
+      <span class="glow-b"></span>
+      <span class="glow-c"></span>
+    </div>
+
+    <div class="shell">
+      <header class="topbar">
+        <a class="brand" href="/">
+          <span class="brand-mark" aria-hidden="true">K</span>
+          <span class="brand-text">
+            <strong>K-POP 档案室</strong>
+            <small>热门视频</small>
+          </span>
+        </a>
+        <a class="back-link" href="/">← 返回首页</a>
+      </header>
+
+      <main class="song-main">
+        <article class="song-hero">
+          <div class="song-cover">
+            <img src="{{COVER_URL}}" alt="{{COVER_ALT}}" referrerpolicy="no-referrer" decoding="async" />
+            <span class="song-credit">{{COVER_CREDIT}}</span>
+          </div>
+
+          <div class="song-info">
+            <p class="song-eyebrow">K-POP 热门 MV</p>
+            <h1 class="song-title">{{SONG_TITLE}}</h1>
+            <p class="song-meta">
+              <span class="song-artist">{{ARTIST_NAME}}</span>
+              <span class="song-dot" aria-hidden="true">·</span>
+              <span class="song-year">{{YEAR}}</span>
+            </p>
+            <p class="song-intro">{{INTRO}}</p>
+
+            <div class="song-actions">
+              <a class="btn btn-ghost" id="artistLink" href="{{ARTIST_URL}}">了解歌手信息</a>
+              <a
+                class="btn btn-primary"
+                id="biliLink"
+                href="{{BILI_URL}}"
+                target="_blank"
+                rel="noopener noreferrer"{{BILI_FALLBACK}}
+              >
+                去 B 站看视频
+              </a>
+            </div>
+          </div>
+        </article>
+      </main>
+
+      <footer class="footer">
+        <span>作品仅供学习与交流 · 视频版权归 B 站及上传方所有</span>
+        <span class="footer-meta">跳转观看，不下载、不转存</span>
+      </footer>
+    </div>
+  </body>
+</html>
