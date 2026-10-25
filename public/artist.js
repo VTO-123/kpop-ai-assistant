@@ -219,10 +219,8 @@ function handleEvent(event) {
   if (!event || typeof event !== 'object') return;
 
   if (event.type === 'meta') {
-    const builtin = event.source === 'builtin';
-    els.sourceChip.hidden = false;
-    els.sourceChip.dataset.source = builtin ? 'builtin' : 'ai';
-    els.sourceChip.textContent = builtin ? '内置档案' : 'AI 检索生成';
+    // 来源徽标不在界面展示，meta 只用于后续状态判断
+    els.sourceChip.hidden = true;
     return;
   }
 
@@ -334,10 +332,6 @@ function showNotFound({ message, similar }) {
       link.textContent = name;
       els.notFoundSimilar.append(link);
     });
-
-  els.sourceChip.hidden = false;
-  els.sourceChip.dataset.source = 'ai';
-  els.sourceChip.textContent = 'AI 检索生成';
 }
 
 function showError(message) {

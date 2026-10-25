@@ -55,7 +55,7 @@ export function renderArtistPage(rawName) {
   const replacements = {
     TITLE: escapeHtml(`${displayName}${hasZh ? ` ${displayNameZh}` : ''} · K-POP 档案室`),
     ARTIST_NAME: safeName,
-    BANNER_SUB: escapeHtml(`${hasZh ? `${displayNameZh} · ` : ''}AI 入坑档案 · 实时生成`),
+    BANNER_SUB: escapeHtml(`${hasZh ? `${displayNameZh} · ` : ''}入坑档案`),
     BANNER_CLASS: cover ? 'banner' : 'banner banner--empty',
     COVER_LOOKUP: coverLookup ? ' data-cover-lookup="1"' : '',
     COVER_BLOCK: coverBlock,

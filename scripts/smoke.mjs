@@ -498,7 +498,7 @@ async function demoSuite() {
     const unknown = await collectStream(await postChat(app.base, 'Bigbang'));
     check('未收录团体标记来源为 ai', unknown.meta?.source === 'ai', unknown.meta?.source);
     check('未收录团体不编造正文', unknown.text === '' && unknown.deltas === 0);
-    check('未收录团体明确提示配置 Key', /AI_API_KEY/.test(unknown.error), unknown.error);
+    check('未收录团体给出中性提示', /暂时无法生成/.test(unknown.error), unknown.error);
 
     const badRes = await postChat(app.base, '   ');
     check('空团体名返回 400', badRes.status === 400);

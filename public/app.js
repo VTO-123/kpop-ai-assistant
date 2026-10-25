@@ -183,9 +183,9 @@ async function loadConfig() {
     modeBadge.dataset.mode = data.demo ? 'demo' : 'live';
 
     if (data.demo) {
-      modeText.textContent = 'DEMO · 内置数据 + 无 Key 提示';
+      modeText.textContent = '演示模式';
     } else {
-      modeText.textContent = `LIVE · ${data.model}`;
+      modeText.textContent = 'LIVE';
     }
   } catch {
     modeBadge.hidden = true;

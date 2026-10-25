@@ -113,10 +113,7 @@ export async function handleChat(req, res) {
     } else if (config.demo) {
       // 没配 Key 又不在内置清单里：明确告知，绝不编造假档案
       throw Object.assign(
-        new Error(
-          `「${group}」暂无内置资料，需要由 AI 实时生成；当前是 DEMO 模式（未配置 AI_API_KEY）。` +
-            '请在 .env.local 填写 AI_API_KEY 后重启服务，再试一次。',
-        ),
+        new Error(`「${group}」的档案暂时无法生成，请稍后再试。`),
         { expected: true },
       );
     } else {
