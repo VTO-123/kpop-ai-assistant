@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Install + Smoke Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run smoke test (SSE, routing, security, static)
+        run: npm run smoke
+
+      - name: Server boots on start
+        run: |
+          DEMO_MODE=1 PORT=4399 node server.js &
+          sleep 4
+          curl -fsS http://127.0.0.1:4399/api/config
+          curl -fsS http://127.0.0.1:4399/ | head -n 20
+          kill %1
