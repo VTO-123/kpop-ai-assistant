@@ -42,6 +42,6 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: vtobbb/kpop-ai-assistant:latest
+          tags: vtobbb/kpop-archive:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max

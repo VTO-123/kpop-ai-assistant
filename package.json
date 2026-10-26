@@ -1,5 +1,5 @@
 {
-  "name": "kpop-ai-assistant",
+  "name": "kpop-archive",
   "version": "0.1.0",
   "private": true,
   "description": "K-POP 档案室：输入团体名，AI 流式生成团体介绍与必听曲目推荐。",

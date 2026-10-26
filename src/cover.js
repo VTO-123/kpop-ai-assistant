@@ -16,7 +16,7 @@ const HIT_TTL = 6 * 60 * 60 * 1000;
 const MISS_TTL = 10 * 60 * 1000;
 const MAX_ARTISTS = 6;
 const ALLOWED_HOST = 'music.126.net';
-const USER_AGENT = 'kpop-ai-assistant/0.1 (cover lookup)';
+const USER_AGENT = 'kpop-archive/0.1 (cover lookup)';
 
 /** @typedef {{ url: string, source: 'builtin' | 'netease' | 'none', cached?: boolean }} CoverResolution */
 

@@ -1,4 +1,4 @@
-# K-POP 档案室 · kpop-ai-assistant
+# K-POP 档案室 · kpop-archive
 
 ## 在线 Demo
 
@@ -25,7 +25,7 @@ GitHub Actions CI/CD → Docker Hub 镜像 → Sealos 云端部署，国内直�
 
 ```bash
 # 1. 进入项目
-cd kpop-ai-assistant
+cd kpop-archive
 
 # 2. 安装前端渲染依赖（只有 ogl，约 0.4MB）
 npm install
@@ -90,7 +90,7 @@ npm run smoke
 ## 目录结构
 
 ```
-kpop-ai-assistant/
+kpop-archive/
 ├── server.js              # HTTP 入口：路由（含 /artist/[name]）、静态资源、优雅退出
 ├── src/
 │   ├── config.js          # .env 解析与运行时配置
@@ -320,14 +320,14 @@ FlexCarousel 源码逐行移植的原生 ES module：
 
 - **前后端同仓**：一个 Node 进程同时提供页面与 API，静态资源直接由 `public/` 输出，没有独立前端服务；
 - **多源聚合**：内置精选 → 网易云 → QQ 音乐 → AI 检索兜底，任何真实歌手/团体都能进详情页；
-- **CI/CD**：push 到 `main` → GitHub Actions 跑 `npm run smoke` → 构建镜像并推 `vtobbb/kpop-ai-assistant:latest` 到 Docker Hub；
+- **CI/CD**：push 到 `main` → GitHub Actions 跑 `npm run smoke` → 构建镜像并推 `vtobbb/kpop-archive:latest` 到 Docker Hub；
 - **Sealos 部署**：拉取该镜像，端口 `4321`，环境变量 `HOST=0.0.0.0`、`PORT=4321`、`AI_API_KEY`、`AI_BASE_URL`、`AI_MODEL`。
 
 ### 发布流程（改完功能后）
 
 1. 本地 `npm run smoke` 通过 → `git add . && git commit && git push origin main`；
 2. 等 GitHub Actions 跑绿（smoke 测试 + 镜像构建推送）；
-3. Sealos → 应用管理 → `kpop-ai-assistant` → **变更** → 确认拉取最新镜像 → 保存；
+3. Sealos → 应用管理 → 找到该应用 → **变更** → 确认拉取最新镜像 → 保存；
 4. 打开 <https://uimcwuhdrtyc.sealoshzh.site> 验收。
 
 ---
