@@ -1,10 +1,11 @@
 /* 首页：只负责「搜索 → 跳转详情页」。档案内容全部在 /artist/[name] 里生成。 */
-import { pushRecent, renderRecent } from './js/store.js';
+import { clearRecent, pushRecent, renderRecent } from './js/store.js';
 
 const form = document.getElementById('askForm');
 const input = document.getElementById('groupInput');
 const recentWrap = document.getElementById('recentWrap');
 const recentList = document.getElementById('recentList');
+const recentClear = document.getElementById('recentClear');
 const modeBadge = document.getElementById('modeBadge');
 const modeText = document.getElementById('modeText');
 
@@ -25,7 +26,18 @@ form.addEventListener('submit', (event) => {
   go(input.value);
 });
 
-renderRecent({ wrap: recentWrap, list: recentList }, go);
+renderRecent({ wrap: recentWrap, list: recentList, clear: recentClear }, go);
+
+recentClear?.addEventListener('click', () => {
+  clearRecent();
+  renderRecent({ wrap: recentWrap, list: recentList, clear: recentClear }, go);
+  input.focus();
+});
+
+// 从详情页返回（含 bfcache）时，最近记录可能已经变化
+window.addEventListener('pageshow', () => {
+  renderRecent({ wrap: recentWrap, list: recentList, clear: recentClear }, go);
+});
 
 /* ---------------- 搜索联想 ---------------- */
 

@@ -7,7 +7,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { config } from './config.js';
 import { findGroup } from './groups.js';
-import { formatSourceLine, getLibraryProfile, sourceLabel } from './profile.js';
+import { formatCoverCredit, formatSourceLine, getLibraryProfile, sourceLabel } from './profile.js';
 
 const TEMPLATE_PATH = path.join(config.publicDir, 'artist.html');
 
@@ -127,7 +127,7 @@ export function renderArtistPage(rawName) {
     COVER_BLOCK: coverBlock,
     COVER_URL: safeCover,
     OG_META: cover ? `<meta property="og:image" content="${safeCover}" />` : '',
-    COVER_CREDIT: escapeHtml(group?.coverCredit ? `封面：${group.coverCredit}` : ''),
+    COVER_CREDIT: escapeHtml(group?.coverCredit ? `封面：${formatCoverCredit(group.coverCredit)}` : ''),
     PROFILE_PANEL: renderProfilePanel(profile),
     SOURCE_LINE: escapeHtml(formatSourceLine(profile?.sources || [])),
   };

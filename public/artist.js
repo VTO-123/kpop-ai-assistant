@@ -447,7 +447,7 @@ function finish(label) {
   els.download.disabled = state.notFound || !state.raw;
 }
 
-/** AI 判定「不是真实存在的歌手」时，渲染一个信息页，而不是空白/假档案。 */
+/** 资料判定「不是真实存在的歌手」时，渲染一个信息页，而不是空白/假档案。 */
 function parseNotFound(raw) {
   const text = String(raw || '').trim();
   if (!text.startsWith('## 未收录')) return null;
@@ -471,7 +471,7 @@ function showNotFound({ message, similar }) {
   els.notFoundMessage.textContent = message;
   els.notFoundSimilar.replaceChildren();
 
-  // AI 偶尔会把「男团 / 组合」这类通用词也标成相近艺人，过滤掉
+  // 偶尔会把「男团 / 组合」这类通用词也标成相近艺人，过滤掉
   const blocked = /^(男团|女团|组合|团体|歌手|艺人|偶像|solo|unknown)$/i;
   similar
     .filter((name) => name && !blocked.test(name))

@@ -19,7 +19,7 @@ export function escapeHtml(text) {
 
 export function inline(text) {
   let html = escapeHtml(text);
-  // [[成员名]] 是 AI 输出成员名单时用的标记，不在成员名单行时按普通文字渲染
+  // [[成员名]] 是档案输出成员名单时用的标记，不在成员名单行时按普通文字渲染
   html = html.replace(/\[\[([^\]]+)\]\]/g, '$1');
   html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
   html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
@@ -155,7 +155,7 @@ function renderSongItem(item, section, songLinks, artist) {
   );
 }
 
-/** 「成员名单」这一行：AI 用 [[名字]] 标记的直接成链，内置数据按已知成员名匹配。 */
+/** 「成员名单」这一行：用 [[名字]] 标记的直接成链，内置数据按已知成员名匹配。 */
 function renderBullet(text, members) {
   const match = /^(成员名单|成员)[:：]\s*(.+)$/.exec(text);
   if (!match) return inline(text);
@@ -192,7 +192,7 @@ function renderBullet(text, members) {
   return `${label}${rendered}`;
 }
 
-/** 把 AI 输出里的 [[成员名]] 标记渲染成个人页链接。 */
+/** 把输出里的 [[成员名]] 标记渲染成个人页链接。 */
 function renderMarkedMembers(body) {
   return body
     .split(/(\[\[[^\]]+\]\])/)

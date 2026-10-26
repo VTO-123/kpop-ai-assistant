@@ -47,9 +47,9 @@
             <p class="song-intro">{{INTRO}}</p>
 
             <div class="song-actions">
-              <a class="btn btn-ghost" id="artistLink" href="{{ARTIST_URL}}">了解歌手信息</a>
+              {{PLAY_BUTTON}}
               <a
-                class="btn btn-primary"
+                class="btn btn-ghost"
                 id="biliLink"
                 href="{{BILI_URL}}"
                 target="_blank"
@@ -57,12 +57,23 @@
               >
                 去 B 站看视频
               </a>
+              <a class="btn btn-ghost" id="artistLink" href="{{ARTIST_URL}}">了解歌手信息</a>
             </div>
+
+            <p class="player-hint" id="playerHint"{{HINT_HIDDEN}}>
+              暂未收录可播放的视频，可以点「去 B 站看视频」搜索。
+            </p>
           </div>
         </article>
+
+        <section class="song-player" id="songPlayer" hidden aria-label="B 站播放器">
+          <div class="song-player__frame" id="playerFrame"></div>
+        </section>
       </main>
     </div>
 
     <div class="vto-mark" aria-hidden="true">© VTO</div>
+
+    <script src="/song.js" type="module"></script>
   </body>
 </html>

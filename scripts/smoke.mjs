@@ -240,6 +240,7 @@ async function demoSuite() {
       'GET /styles.css',
       css.status === 200 && /text\/css/.test(css.headers.get('content-type') || ''),
     );
+    const cssText = await css.text();
 
     const jsModule = await fetch(`${app.base}/js/md.js`);
     check(
@@ -258,6 +259,29 @@ async function demoSuite() {
     check('首页不再有页脚文案', !htmlText.includes('作品仅供学习与交流'));
     check('首页有搜索联想容器', htmlText.includes('id="suggestPanel"'));
     check('首页无 AI 痕迹字样', !/deepseek|检索生成|三首必听|\bAI\b/i.test(htmlText));
+
+    // 阶段 D：最近查过（本地记录 + 清空入口）
+    check(
+      '首页有最近查过与清空入口',
+      htmlText.includes('id="recentWrap"') &&
+        htmlText.includes('id="recentList"') &&
+        htmlText.includes('id="recentClear"') &&
+        htmlText.includes('最近查过'),
+    );
+    const storeJs = await (await fetch(`${app.base}/js/store.js`)).text();
+    check(
+      '最近记录最多 6 条且可清空',
+      storeJs.includes('MAX_RECENT = 6') &&
+        storeJs.includes('export function clearRecent') &&
+        storeJs.includes('removeItem'),
+    );
+
+    // 移动端：媒体查询覆盖历史栏与播放器
+    const mobileCss = cssText.slice(cssText.indexOf('@media (max-width: 760px)'));
+    check(
+      '移动端样式覆盖历史栏与播放器',
+      mobileCss.includes('.recent-list') && mobileCss.includes('.song-player__frame'),
+    );
 
     const artistsRes = await fetch(`${app.base}/api/artists`);
     const artistsJson = await artistsRes.json();
@@ -293,6 +317,21 @@ async function demoSuite() {
     check('歌手页有奖项 / 代表舞台板块', artistText.includes('奖项 / 代表舞台'));
     check('歌手页有来源标注', /资料参考：.*百度百科/.test(artistText));
     check('歌手页无 AI 痕迹字样', !/deepseek|检索生成|三首必听|\bAI\b/i.test(artistText));
+
+    // 阶段 D：奖项 / 代表舞台的真实数据
+    const btsPage = await (await fetch(`${app.base}/artist/BTS`)).text();
+    check(
+      '奖项条目带来源标注',
+      btsPage.includes('class="award-item"') &&
+        btsPage.includes('class="award-source"') &&
+        btsPage.includes('百度百科'),
+    );
+    check(
+      '代表舞台跳 B 站视频',
+      btsPage.includes('stage-link') && btsPage.includes('https://www.bilibili.com/video/BV'),
+    );
+    const itzyPage = await (await fetch(`${app.base}/artist/ITZY`)).text();
+    check('没有奖项和舞台时显示「暂未收录」', itzyPage.includes('award-empty'));
     check('详情页不再有轮播', !artistText.includes('coverCarousel'));
     check('详情页不引用轮播脚本', !artistText.includes('/flex-carousel.css'));
     check(
@@ -564,6 +603,21 @@ async function demoSuite() {
     );
     check('歌曲页有两个入口', songHtml.includes('id="artistLink"') && songHtml.includes('id="biliLink"'));
     check('歌曲页带 bvid 供播放器使用', /data-bvid="BV[0-9A-Za-z]+"/.test(songHtml));
+    check(
+      '歌曲页有播放按钮与播放器容器',
+      songHtml.includes('id="playBtn"') &&
+        songHtml.includes('id="songPlayer"') &&
+        songHtml.includes('id="playerFrame"'),
+    );
+    check('播放器不预加载 iframe', !songHtml.includes('player.bilibili.com/player.html'));
+    const songJs = await (await fetch(`${app.base}/song.js`)).text();
+    check(
+      '播放器脚本按 bvid 嵌入',
+      songJs.includes('player.bilibili.com/player.html') &&
+        songJs.includes('bvid=') &&
+        songJs.includes('autoplay=1'),
+    );
+    check('歌曲页保留去 B 站按钮', songHtml.includes('id="biliLink"'));
     check('歌曲页有 VTO 标识', songHtml.includes('class="vto-mark"'));
     check(
       '歌曲页歌手入口指向档案页',

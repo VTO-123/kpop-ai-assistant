@@ -24,6 +24,15 @@ export function pushRecent(name) {
   return next;
 }
 
+/** 清空最近查询；隐私模式下静默失败。 */
+export function clearRecent() {
+  try {
+    localStorage.removeItem(RECENT_KEY);
+  } catch {
+    /* 隐私模式下忽略 */
+  }
+}
+
 /**
  * 把最近记录渲染成 chips。
  * @param {{ wrap: HTMLElement, list: HTMLElement }} els
@@ -34,11 +43,15 @@ export function renderRecent(els, onPick) {
   els.list.innerHTML = '';
   els.wrap.hidden = recent.length === 0;
 
+  const clear = els.clear || null;
+  if (clear) clear.hidden = recent.length === 0;
+
   for (const name of recent) {
     const chip = document.createElement('button');
     chip.type = 'button';
     chip.className = 'chip';
     chip.textContent = name;
+    chip.title = name;
     chip.addEventListener('click', () => onPick(name));
     els.list.appendChild(chip);
   }

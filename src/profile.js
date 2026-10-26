@@ -21,6 +21,17 @@ export function sourceLabel(key) {
   return SOURCE_LABELS[key] || '';
 }
 
+/** 把数据里的英文封面署名转成页面上的中文来源。 */
+export function formatCoverCredit(raw) {
+  const text = String(raw || '').trim();
+  if (!text) return '';
+  if (/netease|126\.net/i.test(text)) return '网易云音乐';
+  if (/bilibili|hdslb/i.test(text)) return 'B站视频封面';
+  if (/baike|baidu|bcebos/i.test(text)) return '百度百科';
+  if (/qq|gtimg/i.test(text)) return 'QQ 音乐';
+  return text;
+}
+
 /** 把来源集合整理成「百度百科 · 网易云音乐 · B站」这种文案。 */
 export function formatSourceLine(sources) {
   const list = [...new Set((sources || []).filter((key) => SOURCE_LABELS[key]))].sort(

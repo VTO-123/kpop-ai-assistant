@@ -7,6 +7,7 @@ import path from 'node:path';
 import { escapeHtml } from './artist-page.js';
 import { resolveBilibiliTarget } from './bilibili.js';
 import { config } from './config.js';
+import { formatCoverCredit } from './profile.js';
 import { findSong } from './songs.js';
 
 const TEMPLATE_PATH = path.join(config.publicDir, 'song.html');
@@ -38,6 +39,10 @@ export async function renderSongPage(rawId) {
   const cover = escapeHtml(song.cover || '');
   const intro = escapeHtml(song.intro || '');
 
+  const playButton = target.bvid
+    ? `<button class="btn btn-primary" id="playBtn" type="button" data-bvid="${escapeHtml(target.bvid)}">▶ 播放 MV</button>`
+    : '';
+
   const replacements = {
     TITLE: escapeHtml(`${song.title} · ${song.artist} · K-POP 档案室`),
     SONG_TITLE: title,
@@ -46,8 +51,10 @@ export async function renderSongPage(rawId) {
     INTRO: intro,
     COVER_URL: cover,
     COVER_ALT: escapeHtml(`${song.title} 封面`),
-    COVER_CREDIT: escapeHtml(song.coverSource ? `封面：${song.coverSource}` : ''),
+    COVER_CREDIT: escapeHtml(song.coverSource ? `封面：${formatCoverCredit(song.coverSource)}` : ''),
     ARTIST_URL: `/artist/${encodeURIComponent(song.artist)}`,
+    PLAY_BUTTON: playButton,
+    HINT_HIDDEN: target.bvid ? ' hidden' : '',
     BILI_URL: escapeHtml(target.url),
     BILI_BVID: escapeHtml(target.bvid || ''),
     BILI_MODE: escapeHtml(target.mode),
