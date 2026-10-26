@@ -977,7 +977,7 @@ async function liveSuite() {
     const failStream = await collectStream(failRes);
     check(
       'LIVE 401 映射为友好提示',
-      /API Key/.test(failStream.error),
+      /配置无效/.test(failStream.error),
       failStream.error || '(no error event)',
     );
   } finally {

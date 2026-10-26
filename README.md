@@ -48,12 +48,11 @@ cp .env.example .env.local     # Windows PowerShell: Copy-Item .env.example .env
 
 ```ini
 AI_API_KEY=sk-xxxxxxxx
-AI_BASE_URL=https://api.deepseek.com/v1
-AI_MODEL=deepseek-chat
+AI_BASE_URL=https://your-gateway.example.com/v1
+AI_MODEL=your-model
 ```
 
-> 任何 OpenAI 兼容的 `/chat/completions` 接口都能用，例如：
-> `AI_BASE_URL=https://api.openai.com/v1` + `AI_MODEL=gpt-4o-mini`。
+> 任何 OpenAI 兼容的 `/chat/completions` 接口都能用，把地址与模型名换成你的即可。
 
 ### 自检
 
@@ -145,8 +144,8 @@ kpop-archive/
 | 变量 | 默认值 | 说明 |
 | --- | --- | --- |
 | `AI_API_KEY` | 空 | 为空则进入 DEMO 模式。也兼容 `DEEPSEEK_API_KEY` / `OPENAI_API_KEY` |
-| `AI_BASE_URL` | `https://api.deepseek.com/v1` | 任意 OpenAI 兼容网关 |
-| `AI_MODEL` | `deepseek-chat` | 模型名 |
+| `AI_BASE_URL` | `https://your-gateway.example.com/v1` | 任意 OpenAI 兼容网关 |
+| `AI_MODEL` | `your-model` | 模型名 |
 | `PORT` | `4321` | 监听端口 |
 | `HOST` | `127.0.0.1` | 监听地址，容器内可设为 `0.0.0.0` |
 | `DEMO_MODE` | 未设置 | 设为 `1` 强制使用演示数据 |
@@ -172,7 +171,7 @@ kpop-archive/
 返回前端需要的运行信息（不含 Key）。
 
 ```json
-{ "demo": false, "model": "deepseek-chat", "provider": "api.deepseek.com" }
+{ "demo": false, "model": "your-model", "provider": "your-gateway.example.com" }
 ```
 
 ### `POST /api/chat`
@@ -186,7 +185,7 @@ kpop-archive/
 响应：`text/event-stream`，每条事件是一行 `data: <json>`。
 
 ```text
-data: {"type":"meta","model":"deepseek-chat","demo":false,"source":"ai"}
+data: {"type":"meta","model":"your-model","demo":false,"source":"ai"}
 
 data: {"type":"delta","text":"## 一句话\n"}
 
@@ -349,10 +348,10 @@ FlexCarousel 源码逐行移植的原生 ES module：
 说明 WebGL2 不可用或没执行 `npm install`（缺 `node_modules/ogl`）。执行 `npm install` 后重启；
 仍不行的话浏览器需支持 WebGL2（Chrome/Edge 默认支持，可在 `chrome://gpu` 确认）。
 
-**提示「无法连接 AI 接口」**
+**提示「资料服务暂时不可用」**
 检查网络与 `AI_BASE_URL`；企业代理需要走网关时，把网关地址填进去。
 
-**提示「API Key 无效或已过期」**
+**提示「资料服务配置无效」**
 确认 `.env.local` 里的 `AI_API_KEY` 没有多余空格或引号，改完要重启进程。
 
 **一直显示 DEMO**

@@ -39,11 +39,11 @@ function readJsonBody(req) {
 function friendlyError(err) {
   const message = String(err?.message || '');
   if (/abort/i.test(err?.name || '')) return '请求已取消';
-  if (/timeout|timed out|ETIMEDOUT/i.test(message)) return '上游接口超时，请稍后重试';
+  if (/timeout|timed out|ETIMEDOUT/i.test(message)) return '资料服务响应超时，请稍后重试';
   if (/fetch failed|ENOTFOUND|ECONNREFUSED|getaddrinfo/i.test(message)) {
-    return `无法连接 AI 接口（${config.providerLabel}），请检查网络或 AI_BASE_URL`;
+    return '资料服务暂时不可用，请稍后重试';
   }
-  if (/401|invalid.*key|unauthorized/i.test(message)) return 'API Key 无效或已过期，请检查 .env.local';
+  if (/401|invalid.*key|unauthorized/i.test(message)) return '资料服务配置无效，请联系管理员';
   if (/429|rate limit/i.test(message)) return '请求太频繁，已被接口限流，请稍后再试';
   return message.slice(0, 200) || '生成失败，请重试';
 }
