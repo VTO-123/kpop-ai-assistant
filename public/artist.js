@@ -54,6 +54,8 @@ function init() {
     start();
   });
 
+  initSongLinkClicks();
+
   window.addEventListener(
     'scroll',
     () => {
@@ -256,6 +258,57 @@ function applyProfile(data) {
   old.replaceWith(section);
 }
 
+
+/* ---------------- 歌名 → B 站（有 bvid 直链，没有交给服务端解析） ---------------- */
+
+const biliCache = new Map();
+
+async function resolveBiliUrl(title, artistName) {
+  const key = `${title}|${artistName}`.toLowerCase();
+  if (biliCache.has(key)) return biliCache.get(key);
+
+  const query = new URLSearchParams({ title: title || '', artist: artistName || '' });
+  const promise = fetch(`/api/bilibili?${query.toString()}`)
+    .then((res) => (res.ok ? res.json() : null))
+    .then((data) => (data && data.url) || '')
+    .catch(() => '');
+  biliCache.set(key, promise);
+  return promise;
+}
+
+function initSongLinkClicks() {
+  els.output.addEventListener('click', async (event) => {
+    const link = event.target.closest?.('a.song-link');
+    if (!link) return;
+    // 有 bvid 的链接本身已是视频页，交给浏览器直接打开
+    if (link.dataset.bvid) return;
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+    event.preventDefault();
+    // 先同步开窗，避免 await 之后被浏览器当成弹窗拦截
+    const win = window.open('', '_blank');
+    const url = (await resolveBiliUrl(link.dataset.songTitle, link.dataset.songArtist)) || link.href;
+
+    if (win) {
+      try {
+        win.opener = null;
+      } catch {
+        /* 跨域时拿不到 opener，忽略 */
+      }
+      win.location.replace(url);
+    } else {
+      window.location.href = url;
+    }
+  });
+
+  // 悬停时预取，点击几乎无等待
+  els.output.addEventListener('mouseover', (event) => {
+    const link = event.target.closest?.('a.song-link');
+    if (link && !link.dataset.bvid) {
+      resolveBiliUrl(link.dataset.songTitle, link.dataset.songArtist);
+    }
+  });
+}
 
 /* ---------------- 档案正文（流式） ---------------- */
 

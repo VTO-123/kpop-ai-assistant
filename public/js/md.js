@@ -101,7 +101,31 @@ export function renderMarkdown(text, options = {}) {
   return out.join('');
 }
 
-/** 只在「热门歌曲 / 必听」小节里把歌名做成链接：有 BV 走视频页，没有回退 B 站搜索页。 */
+/** 去掉括号版本与 remix/live 后缀，只留主标题（与 src/bilibili.js 保持一致）。 */
+export function normalizeSongTitle(raw) {
+  let value = String(raw || '').trim();
+  value = value.replace(/[（(【\[][^）)】\]]*[）)】\]]/g, ' ');
+  value = value.replace(
+    /\s*[-–—~]\s*(remix|inst|instrumental|live|acoustic|ver\.?|version|mr|伴奏|纯音乐).*$/i,
+    ' ',
+  );
+  return value.replace(/\s+/g, ' ').trim();
+}
+
+export function isAsciiOnly(value) {
+  return /^[\x20-\x7e]+$/.test(String(value || ''));
+}
+
+/** 搜索关键词：歌名 + 歌手名；纯英文歌补 MV 后缀。 */
+export function buildSearchKeyword(title, artist) {
+  const main = normalizeSongTitle(title) || String(title || '').trim();
+  const artistName = String(artist || '').trim();
+  const keyword = [main, artistName].filter(Boolean).join(' ');
+  if (!keyword) return '';
+  return isAsciiOnly(main) ? `${keyword} MV` : keyword;
+}
+
+/** 只在「热门歌曲 / 必听」小节里把歌名做成链接：有 BV 走视频页，没有交给服务端解析。 */
 function renderSongItem(item, section, songLinks, artist) {
   if (!/必听|热门歌曲/.test(section)) return inline(item);
 
@@ -112,7 +136,10 @@ function renderSongItem(item, section, songLinks, artist) {
   const hit = songLinks[normalizeTitle(title)];
   const bvid = hit && /^BV[0-9A-Za-z]{6,}$/.test(hit.bvid || '') ? hit.bvid : '';
   // 已知歌曲用曲库里的歌手名，未知歌曲用当前页面的歌手名，提高搜索命中率
-  const keyword = `${title} ${hit?.artist || artist}`.trim();
+  const artistName = hit?.artist || artist;
+  const keyword = buildSearchKeyword(title, artistName) || `${title} ${artistName}`.trim();
+
+  // 有 bvid 直接是视频页；没有先给搜索页兜底，点击时再由服务端尝试解析
   const href = bvid
     ? `https://www.bilibili.com/video/${bvid}`
     : `https://search.bilibili.com/all?keyword=${encodeURIComponent(keyword)}`;
@@ -121,6 +148,8 @@ function renderSongItem(item, section, songLinks, artist) {
 
   return (
     `<a class="song-link" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer"` +
+    ` data-song-title="${escapeHtml(title)}" data-song-artist="${escapeHtml(artistName)}"` +
+    (bvid ? ` data-bvid="${escapeHtml(bvid)}"` : '') +
     ` title="${bvid ? '在 B 站看这首歌' : '在 B 站搜索这首歌'}">` +
     `<strong>${escapeHtml(title)}</strong></a>${rest}`
   );

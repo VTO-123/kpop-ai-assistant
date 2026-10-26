@@ -5,8 +5,9 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { escapeHtml } from './artist-page.js';
+import { resolveBilibiliTarget } from './bilibili.js';
 import { config } from './config.js';
-import { findSong, hasBvid, songBilibiliUrl } from './songs.js';
+import { findSong } from './songs.js';
 
 const TEMPLATE_PATH = path.join(config.publicDir, 'song.html');
 let templateCache = null;
@@ -19,11 +20,18 @@ function loadTemplate() {
 
 /**
  * @param {string} rawId
- * @returns {null | { html: string, song: object }}
+ * @returns {Promise<null | { html: string, song: object }>}
  */
-export function renderSongPage(rawId) {
+export async function renderSongPage(rawId) {
   const song = findSong(rawId);
   if (!song) return null;
+
+  // 没有 bvid 的曲目，服务端先试一次 B 站搜索；失败会退到搜索页
+  const target = await resolveBilibiliTarget({
+    artist: song.artist,
+    title: song.title,
+    bvid: song.bvid,
+  });
 
   const title = escapeHtml(song.title);
   const artist = escapeHtml(song.artist);
@@ -40,8 +48,11 @@ export function renderSongPage(rawId) {
     COVER_ALT: escapeHtml(`${song.title} 封面`),
     COVER_CREDIT: escapeHtml(song.coverSource ? `封面：${song.coverSource}` : ''),
     ARTIST_URL: `/artist/${encodeURIComponent(song.artist)}`,
-    BILI_URL: escapeHtml(songBilibiliUrl(song)),
-    BILI_FALLBACK: hasBvid(song) ? '' : ' data-fallback="1"',
+    BILI_URL: escapeHtml(target.url),
+    BILI_BVID: escapeHtml(target.bvid || ''),
+    BILI_MODE: escapeHtml(target.mode),
+    BILI_QUERY: escapeHtml(target.keyword),
+    BILI_FALLBACK: target.bvid ? '' : ' data-fallback="1"',
     OG_META: cover
       ? `<meta property="og:image" content="${cover}" />` +
         `<meta property="og:title" content="${escapeHtml(`${song.title} · ${song.artist}`)}" />`

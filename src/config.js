@@ -92,6 +92,7 @@ export const config = {
 
   // B 站：没有 bvid 映射时，服务端用搜索接口补一次（失败静默降级为搜索页）
   biliLookup: process.env.BILI_LOOKUP !== '0',
+  biliApiBase: trimTrailingSlash(process.env.BILI_API_BASE || 'https://api.bilibili.com'),
   biliTimeoutMs: Number.parseInt(process.env.BILI_TIMEOUT_MS || '5000', 10),
 };
 

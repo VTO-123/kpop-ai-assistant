@@ -4,10 +4,10 @@
  */
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
+import { buildSearchKeyword, isBvid, searchUrl, videoUrl } from './bilibili.js';
 import { ROOT_DIR } from './config.js';
 
 const FILE = path.join(ROOT_DIR, 'data', 'songs.json');
-const BVID_PATTERN = /^BV[0-9A-Za-z]{6,}$/;
 
 let cache = null;
 
@@ -63,14 +63,13 @@ export function findSong(rawId) {
 }
 
 export function hasBvid(song) {
-  return BVID_PATTERN.test(String(song?.bvid || '').trim());
+  return isBvid(song?.bvid);
 }
 
 /** 有 BV 号跳官方播放页；没有就退化为 B 站搜索页，避免死链。 */
 export function songBilibiliUrl(song) {
-  if (hasBvid(song)) return `https://www.bilibili.com/video/${String(song.bvid).trim()}`;
-  const keyword = `${song?.title || ''} ${song?.artist || ''} MV`.trim();
-  return `https://search.bilibili.com/all?keyword=${encodeURIComponent(keyword)}`;
+  if (hasBvid(song)) return videoUrl(song.bvid);
+  return searchUrl(buildSearchKeyword(song?.title, song?.artist));
 }
 
 /** 轮播用的卡片数据；封面走同源代理，WebGL 才能取到纹理。 */

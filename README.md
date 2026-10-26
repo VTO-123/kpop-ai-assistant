@@ -212,10 +212,22 @@ data: {"type":"done"}
 首页「热门视频」的数据（只返回有封面的 10 首精选），返回 `{ total, items: [{ id, title, artist, subtitle, src, sourceUrl }] }`。
 `src` 已经换成 `/api/img?...` 的同源代理地址（WebGL 纹理要求同源）。
 
+### `GET /api/bilibili?artist=&title=&bvid=`
+
+按三级策略解析一首歌的 B 站地址：
+
+1. 传了合法 `bvid` → 返回 `https://www.bilibili.com/video/{bvid}`（`mode: mapped`）；
+2. 没有 `bvid` → 服务端用「歌名 + 歌手」查 B 站搜索接口（纯英文歌自动加 `MV`，带括号的版本号只取主标题），
+   命中取第一条视频（`mode: search`）；请求带浏览器 UA、指纹 Cookie，5 秒超时；
+3. 搜索无结果或接口异常 → 静默退到 `https://search.bilibili.com/all?keyword=…`（`mode: search-page`）。
+
+同一首歌结果缓存 6 小时，失败只缓存 10 分钟，避免反复打接口。
+
 ### `GET /api/song-links`
 
 「热门歌曲」的链接映射，返回 `{ total, links: { <规范化歌名>: { title, artist, bvid } } }`。
-前端渲染时按歌名查表：有 `bvid` 就生成 `https://www.bilibili.com/video/BV…`，没有就退化为 B 站搜索链接。
+前端渲染时按歌名查表：有 `bvid` 就生成 `https://www.bilibili.com/video/BV…`，
+没有则带上歌名与歌手，点击时交给 `/api/bilibili` 解析。
 
 ### `GET /api/members`
 
@@ -271,10 +283,10 @@ FlexCarousel 源码逐行移植的原生 ES module：
 
 歌曲页与档案页的「B 站跳转」都只做**跳转**：
 
-- 档案页「热门歌曲」每首歌 → 曲库里有 `bvid` 时打开 `https://www.bilibili.com/video/<bvid>`；没有就回退到
-  `https://search.bilibili.com/all?keyword={歌名} {歌手}`，保证每首歌都能跳；
-- 歌曲详情页（首页热门视频进入）的「去 B 站看视频」→ 同样优先 `bvid`，没有则回退搜索页；
-- 不下载、不转存、不嵌播第三方视频文件，播放与版权由 B 站 / 上传方处理。
+- 曲库里有 `bvid` 时直接打开 `https://www.bilibili.com/video/<bvid>`；
+- 没有 `bvid` 时，服务端先用 B 站搜索接口找「歌手 歌名」的第一条视频，5 秒超时、失败静默；
+- 搜索也没有结果才退到 `https://search.bilibili.com/all?keyword={关键词}`，保证每首歌都能跳；
+- 不下载、不转存第三方视频文件，播放与版权由 B 站 / 上传方处理。
 
 ### 封面与图片优先级
 

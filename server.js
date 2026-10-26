@@ -1,6 +1,7 @@
 import http from 'node:http';
 import { renderArtistPage } from './src/artist-page.js';
 import { resolveArtistProfile } from './src/artist-profile.js';
+import { resolveBilibiliTarget } from './src/bilibili.js';
 import { config } from './src/config.js';
 import { handleChat } from './src/chat.js';
 import { resolveCover } from './src/cover.js';
@@ -39,6 +40,24 @@ const server = http.createServer(async (req, res) => {
     if (pathname === '/api/chat') {
       if (req.method !== 'POST') return sendJson(res, 405, { error: '只支持 POST' });
       return await handleChat(req, res);
+    }
+
+    // 歌曲链接解析：bvid 直链 → B 站搜索接口 → 搜索页
+    if (pathname === '/api/bilibili') {
+      if (req.method !== 'GET' && req.method !== 'HEAD') {
+        return sendJson(res, 405, { error: '只支持 GET' });
+      }
+      const artist = sanitizeGroup(searchParams.get('artist'));
+      const title = String(searchParams.get('title') || '')
+        .replace(/[\u0000-\u001f\u007f]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .slice(0, 80);
+      const bvid = String(searchParams.get('bvid') || '').trim().slice(0, 24);
+      if (!artist && !title && !bvid) return sendJson(res, 400, { error: '缺少歌曲信息' });
+
+      const target = await resolveBilibiliTarget({ artist, title, bvid });
+      return sendJson(res, 200, target);
     }
 
     // 档案页「资料」面板：出道年 / 公司 / 成员 / 代表作 / 奖项 + 来源
@@ -143,7 +162,7 @@ const server = http.createServer(async (req, res) => {
         return res.end();
       }
 
-      const page = renderSongPage(songId);
+      const page = await renderSongPage(songId);
       if (!page) {
         res.writeHead(302, { Location: '/' });
         return res.end();

@@ -13,6 +13,7 @@ import path from 'node:path';
 import { setTimeout as delay } from 'node:timers/promises';
 import { fileURLToPath } from 'node:url';
 import { parseEnv } from '../src/config.js';
+import { buildSearchKeyword } from '../src/bilibili.js';
 import { SYSTEM_PROMPT } from '../src/prompt.js';
 import { renderMarkdown } from '../public/js/md.js';
 
@@ -193,6 +194,16 @@ function envSuite() {
   check('.env 解析：成对引号被去掉', parsed.AI_MODEL === 'deepseek-chat', parsed.AI_MODEL);
   check('提示词：未收录使用固定标记', SYSTEM_PROMPT.includes('## 未收录'));
   check('提示词：要求标注相近真实艺人', SYSTEM_PROMPT.includes('相近的真实艺人'));
+  check('B站关键词：英文歌加 MV 后缀', buildSearchKeyword('Dynamite', 'BTS') === 'Dynamite BTS MV');
+  check(
+    'B站关键词：括号版本取主标题',
+    buildSearchKeyword('FAKE LOVE (Japanese ver.)', 'BTS') === 'FAKE LOVE BTS MV',
+  );
+  check('B站关键词：中文歌不加 MV', buildSearchKeyword('好日子', 'IU') === '好日子 IU');
+  check(
+    'B站关键词：remix 后缀去掉',
+    buildSearchKeyword('How You Like That - Remix', 'BLACKPINK') === 'How You Like That BLACKPINK MV',
+  );
 }
 
 async function demoSuite() {
@@ -453,6 +464,48 @@ async function demoSuite() {
       Object.values(linksJson.links).filter((item) => /^BV/.test(item.bvid || '')).length >= 70,
     );
 
+    // 阶段 B：B 站三级跳转接口
+    const mappedBili = await (
+      await fetch(
+        `${app.base}/api/bilibili?artist=BTS&title=Dynamite&bvid=${encodeURIComponent('BV1Lh411o7rJ')}`,
+      )
+    ).json();
+    check(
+      'B站：有 bvid 直接跳视频页',
+      mappedBili.mode === 'mapped' && mappedBili.url === 'https://www.bilibili.com/video/BV1Lh411o7rJ',
+      JSON.stringify(mappedBili),
+    );
+
+    const fallbackBili = await (
+      await fetch(`${app.base}/api/bilibili?artist=ATEEZ&title=BAD`)
+    ).json();
+    check(
+      'B站：无 bvid 关闭检索时退搜索页',
+      fallbackBili.mode === 'search-page' &&
+        fallbackBili.keyword === 'BAD ATEEZ MV' &&
+        fallbackBili.url.startsWith('https://search.bilibili.com/all?keyword='),
+      JSON.stringify(fallbackBili),
+    );
+    check('B站：缺少参数返回 400', (await fetch(`${app.base}/api/bilibili`)).status === 400);
+
+    const hotTargets = await Promise.all(
+      songItems.slice(0, 10).map(async (song) => {
+        const query = new URLSearchParams({
+          artist: song.artist,
+          title: song.title,
+          bvid: song.bvid || '',
+        });
+        const res = await fetch(`${app.base}/api/bilibili?${query.toString()}`);
+        return res.json();
+      }),
+    );
+    const reachable = hotTargets.filter(
+      (item) =>
+        /^https:\/\/www\.bilibili\.com\/video\/BV/.test(item.url || '') ||
+        String(item.url || '').startsWith('https://search.bilibili.com/all?keyword='),
+    ).length;
+    check('抽测 10 首热门歌曲：至少 8 首可跳转', reachable >= 8, `${reachable}/10`);
+
     const membersRes = await fetch(`${app.base}/api/members`);
     const membersJson = await membersRes.json();
     check(
@@ -470,9 +523,12 @@ async function demoSuite() {
         artist: 'BLACKPINK',
       },
     );
-    check(
-      '渲染：有 BV 的歌跳视频页',
+    check('渲染：有 BV 的歌跳视频页',
       /https:\/\/www\.bilibili\.com\/video\/BV[0-9A-Za-z]+/.test(rendered),
+    );
+    check(
+      '渲染：歌名链接带服务端解析参数',
+      rendered.includes('data-song-title=') && rendered.includes('data-song-artist=') && rendered.includes('data-bvid='),
     );
     check('渲染：成员名链接到个人页', rendered.includes('href="/artist/Jennie"'));
     check('渲染：成员括号说明不丢', rendered.includes('（主唱）'));
@@ -503,6 +559,7 @@ async function demoSuite() {
       songHtml.includes(firstSong.title) && songHtml.includes(firstSong.artist),
     );
     check('歌曲页有两个入口', songHtml.includes('id="artistLink"') && songHtml.includes('id="biliLink"'));
+    check('歌曲页带 bvid 供播放器使用', /data-bvid="BV[0-9A-Za-z]+"/.test(songHtml));
     check('歌曲页有 VTO 标识', songHtml.includes('class="vto-mark"'));
     check(
       '歌曲页歌手入口指向档案页',
@@ -579,6 +636,115 @@ async function demoSuite() {
   }
 }
 
+/* ---------------- 假 B 站接口（搜索 / 指纹） ---------------- */
+
+let biliCalls = 0;
+let biliLastKeyword = '';
+
+function startFakeBiliApi() {
+  const port = randomPort(4900);
+  const server = http.createServer((req, res) => {
+    const url = new URL(req.url, `http://127.0.0.1:${port}`);
+
+    if (url.pathname === '/x/frontend/finger/spi') {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ code: 0, data: { b_3: 'fake-buvid3', b_4: 'fake-buvid4' } }));
+      return;
+    }
+
+    if (url.pathname === '/x/web-interface/search/type') {
+      biliCalls += 1;
+      biliLastKeyword = url.searchParams.get('keyword') || '';
+
+      if (biliLastKeyword.includes('NOVIDEO')) {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ code: 0, data: { result: [] } }));
+        return;
+      }
+      if (biliLastKeyword.includes('BOOM')) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end('{"code":-500}');
+        return;
+      }
+
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(
+        JSON.stringify({
+          code: 0,
+          data: {
+            result: [
+              { bvid: 'BV1Fake12345', title: 'ATEEZ <em>BAD</em> Official MV', author: 'ATEEZ' },
+              { bvid: 'BV1Fake67890', title: 'BAD reaction', author: 'someone' },
+            ],
+          },
+        }),
+      );
+      return;
+    }
+
+    res.writeHead(404, { 'Content-Type': 'text/plain' });
+    res.end('not found');
+  });
+
+  return new Promise((resolve) => {
+    server.listen(port, '127.0.0.1', () => resolve({ server, port }));
+  });
+}
+
+async function biliSuite() {
+  const bili = await startFakeBiliApi();
+  const app = await startApp({
+    DEMO_MODE: '1',
+    AI_API_KEY: '',
+    BAIKE_LOOKUP: '0',
+    COVER_QQ_LOOKUP: '0',
+    BILI_LOOKUP: '1',
+    BILI_API_BASE: `http://127.0.0.1:${bili.port}`,
+  });
+
+  try {
+    check('B站检索服务启动', app.up, app.up ? '' : serverLog.slice(0, 300));
+    if (!app.up) return;
+
+    const first = await (
+      await fetch(`${app.base}/api/bilibili?artist=ATEEZ&title=${encodeURIComponent('BAD')}`)
+    ).json();
+    check(
+      'B站：搜索命中第一条视频',
+      first.mode === 'search' &&
+        first.bvid === 'BV1Fake12345' &&
+        first.url === 'https://www.bilibili.com/video/BV1Fake12345',
+      JSON.stringify(first),
+    );
+    check('B站：请求关键词带 MV 后缀', biliLastKeyword === 'BAD ATEEZ MV', biliLastKeyword);
+    check('B站：跳过无关结果取 MV', /Official MV/.test(first.videoTitle || ''), first.videoTitle);
+
+    const second = await (
+      await fetch(`${app.base}/api/bilibili?artist=ATEEZ&title=${encodeURIComponent('BAD')}`)
+    ).json();
+    check('B站：同一首歌命中缓存', second.bvid === 'BV1Fake12345' && biliCalls === 1, `calls=${biliCalls}`);
+
+    const none = await (
+      await fetch(`${app.base}/api/bilibili?artist=ATEEZ&title=NOVIDEO`)
+    ).json();
+    check(
+      'B站：搜索无结果退搜索页',
+      none.mode === 'search-page' && none.url.startsWith('https://search.bilibili.com/all?keyword='),
+      JSON.stringify(none),
+    );
+
+    const boom = await (await fetch(`${app.base}/api/bilibili?artist=ATEEZ&title=BOOM`)).json();
+    check(
+      'B站：接口异常静默降级',
+      boom.mode === 'search-page' && boom.url.includes('search.bilibili.com'),
+      JSON.stringify(boom),
+    );
+  } finally {
+    app.child.kill();
+    bili.server.close();
+  }
+}
+
 async function liveSuite() {
   const fake = await startFakeUpstream();
   const app = await startApp({
@@ -636,6 +802,7 @@ async function liveSuite() {
 try {
   envSuite();
   await demoSuite();
+  await biliSuite();
   await liveSuite();
 } catch (err) {
   check('未捕获异常', false, String(err && err.stack ? err.stack : err).slice(0, 400));
