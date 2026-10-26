@@ -1,8 +1,379 @@
 {
-  "version": 2,
-  "updatedAt": "2026-10-25",
-  "note": "歌手库：name 为英文名、nameZh 为中文名，两者都参与搜索；cover 为网易云歌手照片（经 /api/proxy 直连加载）；members 用于档案页成员名跳转；bvid 为该团体的代表视频（可选）。",
+  "version": 3,
+  "updatedAt": "2026-10-26",
+  "note": "歌手库：name 英文名 / nameZh 中文名，二者都参与搜索；debut / members / works / awards / bio 来自百度百科词条与网易云音乐实时抓取，baikeUrl 为词条地址；拿不到的字段留空，页面显示「暂未收录」。",
   "groups": [
+    {
+      "key": "g-i-dle",
+      "name": "(G)I-DLE",
+      "nameZh": "女娃",
+      "type": "group",
+      "aliases": [
+        "아이들",
+        "GIDLE",
+        "i-dle",
+        "여자아이들",
+        "(여자)아이들",
+        "女娃"
+      ],
+      "members": [
+        "Miyeon",
+        "Minnie",
+        "Soyeon",
+        "Yuqi",
+        "Shuhua"
+      ],
+      "cover": "https://p2.music.126.net/34DvxAQF3STYmvuUmK5kyw==/109951174034790875.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2018 年 5 月 2 日",
+      "debutYear": 2018,
+      "agency": "CUBE娱乐公司",
+      "works": "LATATA、HANN、Senorita、Uh-Oh、Oh my god、DUMDi DUMDi、火花、TOMBOY、Nxde、Queencard、Super Lady、Fate、Girlfriend、Good Thing、Mono",
+      "awards": [
+        "2018Mnet亚洲音乐大奖“Best of Next”奖",
+        "2018年韩国精灵音乐奖“最佳女子新人”奖",
+        "2018年甜瓜音乐奖“女子新人”奖",
+        "2018年韩国流行音乐奖“女子新人”奖",
+        "2019年韩国Soribada最佳音乐奖“Soribada New Wave”奖",
+        "第34届韩国金唱片奖“最佳表演”奖",
+        "2022年韩国精灵音乐奖“最佳唱片”奖",
+        "2022年韩国精灵音乐奖“最佳女子组合”奖"
+      ],
+      "songs": [
+        "FIRESTARTER",
+        "Know My Name",
+        "TOMBOY",
+        "POP/STARS",
+        "퀸카 (Queencard)",
+        "나는 아픈 건 딱 질색이니까",
+        "Nxde",
+        "MORE",
+        "Allergy",
+        "LATATA"
+      ],
+      "bio": "i-dle（韩文名：아이들），韩国女子演唱组合，由CUBE娱乐公司于2018年5月2日推出。在2018年出道至2025年5月1日期间，该组合以(G)I-DLE之名开展活动；2025年5月2日正式更名为i-dle。现由曺薇娟、MINNIE、田小娟、宋雨琦、叶舒华5名成员组成。演艺经历：2018年5月2日，推出首张迷你专辑《I am》，从而正式出道，凭借专辑主打歌《LATATA》在音乐节目《THE SHOW》中获得了出道之后的首个一位。20",
+      "baikeTitle": "i-dle",
+      "baikeUrl": "https://baike.baidu.com/item/i-dle",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/d50735fae6cd7b899e51af93247955a7d933c895a0d4?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "NEVERLAND"
+    },
+    {
+      "key": "2ne1",
+      "name": "2NE1",
+      "nameZh": "2NE1",
+      "type": "group",
+      "aliases": [
+        "투애니원",
+        "2NE1"
+      ],
+      "members": [
+        "CL",
+        "Bom",
+        "Dara",
+        "Minzy"
+      ],
+      "cover": "https://p2.music.126.net/5Ownga3tCwMzYQJ0NoEoyQ==/109951169806308197.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2009 年 5 月 6 日",
+      "debutYear": 2009,
+      "agency": "YG Entertainment",
+      "works": "我最红、I Don't Care、Fire、Go Away、Ugly、Can't Nobody、I Love You、Lonely、Missing You、Falling in Love、DO YOU LOVE ME、COME BACK HOME",
+      "awards": [
+        "2009 Mnet 亚洲音乐奖新人女歌手奖",
+        "2009 Melon Music Awards年度最佳新秀",
+        "第6届亚洲音乐节亚洲最佳新人奖",
+        "2010 Melon Music Awards Top 10",
+        "2010 Mnet 亚洲音乐奖最佳女子组合奖",
+        "2011 Mnet 亚洲音乐奖最佳歌唱表演团体奖",
+        "第22届首尔歌谣大赏本赏",
+        "2014 Melon Music Awards Top 10"
+      ],
+      "songs": [
+        "내가 제일 잘 나가",
+        "Fire",
+        "Let's Go Party",
+        "I Love You",
+        "Lonely",
+        "Come Back Home",
+        "Go Away",
+        "I Don't Care",
+        "그리워해요",
+        "Lollipop"
+      ],
+      "bio": "2NE1，韩国女子流行演唱组合，由李彩琳（CL）、朴春（Park Bom）、朴山多拉（Sandara Park）、孔敏智（Minzy）四名成员组成。2009年5月6日，2NE1以单曲《Fire》宣布正式出道；7月8日，组合推出迷你专辑《2NE1 1st Mini Album》，凭借专辑主打曲《I Don't Care》获得了2009Mnet亚洲音乐奖女新秀奖。2010年，推出首张韩语正规专辑《To Anyone》，并在同年获得2010 ",
+      "baikeTitle": "2NE1",
+      "baikeUrl": "https://baike.baidu.com/item/2NE1",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/54fbb2fb43166d224f4a9bb322781ef79052982274da?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26"
+    },
+    {
+      "key": "aespa",
+      "name": "aespa",
+      "nameZh": "爱斯帕",
+      "type": "group",
+      "aliases": [
+        "吒",
+        "에스파",
+        "爱斯帕"
+      ],
+      "members": [
+        "Karina",
+        "Giselle",
+        "Winter",
+        "Ningning"
+      ],
+      "cover": "https://p2.music.126.net/8nKTd5vdBthCmfJotzjcGA==/109951171467169368.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "BV1UZuB6JEZq",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2020 年 11 月 17 日",
+      "debutYear": 2020,
+      "agency": "韩国SM娱乐有限公司（韩国）华纳唱片（美国）",
+      "works": "Black Mamba、Forever、Next Level、Savage、Dreams Come True、Girls、Spicy、Drama、Armageddon、Supernova、Whiplash",
+      "awards": [
+        "第36届金唱片大赏最佳新人奖",
+        "第39届金唱片大赏音源部门大赏",
+        "2021Mnet亚洲音乐大奖最佳女子新人",
+        "2024MAMA AWARDS年度歌曲",
+        "第30届首尔歌谣大赏新人赏",
+        "2025 TIMA国际音乐大赏年度海外团体"
+      ],
+      "songs": [
+        "Whiplash",
+        "Drama",
+        "UP (KARINA Solo)",
+        "Supernova",
+        "Armageddon",
+        "Thirsty",
+        "Next Level",
+        "Girls",
+        "Spicy",
+        "Black Mamba"
+      ],
+      "bio": "aespa（에스파）是韩国SM娱乐有限公司于2020年11月17日推出的女子演唱组合，由刘知珉（KARINA）、内永枝利（GISELLE）、金旼炡（WINTER）、宁艺卓（NINGNING）四名成员组成，同时团体还拥有四名AI成员（æ）存在于元宇宙。演艺经历：2020年11月17日，aespa发行首支数位单曲《Black Mamba》而正式出道，并凭借该单曲荣获2020亚洲流行音乐大奖最佳新歌手（海外）。2021年1月17日，在《人气歌",
+      "baikeTitle": "aespa",
+      "baikeUrl": "https://baike.baidu.com/item/aespa",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/f2deb48f8c5494eef01f67be33acf7fe9925bc31d059?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "MY"
+    },
+    {
+      "key": "apink",
+      "name": "Apink",
+      "nameZh": "阿粉",
+      "type": "group",
+      "aliases": [
+        "A Pink",
+        "에이핑크",
+        "阿粉"
+      ],
+      "members": [
+        "朴初珑",
+        "尹普美",
+        "郑恩地",
+        "金南珠",
+        "吴夏荣"
+      ],
+      "cover": "https://p2.music.126.net/uz85l91Y2dompp-fEhn52Q==/109951165904258846.jpg",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2011 年 4 月 19 日",
+      "debutYear": 2011,
+      "works": "PINK CHRISTMAS、SELF、HORN、LOOK、PERCENT、ONE & SIX、Pink Stories、Pink UP、PINK MEMORY、Pink LUV",
+      "awards": [
+        "第26届金唱片大赏新人奖",
+        "2013MAMA次世代国际明星奖",
+        "2011MAMA最佳女子新人奖"
+      ],
+      "songs": [
+        "Love Me More",
+        "MR. CHU",
+        "NONONO",
+        "LUV",
+        "BUBIBU",
+        "Mr.Chu (On Stage) -Japanese Ver.-",
+        "NoNoNo (Japanese Ver.)",
+        "SECRET",
+        "1도 없어",
+        "REMEMBER"
+      ],
+      "bio": "A Pink（에이핑크）是CUBE Entertainment子公司A CUBE Entertainment于2011年4月19日推出的韩国女子组合。原公司因被收购并重组，组合转入IST Entertainment旗下。现以朴初珑、尹普美、郑恩地、金南珠、吴夏荣5人组成，成员洪瑜暻、孙娜恩分别于2013年、2022年退出组合。2011年4月19日，Apink以首张迷你专辑《Seven Springs of A Pink》正式出道；11月",
+      "baikeTitle": "A Pink",
+      "baikeUrl": "https://baike.baidu.com/item/A%20Pink",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/a8773912b31bb051f8198510d82ccdb44aed2e734af6?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26"
+    },
+    {
+      "key": "ateez",
+      "name": "ATEEZ",
+      "nameZh": "梯",
+      "type": "group",
+      "aliases": [
+        "에이티즈",
+        "梯"
+      ],
+      "cover": "https://p1.music.126.net/f3DnvCaWS8Zf05SZ3kw27A==/109951173408383487.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "members": [
+        "金弘中",
+        "朴星化",
+        "丁润浩",
+        "姜吕尚",
+        "崔伞",
+        "宋旼琦",
+        "郑友荣",
+        "崔钟浩"
+      ],
+      "debut": "2018 年 10 月 24 日",
+      "debutYear": 2018,
+      "agency": "KQ Entertainment",
+      "works": "Answer、WAVE、WONDERLAND、INCEPTION、Utopia、Say My Name",
+      "awards": [
+        "2020年MAMA Worldwide Fans Choice"
+      ],
+      "songs": [
+        "BAD",
+        "WORK Pt.4 - ATEEZ X G-Eazy",
+        "WORK",
+        "Ice On My Teeth",
+        "In Your Fantasy",
+        "Drip",
+        "Adrenaline",
+        "BOUNCY (K-HOT CHILLI PEPPERS)",
+        "MAMACITA",
+        "INCEPTION"
+      ],
+      "bio": "ATEEZ是KQ Entertainment于2018年10月24日推出的韩国男子演唱组合，由金弘中 (Hongjoong)、朴星化 (Seonghwa)、丁润浩 (Yunho)、姜吕尚 (Yeosang)、崔伞 (San)、宋旼琦 (Mingi)、郑友荣 (Wooyoung)、崔钟浩 (Jongho)八位成员组成。2017年10月，出演JTBC真人秀《MIXNINE》。2018年10月，凭借首张迷你专辑《TREASURE EP.1: ",
+      "baikeTitle": "ATEEZ",
+      "baikeUrl": "https://baike.baidu.com/item/ATEEZ",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/0ff41bd5ad6eddc451da877a818fa1fd5266d11695ac?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26"
+    },
+    {
+      "key": "babymonster",
+      "name": "BABYMONSTER",
+      "nameZh": "宝怪",
+      "type": "group",
+      "aliases": [
+        "베이비몬스터"
+      ],
+      "cover": "https://p2.music.126.net/iy67u-2s7nfwI1CJWcRpQw==/109951173460219603.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "members": [
+        "RAMI",
+        "AHYEON",
+        "RORA",
+        "ASA",
+        "RUKA",
+        "CHIQUITA",
+        "PHARITA"
+      ],
+      "debut": "2023 年 11 月 27 日",
+      "debutYear": 2023,
+      "agency": "YG Entertainment",
+      "works": "BATTER UP、Stuck In The Middle、sheesh、like that",
+      "songs": [
+        "DRIP",
+        "LIKE THAT",
+        "춤 (CHOOM)",
+        "WE GO UP",
+        "BATTER UP",
+        "Stuck In The Middle",
+        "SHEESH",
+        "FOREVER",
+        "MOON",
+        "DREAM"
+      ],
+      "bio": "BABYMONSTER（베이비몬스터）是YG Entertainment于2023年推出的韩国女子演唱组合，由申厦蓝（RAMI）、郑雅譞（AHYEON）、李茶仁（RORA）、榎並杏纱（ASA）、河井瑠花（RUKA）、CHIQUITA、PHARITA共7名成员组成。演艺经历：2022年，YG Entertainment公开了“YG NEXT MOVEMENT”海报，宣布了即将推出新人女子组合的消息。2023年，YG Entertainme",
+      "baikeTitle": "BABYMONSTER",
+      "baikeUrl": "https://baike.baidu.com/item/BABYMONSTER",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/42a98226cffc1e178a823a9b2fc8e103738da977435a?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "MONSTIEZ"
+    },
+    {
+      "key": "bigbang",
+      "name": "BIGBANG",
+      "nameZh": "大棒",
+      "type": "group",
+      "aliases": [
+        "빅뱅"
+      ],
+      "members": [
+        "G-Dragon",
+        "Taeyang",
+        "Daesung",
+        "T.O.P"
+      ],
+      "cover": "https://p1.music.126.net/YZ7_zYI5e5kJdd8tcKjlGw==/109951173904581661.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2006 年 8 月 19 日",
+      "debutYear": 2006,
+      "agency": "YG娱乐公司",
+      "works": "谎言、一天一天、Fantastic Baby、IF YOU、BANG BANG BANG、LOSER、Tonight、最后的问候、Blue、红霞、Monster、Let's not fall in love、Bad Boy、Stupid Liar、Always、How Gee、LAST DANCE、春夏秋冬、Dirty Cash、My Heaven、声をきかせて、Tell Me Goodbye",
+      "awards": [
+        "MTV欧洲音乐奖Worldwide Act大奖",
+        "首个被格莱美介绍的韩国歌手",
+        "MAMA最佳男子组合奖",
+        "MAMA年度专辑大奖",
+        "韩国金唱片奖音源部门本奖",
+        "日本金唱片奖",
+        "澳洲Australia Pop Asia Awards最佳男子团体奖",
+        "联合国颁发的Global Unity奖"
+      ],
+      "songs": [
+        "IF YOU",
+        "거짓말",
+        "하루하루",
+        "뱅뱅뱅 (BANG BANG BANG)",
+        "BLUE",
+        "FANTASTIC BABY",
+        "LIES",
+        "BAD BOY",
+        "Let's not fall in love",
+        "LOSER"
+      ],
+      "bio": "BIGBANG（빅뱅）是韩国YG娱乐公司于2006年8月推出的男子演唱组合，现以G-DRAGON、TAEYANG、DAESUNG三名成员的组合形式展开活动。演艺经历：2006年8月19日，以五人组形式正式出道，同年发行首张正规专辑《BIGBANG Vol.1》并举办首场演唱会“The Real”。2007年，凭借首张迷你专辑《Always》主打曲《谎言》获得广泛关注。2009年，凭借歌曲《My Heaven》在日本正式出道。2011年，",
+      "baikeTitle": "BIGBANG",
+      "baikeUrl": "https://baike.baidu.com/item/BIGBANG",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/d50735fae6cd7b899e516ff7647955a7d933c895a008?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "V.I.P"
+    },
     {
       "key": "blackpink",
       "name": "BLACKPINK",
@@ -22,7 +393,84 @@
       "cover": "https://p2.music.126.net/Gl21MaKKL6_LUa2fWN2VwQ==/109951172945542040.jpg?param=1000y1000",
       "coverSource": "NetEase Cloud Music artist photo",
       "bvid": "BV15chL62Egs",
-      "coverCredit": "NetEase Cloud Music artist photo"
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2016 年 8 月 8 日",
+      "debutYear": 2016,
+      "agency": "YG Entertainment",
+      "works": "How You Like That、DDU-DU DDU-DU、AS IF IT'S YOUR LAST、KILL THIS LOVE、WHISTLE、Ice Cream、Lovesick Girls、BOOMBAYAH、PLAYING WITH FIRE、Pink Venom、Shut Down、Forever Young、Crazy Over You、Kiss and Make Up",
+      "songs": [
+        "JUMP",
+        "Pink Venom",
+        "Kill This Love",
+        "마지막처럼",
+        "WHISTLE",
+        "Lovesick Girls",
+        "Champion",
+        "How You Like That",
+        "불장난（PLAYING WITH FIRE）",
+        "Forever Young"
+      ],
+      "bio": "BLACKPINK（블랙핑크），韩国女子唱跳组合，2016年8月8日由YG Entertainment推出，由金智秀（JISOO）、金珍妮（JENNIE）、朴彩英（ROSÉ）、LISA四名成员组成。组合名“BLACKPINK”在看起来很美的粉色中稍微加入了否定的意义，旨在传达出“不要只看漂亮的部分”、“看到的并不是全部”的意思。演艺经历：2016年，发行首张单曲专辑《SQUARE ONE》并正式出道，《WHISTLE》在八个音乐网站周排",
+      "baikeTitle": "BLACKPINK",
+      "baikeUrl": "https://baike.baidu.com/item/BLACKPINK",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/c995d143ad4bd11373f01a5e66fab30f4bfbfbedaf18?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "BLINK"
+    },
+    {
+      "key": "boynextdoor",
+      "name": "BOYNEXTDOOR",
+      "nameZh": "门童",
+      "type": "group",
+      "aliases": [
+        "보이넥스트도어"
+      ],
+      "cover": "https://p2.music.126.net/oqcgJBPdgdq100ZRwLDtTg==/109951173351176045.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "members": [
+        "朴成淏",
+        "李常赫",
+        "明宰铉",
+        "汉东旼",
+        "金桐儇",
+        "金云鹤"
+      ],
+      "debut": "2023 年 5 月 30 日",
+      "debutYear": 2023,
+      "agency": "KOZ ENTERTAINMENT",
+      "works": "But I Like You、One and Only、Serenade、But Sometimes、Crying、Earth, Wind & Fire、HOW?",
+      "awards": [
+        "2023年Melon音乐颁奖典礼“全球上升艺人”奖",
+        "2023年亚洲明星盛典“最佳选择”奖",
+        "第38届韩国金唱片奖“Next Generation”奖"
+      ],
+      "songs": [
+        "No Doubt",
+        "오늘만 I LOVE YOU (Live)",
+        "이렇게 좋아해 본 적이 없어요",
+        "Ruin My Life",
+        "Fadeaway",
+        "Earth, Wind & Fire (Live)",
+        "Lucky Charm",
+        "Nice Guy (Live)",
+        "So let's go see the stars (Live)",
+        "부모님 관람불가(Dangerous) (Live)"
+      ],
+      "bio": "BOYNEXTDOOR（보이넥스트도어）是HYBE旗下KOZ ENTERTAINMENT于2023年5月30日推出的韩国男子演唱组合，由朴成淏（SUNGHO）、李常赫（RIWOO）、明宰铉（JAEHYUN、队长）、汉东旼（TAESAN） 、金桐儇（LEEHAN）、金云鹤（WOONHAK）六名成员组成。2023年5月23日，公开出道专辑的首支主打曲《돌아버리겠다(But I Like You)》的MV；5月26日，公开第二支主打曲《One",
+      "baikeTitle": "BOYNEXTDOOR",
+      "baikeUrl": "https://baike.baidu.com/item/BOYNEXTDOOR",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/a686c9177f3e6709c93d30cf5f9f883df8dcd100fff1?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "ONEDOOR"
     },
     {
       "key": "bts",
@@ -32,7 +480,8 @@
       "aliases": [
         "防弹少年团",
         "防弹",
-        "방탄소년단"
+        "방탄소년단",
+        "Bangtan Boys"
       ],
       "members": [
         "RM",
@@ -46,73 +495,446 @@
       "cover": "https://p2.music.126.net/iuOHZKWUBFMA-qi_jKZX9g==/109951166161837643.jpg?param=1000y1000",
       "coverSource": "NetEase Cloud Music artist photo",
       "bvid": "BV19k4y1u7FW",
-      "coverCredit": "NetEase Cloud Music artist photo"
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2013 年 6 月 13 日",
+      "debutYear": 2013,
+      "agency": "BIGHIT MUSIC",
+      "works": "Spring Day、血、汗、泪、I NEED U、DNA、Boy In Luv、Boy With Luv、Dynamite、Butter、Fake Love",
+      "awards": [
+        "第5届Melon音乐盛典最佳新人奖",
+        "第32届金唱片大赏唱片部门大赏",
+        "2017Mnet亚洲音乐大奖年度歌手奖",
+        "第15届韩国音乐大奖年度歌手奖",
+        "第25届公告牌音乐奖最佳社群媒体艺人奖"
+      ],
+      "songs": [
+        "FAKE LOVE (Japanese ver.)",
+        "I NEED U(Japanese Ver.)",
+        "血、汗、涙 (Japanese ver.)",
+        "Left and Right (Feat. Jung Kook of BTS)",
+        "Butterfly (Japanese Ver.)",
+        "Spring Day (Japanese Version)",
+        "Dreamers [Music from the FIFA World Cup Qatar 2022 Official Soundtrack]",
+        "Boy With Luv (Japanese Version)",
+        "Savage Love (Laxed - Siren Beat) (BTS Remix)",
+        "Dynamite (Live)"
+      ],
+      "bio": "防弹少年团（BTS），韩国男子演唱组合，由HYBE旗下BIGHIT MUSIC打造，于2013年6月13日正式出道，组合由金南俊、金硕珍、闵玧其、郑号锡、朴智旻、金泰亨、田柾国7名成员组成。演艺经历：2013年6月12日，发行首张单曲专辑《2 COOL 4 SKOOL》，次日，出演Mnet音乐节目《M! Countdown》，正式出道；同年，推出首张迷你专辑《O!RUL8,2?》。2014年6月，推出首张日文单曲辑《NO MORE DR",
+      "baikeTitle": "防弹少年团",
+      "baikeUrl": "https://baike.baidu.com/item/%E9%98%B2%E5%BC%B9%E5%B0%91%E5%B9%B4%E5%9B%A2",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/72f082025aafa40f4bfb16904031144f78f0f736b37a?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26"
     },
     {
-      "key": "newjeans",
-      "name": "NewJeans",
-      "nameZh": "新牛仔裤",
+      "key": "enhypen",
+      "name": "ENHYPEN",
+      "nameZh": "符",
       "type": "group",
       "aliases": [
-        "뉴진스",
-        "nj"
+        "엔하이픈",
+        "符"
       ],
       "members": [
-        "Minji",
-        "Hanni",
-        "Danielle",
-        "Haerin",
-        "Hyein"
+        "Jungwon",
+        "Heeseung",
+        "Jay",
+        "Jake",
+        "Sunghoon",
+        "Sunoo",
+        "Ni-ki"
       ],
-      "cover": "https://p2.music.126.net/pBbRxEysXaKRr2Lvoyj_OA==/109951168165015954.jpg?param=1000y1000",
+      "cover": "https://p2.music.126.net/NKQb4aw37-zMemB4ra3Gsw==/109951172613682248.jpg?param=1000y1000",
       "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "BV1wE8t6fEaV",
-      "coverCredit": "NetEase Cloud Music artist photo"
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2020 年 11 月 30 日",
+      "debutYear": 2020,
+      "agency": "BELIFT LAB",
+      "works": "Sweet Venom、Polaroid Love(拍立得爱)、Bite Me、BLOSSOM、CRIMINAL LOVE",
+      "awards": [
+        "2023MAMA全球粉丝选择奖",
+        "2021Mnet亚洲音乐大奖 最佳男新人",
+        "第35届金唱片大赏新人奖"
+      ],
+      "songs": [
+        "Bite Me (Japanese Ver.)",
+        "Polaroid Love (Band LIVE)",
+        "BLOSSOM",
+        "Sweet Venom (Live)",
+        "Confessions (feat. HEESEUNG & JAKE of ENHYPEN x Paul Russell)",
+        "XO (Only If You Say Yes) (Jazz R&B Remix)",
+        "One and Only",
+        "What Makes You Beautiful",
+        "Home",
+        "Given-Taken (Japanese Ver.)"
+      ],
+      "bio": "ENHYPEN（엔하이픈）是HYBE旗下厂牌BELIFT LAB于2020年11月30日推出的男子演唱组合，由梁祯元（JUNGWON、队长）、朴综星（JAY）、沈载伦（JAKE）、朴成训（SUNGHOON）、金善禹（SUNOO）、西村力（NI-KI）六名成员组成。组合名称象征着几名完全不同的少年彼此连接在一起，互相发现并共同成长的含义，还包含了要用音乐将人与人、世界与世界联系在一起的抱负。2020年9月18日，BigHit Entert",
+      "baikeTitle": "ENHYPEN",
+      "baikeUrl": "https://baike.baidu.com/item/ENHYPEN",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/0eb30f2442a7d933c895c6ee1417c61373f08302aba0?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "ENGENE"
     },
     {
-      "key": "twice",
-      "name": "TWICE",
-      "nameZh": "兔瓦斯",
+      "key": "everglow",
+      "name": "EVERGLOW",
+      "nameZh": "阁楼",
       "type": "group",
       "aliases": [
-        "兔瓦斯",
-        "트와이스"
+        "에버글로우"
       ],
-      "members": [
-        "Nayeon",
-        "Jeongyeon",
-        "Momo",
-        "Sana",
-        "Jihyo",
-        "Mina",
-        "Dahyun",
-        "Chaeyoung",
-        "Tzuyu"
-      ],
-      "cover": "https://p2.music.126.net/vEboEKvo5d3fFovH0mVVDQ==/109951172132303381.jpg?param=1000y1000",
+      "cover": "https://p1.music.126.net/uww8je_xB5hti6omVfKNMg==/109951166680094244.jpg?param=1000y1000",
       "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "BV1FE411a72Q",
-      "coverCredit": "NetEase Cloud Music artist photo"
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "works": "DUN DUN、Adios、LA DI DA、Pirate、봉봉쇼콜라",
+      "songs": [
+        "DUN DUN",
+        "Adios",
+        "LA DI DA",
+        "Pirate",
+        "봉봉쇼콜라",
+        "Hush",
+        "FIRST",
+        "SLAY",
+        "SALUTE",
+        "CODE"
+      ],
+      "bio": "《Everglow》是由酷玩乐队创作并演唱的歌曲，作为乐队第七张专辑 《A Head Full of Dreams》的宣传单曲发行于2015年11月26日。2016年11月11日，单曲版《Everglow》发行，这个版本对专辑版进行了改编。2017年10月26日，该曲MV提名英国音乐录影带奖最佳英国摇滚/独立音乐录影带。",
+      "baikeTitle": "Everglow",
+      "baikeUrl": "https://baike.baidu.com/item/Everglow",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/9e3df8dcd100baa1cd117afee446ae12c8fcc3ce8062?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26"
     },
     {
-      "key": "aespa",
-      "name": "aespa",
-      "nameZh": "爱斯帕",
+      "key": "exo",
+      "name": "EXO",
+      "nameZh": "茶蛋",
       "type": "group",
       "aliases": [
-        "吒",
-        "에스파"
+        "엑소",
+        "茶蛋"
       ],
       "members": [
-        "Karina",
-        "Giselle",
-        "Winter",
-        "Ningning"
+        "Xiumin",
+        "Suho",
+        "Lay",
+        "Baekhyun",
+        "Chen",
+        "Chanyeol",
+        "D.O.",
+        "Kai",
+        "Sehun"
       ],
-      "cover": "https://p2.music.126.net/8nKTd5vdBthCmfJotzjcGA==/109951171467169368.jpg?param=1000y1000",
+      "cover": "https://p2.music.126.net/vY_0HYqgraysBLWXuJ5tIQ==/109951168721913427.jpg?param=1000y1000",
       "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "BV1UZuB6JEZq",
-      "coverCredit": "NetEase Cloud Music artist photo"
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2012 年 4 月 8 日",
+      "debutYear": 2012,
+      "agency": "韩国SM娱乐有限公司",
+      "works": "咆哮、MONSTER、LOVE ME RIGHT、Love Shot、MAMA、叫我、上瘾、十二月的奇迹、狼与美女、Tempo、人鱼的眼泪、叩叩趴、初雪、History、LOTTO、Sing For You、The Eve、Power、Cream Soda、Been Through、约定",
+      "awards": [
+        "2014Mnet亚洲音乐大奖“最佳男子组合”奖",
+        "2014Mnet亚洲音乐大奖“年度最佳艺人”奖",
+        "2014年SBS歌谣大奖“最佳男子组合”奖",
+        "2014年第28届韩国金唱片大奖“专辑单元大奖”",
+        "2014年第28届韩国金唱片大奖“专辑单元本奖”",
+        "2016年第30届韩国金唱片大奖“专辑大奖”",
+        "2016年第25届首尔歌谣奖“年度大奖”",
+        "2016年第25届首尔歌谣奖“韩流特别奖”"
+      ],
+      "songs": [
+        "Baby, Don't Cry (人鱼的眼泪)",
+        "顺其自然 (Been Through)",
+        "첫 눈",
+        "十二月的奇迹 (Miracles in December)",
+        "咆哮 (Growl)",
+        "History",
+        "CALL ME BABY",
+        "으르렁 (Growl)",
+        "Love Shot",
+        "蝴蝶少女 (Don't Go)"
+      ],
+      "bio": "EXO（엑소）是韩国SM娱乐有限公司于2012年4月8日推出的男子演唱组合，组合现有金珉锡、金俊勉、张艺兴、边伯贤、金钟大、朴灿烈、都暻秀、金钟仁、吴世勋9名成员。演艺经历：2012年，EXO发行组合首张迷你专辑《MAMA》，以12人组的形式正式出道，该专辑仅售卖一个月，其销售量便突破了10万张。2013年，推出首张正规专辑《XOXO》。2015年，发行了名为《EXODUS》的第二张正规专辑，凭借该专辑登上美国公告牌200强专辑榜第90",
+      "baikeTitle": "EXO",
+      "baikeUrl": "https://baike.baidu.com/item/EXO",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/1f178a82b9014a90f603a351b22f2e12b31bb151409c?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "EXO-L"
+    },
+    {
+      "key": "girls-generation",
+      "name": "Girls' Generation",
+      "nameZh": "少女时代",
+      "type": "group",
+      "aliases": [
+        "SNSD",
+        "소녀시대",
+        "少女时代",
+        "Girls Generation"
+      ],
+      "members": [
+        "Taeyeon",
+        "Sunny",
+        "Tiffany",
+        "Hyoyeon",
+        "Yuri",
+        "Sooyoung",
+        "Yoona",
+        "Seohyun"
+      ],
+      "cover": "https://p2.music.126.net/_HYJgCgSQTcYezK79BXDDw==/109951167749851415.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2007 年 8 月 5 日",
+      "debutYear": 2007,
+      "agency": "韩国SM娱乐有限公司",
+      "works": "再次重逢的世界、Girls' Generation、Kissing You、Gee、Genie、Oh!、Run Devil Run、Hoot、The Boys、I Got A Boy、Mr.Mr.、Catch Me If You Can、Party、Lion Heart、You Think、那个夏天、Holiday、All Night、FOREVER 1",
+      "awards": [
+        "金唱片大赏音源&唱片大赏",
+        "首尔歌谣大赏大赏",
+        "福布斯韩国名人榜三年冠军",
+        "连续八年前十",
+        "韩国盖洛普调查歌手榜连续三年冠军",
+        "连续十年前五",
+        "MelOn2000年代十年榜冠军",
+        "YouTube年度音乐录像带奖"
+      ],
+      "songs": [
+        "Gee",
+        "다시 만난 세계 (Into The New World)",
+        "The Boys",
+        "再次重逢的世界",
+        "Oh!",
+        "소원을 말해봐 (Genie)",
+        "Lion Heart",
+        "Mr.Taxi",
+        "说出你的愿望",
+        "Mr.Mr."
+      ],
+      "bio": "少女时代（韩语：소녀시대，英语：Girls' Generation），由韩国SM娱乐有限公司于2007年推出的女子流行演唱团体，出道时由金泰妍、郑秀妍、李顺圭、黄美英、金孝渊、权俞利、崔秀英、林允儿、徐珠贤9人组成，现以金泰妍、李顺圭、黄美英、金孝渊、崔秀英、林允儿、徐珠贤、权俞利8名成员的形式展开活动。演艺经历：2007年8月5日，发行首支单曲《再次重逢的世界》正式出道；11月，发行首张正规专辑《Girls' Generation》。",
+      "baikeTitle": "少女时代",
+      "baikeUrl": "https://baike.baidu.com/item/%E5%B0%91%E5%A5%B3%E6%97%B6%E4%BB%A3",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/d6ca7bcb0a46f21fbe09f5f47b797c600c338744005c?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "SONE"
+    },
+    {
+      "key": "got7",
+      "name": "GOT7",
+      "nameZh": "搞七",
+      "type": "group",
+      "aliases": [
+        "갓세븐"
+      ],
+      "cover": "https://p1.music.126.net/WsQt-7IFvdal8r_VP8pAwg==/109951167394488494.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "members": [
+        "林在范(Jay B)",
+        "朴珍荣(JinYoung)",
+        "段宜恩(Mark)",
+        "王嘉尔(Jackson)",
+        "崔荣宰(YoungJae)",
+        "BamBam",
+        "金有谦(YuGyeom)"
+      ],
+      "debut": "2014 年",
+      "debutYear": 2014,
+      "agency": "华纳音乐",
+      "works": "Girls Girls Girls、If you do、just right、FLY、Hard Carry",
+      "awards": [
+        "第29届金唱片大赏“电子音源新人奖”",
+        "“年度最具爱心奖”",
+        "第24届首尔歌谣大赏－新人奖",
+        "连续五年获得金唱片大赏的专辑部门本赏",
+        "连续三年获得Mnet亚洲音乐大奖的Worldwide Fans’ Choice Top 10"
+      ],
+      "songs": [
+        "고마워",
+        "니가 하면",
+        "She's a monster",
+        "PYTHON",
+        "A",
+        "하지하지마",
+        "딱 좋아(Just right)",
+        "하드캐리",
+        "달빛",
+        "고백송"
+      ],
+      "bio": "GOT7是韩国JYP Entertainment于2014年推出的男子组合，由林在范（Jay B）、朴珍荣、段宜恩、王嘉尔、崔荣宰、BamBam、金有谦7名多国籍成员组成，作为JYP娱乐首个HIPHOP组合，擅长融合武术元素的\"Martial Arts Tricking\"表演形式。2014年1月16日通过首张迷你专辑《Got it?》正式出道，该专辑曾登顶Billboard世界专辑榜，同年10月以日文单曲《AROUND THE WORL",
+      "baikeTitle": "GOT7",
+      "baikeUrl": "https://baike.baidu.com/item/GOT7",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/d52a2834349b033b5bb50edf609521d3d539b6001738?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "I GOT7（鸟宝宝）"
+    },
+    {
+      "key": "ikon",
+      "name": "iKON",
+      "nameZh": "康",
+      "type": "group",
+      "aliases": [
+        "아이콘"
+      ],
+      "cover": "https://p1.music.126.net/EaYQtN7eVqgCDTcdzqujWQ==/109951167699866387.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "members": [
+        "金振焕",
+        "金知元",
+        "宋尹亨",
+        "具晙会",
+        "金东爀",
+        "郑粲右"
+      ],
+      "debut": "2015 年 9 月 15 日",
+      "debutYear": 2015,
+      "agency": "143 Entertainment",
+      "works": "AIRPLANE、RHYTHM TA、LOVE SCENARIO、Killing Me、GOODBYE ROAD、I’M OK、Dive、Why Why Why、BUT YOU",
+      "awards": [
+        "2018 Melon Music Awards年度最佳歌曲奖",
+        "第33届金唱片大赏音源部门大赏和本赏"
+      ],
+      "songs": [
+        "사랑을 했다 (LOVE SCENARIO)",
+        "LOVE SCENARIO (中文版)",
+        "MY TYPE (취향저격)",
+        "RHYTHM TA (리듬 타)",
+        "AIRPLANE",
+        "너란 바람 따라 (Flower)",
+        "나쁜놈 (JERK)",
+        "JUST GO",
+        "APOLOGY",
+        "LONG TIME NO SEE"
+      ],
+      "bio": "iKON（아이콘），韩国男子演唱组合，现以金振焕、金知元、宋尹亨、具晙会、金东爀、郑粲右6名成员的形式展开活动。2014年9月11日，出演YG Entertainment出道生存节目《MIX&MATCH》。2015年9月15日，发布首张正规专辑先行曲《取向狙击》并正式出道，发布后在马来西亚、泰国等7个国家和地区的iTunes单曲排行榜上排名1位；10月1日，发布正规专辑半专辑；12月14日，正式发布首张正规专辑《WELCOME BACK",
+      "baikeTitle": "iKON",
+      "baikeUrl": "https://baike.baidu.com/item/iKON",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/8b82b9014a90f603738dee559c41a41bb051f81947df?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26"
+    },
+    {
+      "key": "illit",
+      "name": "ILLIT",
+      "nameZh": "礼",
+      "type": "group",
+      "aliases": [
+        "아일릿"
+      ],
+      "cover": "https://p2.music.126.net/YaVGP1k5hzRTYrY2fN6wBw==/109951170610841384.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "members": [
+        "卢玧我",
+        "朴慜柱",
+        "境萌花",
+        "李沅禧",
+        "外园彩羽"
+      ],
+      "debut": "2024 年 3 月 25 日",
+      "debutYear": 2024,
+      "agency": "BELIFT LAB",
+      "works": "Magnetic、Lucky Girl Syndrome、Cherish (My Love)、Tick-Tack",
+      "awards": [
+        "第66届日本唱片大奖新人奖",
+        "2024年韩国MAMA奖最佳女子新人组合",
+        "2024年韩国甜瓜音乐奖年度新人"
+      ],
+      "songs": [
+        "Magnetic (Live)",
+        "Lucky Girl Syndrome (Live)",
+        "Tick-Tack (Live)",
+        "Cherish (My Love) (Live)",
+        "See U Tonight (feat. YUNAH & MINJU of ILLIT)",
+        "Tick-Tack (Joenast Remix)",
+        "What is Love?",
+        "Magnetic 现场@ AliExpress 2024 Weverse Con Festival",
+        "IYKYK (If You Know You Know) (Live)",
+        "SUPER REAL ME (Highlight Medley)"
+      ],
+      "bio": "ILLIT（아일릿）是HYBE旗下厂牌BELIFT LAB于2023年9月1日推出的韩国女子唱跳组合，由卢玧我（YUNAH）、朴慜柱（MINJU）、境萌花（MOKA）、李沅禧（WONHEE）、外园彩羽（IROHA）五名成员组成。2023年9月1日，HYBE与JTBC合制的选秀节目《R U Next?》正式收官，六名成员加入组合，正式成团；10月24日，团体旅行真人秀《I'LL LIKE IT!》播出。2024年1月5日，组合宣布以五人体",
+      "baikeTitle": "ILLIT",
+      "baikeUrl": "https://baike.baidu.com/item/ILLIT",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/7e3e6709c93d70cf3bc7af3d8e85c600baa1cd11fdf0?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "GLLIT"
+    },
+    {
+      "key": "itzy",
+      "name": "ITZY",
+      "nameZh": "一击",
+      "type": "group",
+      "aliases": [
+        "있지",
+        "一击"
+      ],
+      "members": [
+        "Yeji",
+        "Lia",
+        "Ryujin",
+        "Chaeryeong",
+        "Yuna"
+      ],
+      "cover": "https://p2.music.126.net/32hj7c1jgLN_Eux8SdTXCw==/109951173202821065.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2019 年 1 月 21 日",
+      "debutYear": 2019,
+      "agency": "JYP Entertainment",
+      "works": "DALLA DALLA、ICY、WANNABE、NOT SHY、In the morning、LOCO、SNEAKERS、Cheshire",
+      "songs": [
+        "Not Shy",
+        "Imaginary Friend",
+        "THAT’S A NO NO",
+        "WANNABE",
+        "Motto",
+        "달라달라",
+        "CAKE",
+        "SNEAKERS",
+        "UNTOUCHABLE",
+        "Cheshire"
+      ],
+      "bio": "ITZY（있지）是JYP Entertainment于2019年2月12日推出的韩国女子演唱组合，由黄礼志（Yeji）、崔智秀（Lia）、申留真（Ryujin）、李彩领（Chaeryeong）、申有娜（Yuna）五位成员组成。2019年1月21日，JYP公司发布视频，正式公开组合名称ITZY；2月12日，发行首张单曲专辑《IT'z Different》，从而正式出道；21日，凭借《DALLA DALLA》在音乐节目《M！ Countdo",
+      "baikeTitle": "ITZY",
+      "baikeUrl": "https://baike.baidu.com/item/ITZY",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/730e0cf3d7ca7bcb0a462f67f25f7c63f6246b600266?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "MIDZY"
     },
     {
       "key": "ive",
@@ -134,7 +956,634 @@
       "cover": "https://p2.music.126.net/7o9C8NEIz4IB5FC4pEiZOQ==/109951174118144338.jpg?param=1000y1000",
       "coverSource": "NetEase Cloud Music artist photo",
       "bvid": "BV1tAhR6mEbA",
-      "coverCredit": "NetEase Cloud Music artist photo"
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2021 年 12 月 1 日",
+      "debutYear": 2021,
+      "agency": "Starship Entertainment",
+      "works": "ELEVEN、LOVE DIVE、After LIKE、Baddie、Blue Blood、My Satisfaction",
+      "awards": [
+        "2022 Melon音乐颁奖典礼 年度歌曲大赏",
+        "2022Mnet亚洲音乐大奖 年度歌曲大赏",
+        "2025TMA年度歌手",
+        "年度之声"
+      ],
+      "songs": [
+        "BANG BANG",
+        "After LIKE",
+        "LOVE DIVE",
+        "I AM",
+        "Baddie",
+        "REBEL HEART",
+        "ELEVEN",
+        "XOXZ",
+        "Looks Can Kill",
+        "Kitsch"
+      ],
+      "bio": "IVE（아이브）是Starship Entertainment于2021年12月1日推出的韩国女子演唱组合，由安俞真（Yujin、队长）、金秋天（Gaeul）、张员瑛（Wonyoung）、金志垣（LIZ）、直井怜（Rei）、李贤瑞（Leeseo）六名成员组成。2021年12月1日，发行首张单曲专辑《ELEVEN》并正式出道，该张专辑打破了韩国女团出道唱片最高初动纪录；12月6日，首部团体综艺《1,2,3 IVE》播出；12月8日，在《S",
+      "baikeTitle": "IVE",
+      "baikeUrl": "https://baike.baidu.com/item/IVE",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/94cad1c8a786c9177f3ecc6c3e6b67cf3bc79f3df915?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "DIVE"
+    },
+    {
+      "key": "kep1er",
+      "name": "Kep1er",
+      "nameZh": "葡",
+      "type": "group",
+      "aliases": [
+        "케플러",
+        "葡"
+      ],
+      "cover": "https://p2.music.126.net/4S8LFKhgcEenRwoVmKPIag==/109951173114913621.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "members": [
+        "崔有真",
+        "沈小婷",
+        "金采炫",
+        "金多娟",
+        "江崎光",
+        "休宁巴伊叶"
+      ],
+      "debut": "2022 年 1 月 3 日",
+      "debutYear": 2022,
+      "agency": "Wake One Entertainment、Klap Entertainment",
+      "works": "Wa Da Da、Up!、Wing Wing、We Fresh、I do! do you?、Giddy、Galileo、Shooting Star",
+      "awards": [
+        "2022Mnet亚洲音乐大奖 最受欢迎新人奖",
+        "2023日本金唱片大奖“Best 3新人奖”和“年度流媒歌曲”"
+      ],
+      "songs": [
+        "WA DA DA",
+        "Shooting Star",
+        "KILLA (Face the other me)",
+        "BUBBLE GUM",
+        "LINNK the next generation (LIVE)",
+        "Up!",
+        "Sugar",
+        "TIPI-TAP",
+        "tOgether fOrever",
+        "Heart Surf"
+      ],
+      "bio": "Kep1er（케플러）是韩国CJ ENM旗下Wake One Entertainment于2021年10月22日推出的女子演唱组合，由队长崔有真（Yujin）、沈小婷（Xiaoting）、金采炫（Chaehyun）、金多娟（Dayeon）、江崎光（Hikaru）、休宁巴伊叶（Huening Bahiyyih）、六位成员组成，组合名称结合了“Kep”和“1”两个部分，“Kep”代表抓住大家的梦想，“1”代表团结成为一体，并成为第一。202",
+      "baikeTitle": "Kep1er",
+      "baikeUrl": "https://baike.baidu.com/item/Kep1er",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/09fa513d269759ee3d6d89688ca254166d224f4a7144?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "Kep1ian"
+    },
+    {
+      "key": "kiss-of-life",
+      "name": "KISS OF LIFE",
+      "nameZh": "吻",
+      "type": "group",
+      "aliases": [
+        "키스오브라이프"
+      ],
+      "cover": "https://p2.music.126.net/c7caxzNdolyNl9XeSTUq8A==/109951172236895252.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "works": "SUPERPOWER、Lips Hips Kiss、Who is she、Nothing、Igloo",
+      "songs": [
+        "SUPERPOWER",
+        "Lips Hips Kiss",
+        "Who is she",
+        "Nothing",
+        "Igloo",
+        "Midas Touch",
+        "Sticky",
+        "SWEAT",
+        "R.E.M",
+        "쉿 (Shhh)"
+      ],
+      "bio": "《KISS OF LIFE》是日本歌手平井坚演唱的歌曲，由平井坚作词，并与中野雅仁共同作曲，于2001年5月16日作为单曲发行，是富士电视台电视剧《爱情革命》的主题歌。该曲最初收录于2002年1月30日发行的专辑《THE STILL LIFE Deluxe Edition》，后续被收录至2005年推出的十周年纪念精选集《爱歌成痴》。歌曲另推出混音版本《KISS OF LIFE (S.O.U.L. remix =Sound Of Urba",
+      "baikeTitle": "KISS OF LIFE",
+      "baikeUrl": "https://baike.baidu.com/item/KISS%20OF%20LIFE",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/b3119313b07eca801314ebab9b2397dda144836d?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26"
+    },
+    {
+      "key": "le-sserafim",
+      "name": "LE SSERAFIM",
+      "nameZh": "炽",
+      "type": "group",
+      "aliases": [
+        "르세라핌",
+        "炽"
+      ],
+      "members": [
+        "Kim Chaewon",
+        "Sakura",
+        "Huh Yunjin",
+        "Kazuha",
+        "Hong Eunchae"
+      ],
+      "cover": "https://p1.music.126.net/9ZhGbPI4z8e_dQDMmOzLLA==/109951169927412734.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2022 年 5 月 2 日",
+      "debutYear": 2022,
+      "agency": "SOURCE MUSIC",
+      "works": "FEARLESS、ANTIFRAGILE、ANTIFRAGILE、UNFORGIVEN、CRAZY",
+      "songs": [
+        "FEARLESS (Japanese ver.)",
+        "UNFORGIVEN (feat. Nile Rodgers, Ado) -Japanese ver.-",
+        "ANTIFRAGILE (Live)",
+        "Perfect Night (Live)",
+        "CRAZY(Live)",
+        "Smart (Live)",
+        "EASY (Live)",
+        "CRAZY（cover）",
+        "이브, 프시케 그리고 푸른 수염의 아내 (Eve, Psyche & The Bluebeard's wife) (Live)",
+        "LINNK the next generation (LIVE)"
+      ],
+      "bio": "LE SSERAFIM（르세라핌）是HYBE旗下SOURCE MUSIC于2022年推出的女子组合，由宫胁咲良（SAKURA）、队长金采源（KIM CHAEWON）、许允真（HUH YUNJIN）、中村一叶（KAZUHA）、洪恩採（HONG EUNCHAE）五名成员组成。2022年5月2日，组合发行专辑《FEARLESS》并正式出道；5月20日，经纪公司称成员金佳览暂时中断活动，组合暂时以5人组进行活动；7月20日，经纪公司宣布金佳览退",
+      "baikeTitle": "LE SSERAFIM",
+      "baikeUrl": "https://baike.baidu.com/item/LE%20SSERAFIM",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/4b90f603738da97739121924f409ef198618367a4531?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "FEARNOT"
+    },
+    {
+      "key": "mamamoo",
+      "name": "MAMAMOO",
+      "nameZh": "妈妈木",
+      "type": "group",
+      "aliases": [
+        "마마무",
+        "妈妈木"
+      ],
+      "members": [
+        "Solar",
+        "Moonbyul",
+        "Wheein",
+        "Hwasa"
+      ],
+      "cover": "https://p1.music.126.net/VMOSTY5p3-6aCve1WytbZQ==/109951171008236154.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2014 年 6 月 19 日",
+      "debutYear": 2014,
+      "agency": "Rainbow Bridge World（RBW）",
+      "works": "Yes I am、Decalcomanie、你最完美、Um Oh Ah Yeh、Piano Man、Mr.暧昧模糊、Starry Night、RED MOON、Wind Flower、gogobebe、reality in BLACK、AYA、Where Are We Now、ILLELLA",
+      "awards": [
+        "第4届Gaon Chart K-POP Awards年度新人赏"
+      ],
+      "songs": [
+        "HIP -Japanese ver.-",
+        "Wind Flower",
+        "HIP",
+        "너나 해",
+        "4 Flowers",
+        "척 (Chuck)",
+        "고고베베 (gogobebe)",
+        "장마",
+        "Travel",
+        "별이 빛나는 밤"
+      ],
+      "bio": "MAMAMOO（마마무），是Rainbow Bridge World于2014年6月19日推出的韩国女子演唱组合，由金容仙（颂乐）、文星伊（玟星）、丁辉人（辉人）、安惠真（华莎）四名成员组成。组合名字中的“MAMA”是不分国家和语言所有新生儿学会的第一个词汇，“MOO”为婴儿牙牙学语的拟声词，“MAMAMOO”意为期待超越国籍和语言，为大众带来原始的本能性的音乐。2014年6月发布首张迷你专辑《Hello》；6月19日在M! Count",
+      "baikeTitle": "MAMAMOO",
+      "baikeUrl": "https://baike.baidu.com/item/MAMAMOO",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/6a63f6246b600c3387443ba37a17460fd9f9d72a0b1e?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "Moo Moo"
+    },
+    {
+      "key": "monsta-x",
+      "name": "MONSTA X",
+      "nameZh": "芒叉",
+      "type": "group",
+      "aliases": [
+        "몬스타엑스"
+      ],
+      "cover": "https://p1.music.126.net/yjXTQI65EPdJwglR6tykwA==/109951173788795230.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "members": [
+        "Shownu",
+        "李玟赫",
+        "刘奇贤",
+        "蔡亨源",
+        "李周宪",
+        "任昌均"
+      ],
+      "debut": "2015 年 5 月 14 日",
+      "debutYear": 2015,
+      "agency": "Starship Entertainment",
+      "works": "武断入侵、RUSH、Hero、All in、FIGHTER、Beautiful、SHINE FOREVER、DRAMARAMA、Jealousy、Shoot Out、Alligator、Follow、FANTASIA、Love Killa、GAMBLER、Rush Hour、LOVE、Beautiful Liar",
+      "awards": [
+        "连续两年获得Mnet亚洲音乐大奖的Worldwide Fans' Choice TOP 10",
+        "连续四年获得金唱片大赏的专辑部门本赏",
+        "连续三年获得首尔歌谣大赏的本赏"
+      ],
+      "songs": [
+        "MIDDLE OF THE NIGHT",
+        "MAGIC",
+        "무단침입 (Trespass)",
+        "Ex Girl",
+        "Perfect Girl",
+        "Jealousy",
+        "One Day",
+        "SOMEONE'S SOMEONE",
+        "DRAMARAMA",
+        "아름다워 (Beautiful)"
+      ],
+      "bio": "MONSTA X是韩国Starship Entertainment于2015年推出的男子组合，现由孙轩宇（Shownu）、李玟赫、刘奇贤（基贤）、蔡亨源、李周宪、任昌均（I.M）6人组成。通过练习生生存节目《No Mercy》选出成员后，于2015年5月14日正式出道，发行首张EP《Trespass》；5月23日，受邀参加韩国第21届梦想演唱会现场表演；9月7日发行第二张迷你专辑《RUSH》。同年，获得第17届MAMA亚洲音乐盛典新生代",
+      "baikeTitle": "MONSTA X",
+      "baikeUrl": "https://baike.baidu.com/item/MONSTA%20X",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/91529822720e0cf3d7cae179871fe51fbe096a637ca5?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26"
+    },
+    {
+      "key": "nct",
+      "name": "NCT",
+      "nameZh": "NCT",
+      "type": "group",
+      "aliases": [
+        "엔시티"
+      ],
+      "members": [
+        "Taeyong",
+        "Mark",
+        "Doyoung",
+        "Jaehyun",
+        "Haechan",
+        "Jeno",
+        "Jaemin",
+        "Chenle",
+        "Jisung"
+      ],
+      "cover": "https://p1.music.126.net/oH-XvPeBnbyPj0uBo8nStg==/109951168859602784.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2016 年",
+      "debutYear": 2016,
+      "agency": "韩国SM娱乐有限公司",
+      "works": "NCT 2018 Empathy、WISH",
+      "songs": [
+        "Punk Right Now+HYBIRD+7th sense+Go+be natural+RBB+monster (Live)",
+        "Show Me Your Love (Live)",
+        "Under The Sea (Live)",
+        "Keep It Movin'",
+        "Move On",
+        "In The Sun Again (Instrumental)",
+        "Say To Me (Instrumental)",
+        "Neo Got My Back+BOSS+We Go Up+REGULAR+Black on Black (Live)"
+      ],
+      "bio": "NCT是韩国SM娱乐有限公司于2016年起推出的韩国流行乐男子演唱组合，取“Neo Culture Technology”的首字母从而组成“NCT”。该组合原企划人数没有限制，可自由增减成员，自2024年8月起以徐英浩、李泰容、中本悠太、钱锟、金道英、TEN、郑在玹、金廷祐、肖俊、黄冠亨、黄仁俊、李帝努、李东赫、罗渽民、刘扬扬、钟辰乐、朴志晟、吴是温、前田陆、得能勇志、金垈永、广濑辽、藤永咲哉23位固定成员的形式展开活动，不再有成员变动",
+      "baikeTitle": "NCT",
+      "baikeUrl": "https://baike.baidu.com/item/NCT",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/b21bb051f8198618367aa10f32a139738bd4b21c48a1?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "NCTzen"
+    },
+    {
+      "key": "nct127",
+      "name": "NCT 127",
+      "nameZh": "NCT127",
+      "type": "group",
+      "aliases": [
+        "NCT127",
+        "엔시티 127",
+        "127"
+      ],
+      "members": [
+        "李东赫",
+        "郑在玹",
+        "李泰容",
+        "中本悠太",
+        "金道英",
+        "徐英浩",
+        "金廷祐"
+      ],
+      "cover": "https://p1.music.126.net/iEPYp1bcv1JLeUAShndKwQ==/109951169913658381.jpg",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2016 年 7 月 7 日",
+      "debutYear": 2016,
+      "agency": "韩国SM娱乐有限公司",
+      "works": "Regular、Simon Says、Cherry Bomb、英雄、Sticker、Favorite (Vampire)、疾驰（2 Baddies）、Be There For Me、消防车(Fire Truck)",
+      "awards": [
+        "2016 MAMA亚洲音乐大奖 男子组合新人赏",
+        "第31届金唱片奖 唱片部门新人赏",
+        "第26届首尔歌谣大赏 年度最佳新人奖",
+        "第33届金唱片奖 唱片部门本赏",
+        "第28届首尔歌谣大赏 本赏",
+        "2021 AAA亚洲艺人大奖 年度最佳专辑",
+        "第31届首尔歌谣大赏 大赏 本赏"
+      ],
+      "songs": [
+        "波光 (Gold Dust)",
+        "英雄 (Kick It)",
+        "Fact Check (不可思议)",
+        "Back 2 U (AM 01:27)",
+        "留给明天 (The Rainy Night)",
+        "Cherry Bomb",
+        "Walk",
+        "Lemonade",
+        "无限的我 (Limitless)",
+        "疾驰 (2 Baddies)"
+      ],
+      "bio": "NCT 127（엔시티 127）是韩国SM娱乐有限公司于2016年7月7日推出的男子演唱组合，是NCT组合的首尔小分队，NCT是一个全新概念组合，无人数限制，127代表首尔的经度。截至2024年8月组合先后由李东赫、郑在玹、李泰容、中本悠太、金道英、徐英浩、金廷祐七位成员组成。2016年7月6日，NCT 127发行专辑《NCT #127》的主打曲《Fire Truck》MV，次日，在《M!Countdown》中表演出道舞台，正式出道。三",
+      "baikeTitle": "NCT 127",
+      "baikeUrl": "https://baike.baidu.com/item/NCT%20127",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/0ff41bd5ad6eddc451dac73e4183a1fd5266d11695e4?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26"
+    },
+    {
+      "key": "newjeans",
+      "name": "NewJeans",
+      "nameZh": "新牛仔裤",
+      "type": "group",
+      "aliases": [
+        "뉴진스",
+        "nj"
+      ],
+      "members": [
+        "Minji",
+        "Hanni",
+        "Danielle",
+        "Haerin",
+        "Hyein"
+      ],
+      "cover": "https://p2.music.126.net/pBbRxEysXaKRr2Lvoyj_OA==/109951168165015954.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "bvid": "BV1wE8t6fEaV",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2022 年 7 月 22 日",
+      "debutYear": 2022,
+      "agency": "ADOR",
+      "works": "Attention、Hype Boy、Cookie、Hurt、Ditto、OMG、Super Shy、Cool With You、ETA、登神、How Sweet、Supernatural",
+      "awards": [
+        "2022年甜瓜音乐奖“年度新人”奖",
+        "第37届金唱片大赏“年度最佳新人艺人”奖",
+        "2023甜瓜音乐奖“年度歌曲”奖",
+        "2023甜瓜音乐奖“年度艺人”奖",
+        "2024年KGMA“年度艺人”奖",
+        "第39届韩国金唱片奖“国际艺人”奖"
+      ],
+      "songs": [
+        "GODS",
+        "Ditto (Areia Remix)",
+        "How Sweet (UK Garage Remix)",
+        "Super Shy (KyoU Remix)",
+        "Supernatural (City Pop Remix)",
+        "OMG (basecamp Remix)",
+        "Hurt (KyoU Remix)",
+        "Bubble Gum (City Pop Remix)",
+        "ASAP (Live)",
+        "Hype Boy(Remix Hyper Ver.)"
+      ],
+      "bio": "NewJeans（뉴진스），韩国女子演唱组合，于2022年7月22日由HYBE旗下厂牌ADOR推出。初始成员为金玟池（MINJI）、HANNI（范玉欣）、DANIELLE（牟智慧）、姜谐潾（HAERIN）、李惠仁（HYEIN）。2025年，组合因合约争议，曾一度宣布更名为NJZ；12月29日，DANIELLE专属合约被ADOR终止，不再归属于NewJeans。演艺经历：2022年7月22日，公开首张迷你专辑《New Jeans》的第一首",
+      "baikeTitle": "NewJeans",
+      "baikeUrl": "https://baike.baidu.com/item/NewJeans",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/86d6277f9e2f07082838a840a179af99a9014c085467?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "Bunnies"
+    },
+    {
+      "key": "nmixx",
+      "name": "NMIXX",
+      "nameZh": "恩米克斯",
+      "type": "group",
+      "aliases": [
+        "엔믹스",
+        "恩米克斯"
+      ],
+      "cover": "https://p2.music.126.net/VCM3Gk6yr7QjW87OU2kYLw==/109951174117076575.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "members": [
+        "朴珍",
+        "吴海嫄",
+        "薛仑娥",
+        "崔允珍(已退出)",
+        "裴真率",
+        "金智友",
+        "张圭珍"
+      ],
+      "debut": "2022 年 2 月 22 日",
+      "debutYear": 2022,
+      "agency": "JYP Entertainment",
+      "works": "O.O、DICE、Young, Dumb, Stupid、Love Me Like This、Roller Coaster、Party O'Clock、Blue Valentine",
+      "songs": [
+        "Heavy Serenade",
+        "KNOW ABOUT ME",
+        "Birthday Wish",
+        "DASH",
+        "Crescendo",
+        "Love Me Like This",
+        "Blue Valentine",
+        "Sing to the Moon (LILY, HAEWON)",
+        "RudE TaLK",
+        "Kerosene"
+      ],
+      "bio": "NMIXX（엔믹스）是JYP Entertainment于2022年2月22日推出的韩国女子演唱团体，出道时由七名成员组成，现由朴珍（LILY）、吴海嫄（HAEWON、队长）、薛仑娥（SULLYOON）、裴真率（BAE）、金智友（JIWOO）、张圭珍（KYUJIN）六名成员组成。2022年2月22日，组合发行单曲专辑《AD MARE》，正式出道；3月1日，举行出道Showcase；9月19日，发行第二张单曲专辑《ENTWURF》；11月",
+      "baikeTitle": "NMIXX",
+      "baikeUrl": "https://baike.baidu.com/item/NMIXX",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/5243fbf2b2119313b07e31a1346f1bd7912397dd27d0?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "NSWER"
+    },
+    {
+      "key": "ohmygirl",
+      "name": "OH MY GIRL",
+      "nameZh": "噜妹",
+      "type": "group",
+      "aliases": [
+        "Oh My Girl",
+        "오마이걸",
+        "OMG",
+        "噜妹"
+      ],
+      "members": [
+        "崔效定",
+        "金美贤",
+        "柳諟我",
+        "玄胜熙",
+        "裴有彬",
+        "崔乂园"
+      ],
+      "cover": "https://p2.music.126.net/Alui2fc28DHmlEsemxSskg==/109951170705717375.jpg",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2015 年 4 月 20 日",
+      "debutYear": 2015,
+      "agency": "WM Entertainment",
+      "works": "CUPID、CLOSER、WINDY DAY、A-ing、COLORING BOOK、秘密花园、Remember me、The fifth season (SSFWL)、BUNGEE、NONSTOP、Real Love、DUN DUN DANCE、Dreamy Resonance",
+      "songs": [
+        "Dolphin",
+        "살짝 설렜어 (Nonstop)",
+        "다섯 번째 계절 (SSFWL)",
+        "Dun Dun Dance",
+        "한 발짝 두 발짝",
+        "불꽃놀이 (Remember Me)",
+        "Closer",
+        "비밀정원",
+        "五番目の季節 Japanese ver.",
+        "Twilight"
+      ],
+      "bio": "OH MY GIRL（오마이걸）是WM Entertainment于2015年4月20日推出的韩国女子演唱组合，现由崔效定、金美贤、柳諟我、玄胜熙、裴有彬、崔乂园6名成员组成。2015年4月20日，发布首张迷你专辑《OH MY GIRL》正式出道；10月8日，发布第二张迷你专辑《CLOSER》，该专辑在Billboard 2015最佳KPOP专辑中获得第14位；同年，获得2015两点出逃最佳女子新人奖。2016年3月28日，发行第三张迷",
+      "baikeTitle": "Oh My Girl",
+      "baikeUrl": "https://baike.baidu.com/item/Oh%20My%20Girl",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/962bd40735fae6cd7b89f7486ee4182442a7d933a1d9?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26"
+    },
+    {
+      "key": "red-velvet",
+      "name": "Red Velvet",
+      "nameZh": "红毛",
+      "type": "group",
+      "aliases": [
+        "레드벨벳",
+        "RV",
+        "红毛"
+      ],
+      "members": [
+        "Irene",
+        "Seulgi",
+        "Wendy",
+        "Joy",
+        "Yeri"
+      ],
+      "cover": "https://p1.music.126.net/tu-ADMGzdzcI1-JViPUrgQ==/109951170290687645.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2014 年 8 月 1 日",
+      "debutYear": 2014,
+      "agency": "韩国SM娱乐有限公司",
+      "works": "Happiness、Ice Cream Cake、Dumb Dumb、One Of These Nights、Russian Roulette、Rookie、Red Flavor、Peek-A-Boo、Bad Boy、Birthday",
+      "awards": [
+        "2014年第29届韩国金唱片-新人赏",
+        "2015年第30届韩国金唱片-音源本赏奖",
+        "2017年第19届Mnet亚洲音乐大奖-最佳女子组合",
+        "2018年第8届Gaon Chart K-POP大奖-音源部年度歌手",
+        "2020年第10届Gaon Chart K-POP大奖-音源部年度歌手",
+        "2021年第35届金唱片大奖音源部门本赏",
+        "2022年GMA 最佳女子表演",
+        "最佳MV"
+      ],
+      "songs": [
+        "Psycho",
+        "Bad Boy",
+        "俄罗斯轮盘 (Russian Roulette)",
+        "Feel My Rhythm",
+        "7月7日",
+        "躲猫猫 (Peek-A-Boo)",
+        "红色味道 (Red Flavor)",
+        "Celebrate",
+        "Cosmic",
+        "Queendom"
+      ],
+      "bio": "Red Velvet（레드벨벳 、レッドベルベット、Red Velvet）是韩国SM娱乐有限公司于2014年8月推出的女子演唱组合，由裴珠泫、姜涩琪、孙承完、朴秀荣和金艺琳五人组成。2014年8月1日，发行首张单曲《Happiness》正式出道；10月13日，发行第二首单曲《Be Natural》。2015年1月，获得第29届韩国金唱片唱片部门新人奖；3月11日，经纪公司宣布增添金艺琳（Yeri）为组合的新成员，并于18日发行首张迷你专",
+      "baikeTitle": "Red Velvet",
+      "baikeUrl": "https://baike.baidu.com/item/Red%20Velvet",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/8cb1cb1349540923dd54f6867a0dc609b3de9d82e3b7?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "ReVeluv"
+    },
+    {
+      "key": "riize",
+      "name": "RIIZE",
+      "nameZh": "赖子",
+      "type": "group",
+      "aliases": [
+        "라이즈"
+      ],
+      "cover": "https://p1.music.126.net/COfuMUk983T2SsLPHHQLxg==/109951169697125367.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "members": [
+        "大崎将太郎",
+        "宋恩奭",
+        "郑成灿",
+        "朴元彬",
+        "李炤熙",
+        "李灿荣"
+      ],
+      "debut": "2023 年 9 月 4 日",
+      "debutYear": 2023,
+      "agency": "韩国SM娱乐有限公司",
+      "works": "Memories、Get A Guitar、Talk Saxy、Love 119、Siren、Impossible、One Kiss、Boom Boom Bass、RIIZING",
+      "awards": [
+        "2023年韩国TMA音乐奖“NEXT Leader”奖",
+        "2023Mnet亚洲音乐大奖“最受喜爱新人”奖",
+        "2023年Melon音乐颁奖典礼“最佳新人”奖",
+        "第33届首尔歌谣大赏“最佳新人”奖",
+        "第13届韩国Circle Chart音乐奖独立听众部门新人奖",
+        "2025 TIMA国际音乐大赏年度海外团体突破奖"
+      ],
+      "songs": [
+        "Love 119",
+        "Boom Boom Bass",
+        "Behind The Shine",
+        "Get A Guitar",
+        "Talk Saxy",
+        "Impossible",
+        "Honestly",
+        "Memories",
+        "One Kiss",
+        "Siren"
+      ],
+      "bio": "RIIZE（라이즈）是韩国SM娱乐有限公司于2023年9月4日推出的男子演唱组合，现以大崎将太郎（SHOTARO）、宋恩奭（EUNSEOK）、郑成灿（SUNGCHAN）、朴元彬（WONBIN）、李炤熙（SOHEE）、李灿荣（ANTON）六名成员的形式展开活动，成员洪承汉（SEUNGHAN）已退团。2023年，在SNS上创建官方账号并正式揭晓七位成员的身份；8月，公开出道专辑的序曲《Memories》的音源及MV；9月4日，发行首张单曲专",
+      "baikeTitle": "RIIZE",
+      "baikeUrl": "https://baike.baidu.com/item/RIIZE",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/d439b6003af33a87e950ab54600407385343fbf21f7e?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "BRIIZE"
     },
     {
       "key": "seventeen",
@@ -164,7 +1613,137 @@
       "cover": "https://p2.music.126.net/68kwvS99Fb2ITz5ETsNQhQ==/109951168850272055.jpg?param=1000y1000",
       "coverSource": "NetEase Cloud Music artist photo",
       "bvid": "BV1A24y1U7Vc",
-      "coverCredit": "NetEase Cloud Music artist photo"
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2015 年 5 月 26 日",
+      "debutYear": 2015,
+      "agency": "Pledis Entertainment",
+      "works": "Adore U、万岁、Pretty U、Very Nice、Boom Boom、Don't Wanna Cry、CLAP、谢谢、Oh ! my、HIT、毒：Fear、Left & Right、HOME;RUN、Ready to love、Rock with you、Darl+ing、HOT、_WORLD、F*ck My Life、Super、God of Music、MAESTRO",
+      "awards": [
+        "第25届首尔歌谣大赏新人奖",
+        "第30届金唱片大赏新人奖",
+        "第32届韩国金唱片奖专辑部门本奖",
+        "第38届韩国金唱片唱片大赏"
+      ],
+      "songs": [
+        "글쎄",
+        "舞い落ちる花びら（Fallin' Flower）",
+        "아주 NICE",
+        "Darl+ing (Holiday ver.)",
+        "울고 싶지 않아",
+        "今 -明日 世界が終わっても-",
+        "SAY YES",
+        "SWEETEST THING",
+        "몰래 듣지 마요",
+        "박수"
+      ],
+      "bio": "SEVENTEEN（세븐틴）是HYBE旗下厂牌Pledis Entertainment于2015年5月26日推出的男子组合，由崔胜哲、尹净汉、洪知秀、文俊辉、权顺荣、全圆佑、李知勋、李硕珉、金珉奎、徐明浩、夫胜宽、崔瀚率、李灿13名成员组成。演艺经历：2015年发布首张迷你专辑《17 CARAT》正式出道。2016年发行首张正规专辑《LOVE&LETTER》。2018年发行首张日本迷你专辑《WE MAKE YOU》，正式进军日本乐坛。2",
+      "baikeTitle": "SEVENTEEN",
+      "baikeUrl": "https://baike.baidu.com/item/SEVENTEEN",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/aa64034f78f0f736afc36f70c202a419ebc4b745b531?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "CARAT(克拉)"
+    },
+    {
+      "key": "shinee",
+      "name": "SHINee",
+      "nameZh": "闪",
+      "type": "group",
+      "aliases": [
+        "샤이니",
+        "闪"
+      ],
+      "members": [
+        "Onew",
+        "Key",
+        "Minho",
+        "Taemin"
+      ],
+      "cover": "https://p2.music.126.net/cBVLSq_tTa0QqgAUk3DDZw==/109951168695082856.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2008 年 5 月 25 日",
+      "debutYear": 2008,
+      "agency": "韩国SM娱乐有限公司",
+      "works": "姐姐真漂亮、Amigo、Juliette、Ring Ding Dong、Lucifer、Hello、Sherlock、Dream Girl、Why So Serious?、Everybody、View、Married to the Music、1 Of 1、Tell Me What To Do、Good Evening、I Want You、Our Page、Countless、Don't Call Me、Atlantis、The Feeling、HARD",
+      "awards": [
+        "2008年第23届韩国金唱片新人组合",
+        "2010年第17届大韩民国演艺艺术最佳男子组合",
+        "2013年第22届首尔歌谣人气赏",
+        "2016年第2届酷音乐亚洲盛典亚洲最佳组合",
+        "2019年第28届首尔歌谣人气奖等"
+      ],
+      "songs": [
+        "누난 너무 예뻐 (Replay)",
+        "Replay",
+        "透明雨伞 (Don’t Let Me Go)",
+        "Lucifer",
+        "투명 우산 (Don’t Let Me Go)",
+        "Replay -君は仆のeverything-",
+        "姐姐真漂亮 (Replay)",
+        "Stand By Me",
+        "Ring Ding Dong",
+        "View"
+      ],
+      "bio": "SHINee（샤이니）是韩国SM娱乐有限公司于2008年推出的男子流行演唱组合，由温流、金钟铉、金基范、崔珉豪和李泰民5人组成。2008年5月25日，SHINee以歌曲《姐姐真漂亮》正式出道；同年8月28日，发行首张正规专辑《The SHINee World》，获得第23届韩国金唱片新人组合奖。2009年5月25日，发行第二张迷你专辑《Romeo》；同年10月19日，发行第三张迷你专辑《2009, Year Of Us》。2010年7月",
+      "baikeTitle": "SHINee",
+      "baikeUrl": "https://baike.baidu.com/item/SHINee",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/023b5bb5c9ea15cefb39aaa5ba003af33b87b243?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "SHINee WORLD"
+    },
+    {
+      "key": "stayc",
+      "name": "STAYC",
+      "nameZh": "思黛西",
+      "type": "group",
+      "aliases": [
+        "스테이씨",
+        "思黛西"
+      ],
+      "cover": "https://p1.music.126.net/_K9HqT_lc7N1uFSFPvQJdQ==/109951173348753620.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "members": [
+        "裴秀珉",
+        "朴莳恩",
+        "李彩煐",
+        "尹势银",
+        "沈姿润",
+        "张叡恩"
+      ],
+      "debut": "2020 年 11 月 12 日",
+      "debutYear": 2020,
+      "agency": "High Up Entertainment",
+      "works": "SO BAD、ASAP、STEREOTYPE、RUN2U、YOUNG LUV",
+      "songs": [
+        "Bubble",
+        "POPPY",
+        "2 L0VE",
+        "ASAP",
+        "BEBE",
+        "색안경 (STEREOTYPE)",
+        "GPT",
+        "Teddy Bear",
+        "Beauty Bomb",
+        "SO BAD"
+      ],
+      "bio": "STAYC（스테이씨）是由High Up Entertainment于2020年11月12日推出的韩国女子演唱团体，由队长裴秀珉（SUMIN）、朴莳恩（SIEUN）、李彩煐（ISA）、尹势银（SEEUN）、沈姿润（YOON）、张叡恩（J）6名成员组成。2020年11月12日，发行首张单曲专辑《Star To A Young Culture》并正式出道，专辑的总销量创下当年度出道女艺人中出道专辑销量的新纪录。2021年4月18日，发行第二",
+      "baikeTitle": "STAYC",
+      "baikeUrl": "https://baike.baidu.com/item/STAYC",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/6c224f4a20a4462309f7ced55c74650e0cf3d7ca7977?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26"
     },
     {
       "key": "straykids",
@@ -173,7 +1752,9 @@
       "type": "group",
       "aliases": [
         "스트레이 키즈",
-        "迷"
+        "迷",
+        "SKZ",
+        "流浪儿童"
       ],
       "members": [
         "Bang Chan",
@@ -188,29 +1769,95 @@
       "cover": "https://p2.music.126.net/G0m96B5TFAqqfGZQ8Ljv7Q==/109951173705126874.jpg?param=1000y1000",
       "coverSource": "NetEase Cloud Music artist photo",
       "bvid": "BV1Xaut64EVW",
-      "coverCredit": "NetEase Cloud Music artist photo"
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2018 年 3 月 25 日",
+      "debutYear": 2018,
+      "agency": "JYP Entertainment",
+      "works": "Stray Kids、Mixtape、I am NOT、I am WHO",
+      "awards": [
+        "第二届Soribada最佳音乐大奖 新韩流新人赏",
+        "2025年韩国MAMA奖粉丝选择奖",
+        "第40届韩国金唱片奖年专大赏"
+      ],
+      "songs": [
+        "MANIAC",
+        "충돌 (Collision)",
+        "This & That",
+        "Chk Chk Boom",
+        "Charmer",
+        "락 (樂) (LALALALA)",
+        "소리꾼(Thunderous)",
+        "Falling Up -English version-",
+        "RUN IT",
+        "November 11th"
+      ],
+      "bio": "Stray Kids是JYP Entertainment于2018年3月25日推出的韩国男子演唱组合，由方灿、李旻浩、徐彰彬、黄铉辰、韩知城、李龙馥、金昇玟、梁精寅8位成员组成。2017年10月17日，男团出道生存节目《Stray Kids》在韩国Mnet电视台首播，最终确定参加节目的9位练习生全部获得出道资格。2018年1月8日，发行出道先行专辑《Mixtape》，收录成员在节目中创作的歌曲，主打曲为《Hellevator》；3月26",
+      "baikeTitle": "Stray Kids",
+      "baikeUrl": "https://baike.baidu.com/item/Stray%20Kids",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/9922720e0cf3d7ca7bcba02f8c42a9096b63f624036e?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26"
     },
     {
-      "key": "enhypen",
-      "name": "ENHYPEN",
-      "nameZh": "符",
+      "key": "super-junior",
+      "name": "SUPER JUNIOR",
+      "nameZh": "老少年",
       "type": "group",
       "aliases": [
-        "엔하이픈"
+        "슈퍼주니어",
+        "SJ",
+        "老少年"
       ],
-      "members": [
-        "Jungwon",
-        "Heeseung",
-        "Jay",
-        "Jake",
-        "Sunghoon",
-        "Sunoo",
-        "Ni-ki"
-      ],
-      "cover": "https://p2.music.126.net/NKQb4aw37-zMemB4ra3Gsw==/109951172613682248.jpg?param=1000y1000",
+      "cover": "https://p1.music.126.net/cxmFAAPwt3HNNhVD213O0A==/109951169677026088.jpg?param=1000y1000",
       "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "members": [
+        "利特(朴正洙)",
+        "金希澈",
+        "金钟云(艺声)",
+        "申东熙(神童)",
+        "李赫宰(银赫)",
+        "崔始源",
+        "李东海",
+        "金厉旭",
+        "曺圭贤"
+      ],
+      "debut": "2005 年 11 月 6 日",
+      "debutYear": 2005,
+      "agency": "Label SJ、韩国SM娱乐有限公司、爱贝克思、ICM Partners",
+      "works": "Super TV、Sorry, Sorry、Bonamana、Mr.Simple、Sexy, Free & Single、Mamacita、Devil、Play、Time Slip",
+      "awards": [
+        "第21届 首尔歌谣大赏 大赏",
+        "三届 金唱片大赏 唱片大赏",
+        "两届 Mnet亚洲音乐大奖 年度专辑大赏",
+        "五次 Gaon Chart K-POP大奖 季度专辑销售奖",
+        "2009至2012年 韩国年度专辑销量冠军歌手",
+        "连续121周蝉联KKBOX音乐排行榜一位歌手"
+      ],
+      "songs": [
+        "SORRY, SORRY",
+        "U",
+        "Mr. Simple",
+        "너라고 (It`s You)",
+        "SUPER GIRL (Rearranged)",
+        "Devil",
+        "미인아 (Bonamana)",
+        "Black Suit",
+        "MAMACITA(아야야)",
+        "Dorothy(도로시)"
+      ],
+      "bio": "Super Junior（슈퍼주니어），韩国男子演唱组合，现以朴正洙（利特）、金希澈、金钟云（艺声）、申东熙（神童）、李赫宰（银赫）、崔始源、李东海、金厉旭、曺圭贤9名成员的形式展开活动。2005年11月6日，Super Junior以《Twins (Knock Out)》正式登台出道，发行首张专辑《SuperJunior 05》；出道初期为12名成员，第13名成员曺圭贤于2006年5月27日加入。2007年，凭借第二张专辑《Don't",
+      "baikeTitle": "Super Junior",
+      "baikeUrl": "https://baike.baidu.com/item/Super%20Junior",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/f636afc379310a55b31962d5ef1d54a98226cffcbac0?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26"
     },
     {
       "key": "tomorrow-x-together",
@@ -219,7 +1866,9 @@
       "type": "group",
       "aliases": [
         "TXT",
-        "투바투"
+        "투바투",
+        "투모로우바이투게더",
+        "明日之子"
       ],
       "members": [
         "Soobin",
@@ -230,290 +1879,120 @@
       ],
       "cover": "https://p1.music.126.net/p0r2AslRKOSONEhzOYEOGQ==/109951168717268064.jpg?param=1000y1000",
       "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2019 年 3 月 4 日",
+      "debutYear": 2019,
+      "agency": "HYBE旗下BIGHIT MUSIC（原Big Hit Entertainment）",
+      "works": "CROWN、Run Away、Blue Hour、Can't You See Me?、Drama、New Rules、Our Summer、0X1=LOVESONG (I Know I Love You) feat. Seori、LO$ER=LO♡ER、Anti-Romantic、Good Boy Gone Bad、Sugar Rush Ride、SWEET",
+      "songs": [
+        "I'll See You There Tomorrow (Live)",
+        "PS5",
+        "Deja Vu (Live)",
+        "LEveL",
+        "Sugar Rush Ride (Japanese Ver.)",
+        "Sweet Dreams",
+        "Good Boy Gone Bad (Japanese Version)",
+        "CROWN (Live)",
+        "Magic",
+        "0X1=LOVESONG (I Know I Love You) feat. 幾田りら [Japanese Ver.]"
+      ],
+      "bio": "TOMORROW X TOGETHER，简称 TXT，是韩国HYBE旗下BIGHIT MUSIC于2019年3月4日推出的男子唱跳组合，由崔秀彬（队长）、崔然竣、崔杋圭、姜太显、休宁凯五名成员组成。演艺经历：2019年3月，发行首张迷你专辑《The Dream Chapter: STAR》，正式出道。2020年1月，发行首张日文单曲专辑《MAGIC HOUR》。2021年8月，发行Repackage专辑《The Chaos Chapte",
+      "baikeTitle": "TOMORROW X TOGETHER",
+      "baikeUrl": "https://baike.baidu.com/item/TOMORROW%20X%20TOGETHER",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/fcfaaf51f3deb48f8c5429d54c4b2d292df5e0fed239?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "MOA"
     },
     {
-      "key": "nct",
-      "name": "NCT",
-      "nameZh": "NCT",
+      "key": "twice",
+      "name": "TWICE",
+      "nameZh": "兔瓦斯",
       "type": "group",
       "aliases": [
-        "엔시티"
+        "兔瓦斯",
+        "트와이스"
       ],
       "members": [
-        "Taeyong",
-        "Mark",
-        "Doyoung",
-        "Jaehyun",
-        "Haechan",
-        "Jeno",
-        "Jaemin",
-        "Chenle",
-        "Jisung"
+        "Nayeon",
+        "Jeongyeon",
+        "Momo",
+        "Sana",
+        "Jihyo",
+        "Mina",
+        "Dahyun",
+        "Chaeyoung",
+        "Tzuyu"
       ],
-      "cover": "https://p1.music.126.net/oH-XvPeBnbyPj0uBo8nStg==/109951168859602784.jpg?param=1000y1000",
+      "cover": "https://p2.music.126.net/vEboEKvo5d3fFovH0mVVDQ==/109951172132303381.jpg?param=1000y1000",
       "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
+      "bvid": "BV1FE411a72Q",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2015 年 10 月 20 日",
+      "debutYear": 2015,
+      "agency": "JYP Entertainment",
+      "works": "Like OOH-AHH、CHEER UP、TT、KNOCK KNOCK、SIGNAL、LIKEY、Heart Shaker、What is Love?、Dance The Night Away、YES or YES、FANCY、Feel Special、MORE & MORE、I CAN'T STOP ME、Alcohol-Free、SCIENTIST、Talk That Talk",
+      "awards": [
+        "Mnet亚洲音乐大奖最佳女子新人奖",
+        "四次Mnet亚洲音乐大奖最佳女子团体奖",
+        "三次Mnet亚洲音乐大奖歌曲大奖",
+        "韩国金唱片大奖唱片部门新人奖",
+        "韩国金唱片大奖音源部门大赏"
+      ],
+      "songs": [
+        "What is Love?",
+        "Strategy",
+        "YES or YES",
+        "THIS IS FOR",
+        "GO HARD",
+        "Talk that Talk",
+        "CHEER UP",
+        "Feel Special",
+        "ONE SPARK",
+        "I CAN'T STOP ME"
+      ],
+      "bio": "TWICE是JYP Entertainment于2015年10月20日推出的女子演唱团体，由林娜琏、俞定延、平井桃（Momo）、凑崎纱夏（Sana）、朴志效、名井南（Mina）、金多贤、孙彩瑛、周子瑜9名成员组成。演艺经历：2015年，凭借首张团体迷你专辑《THE STORY BEGINS》正式出道；12月，获得第17届Mnet亚洲音乐大奖最佳女子新人奖。2016年，发行的第二张迷你专辑主打曲《CHEER UP》在韩国8个音源排行榜上获",
+      "baikeTitle": "TWICE",
+      "baikeUrl": "https://baike.baidu.com/item/TWICE",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/279759ee3d6d55fbb2fbe99b1f7b584a20a44623774e?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "ONCE"
     },
     {
-      "key": "le-sserafim",
-      "name": "LE SSERAFIM",
-      "nameZh": "炽",
+      "key": "tws",
+      "name": "TWS",
+      "nameZh": "吐司",
       "type": "group",
       "aliases": [
-        "르세라핌"
+        "투어스"
       ],
-      "members": [
-        "Kim Chaewon",
-        "Sakura",
-        "Huh Yunjin",
-        "Kazuha",
-        "Hong Eunchae"
-      ],
-      "cover": "https://p1.music.126.net/9ZhGbPI4z8e_dQDMmOzLLA==/109951169927412734.jpg?param=1000y1000",
+      "cover": "https://p1.music.126.net/2vJiuqU4kvsqU3vY0ZXeDg==/109951169230924560.jpg?param=1000y1000",
       "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "itzy",
-      "name": "ITZY",
-      "nameZh": "一击",
-      "type": "group",
-      "aliases": [
-        "있지"
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "works": "plot twist (Band LIVE)、YOU LIKE IT I LOVE IT、hey! hey! (Live)、Kiss Kiss Shy Shy (Korean Ver.)、If I'm S, Can You Be My N? (Live)",
+      "songs": [
+        "plot twist (Band LIVE)",
+        "YOU LIKE IT I LOVE IT",
+        "hey! hey! (Live)",
+        "Kiss Kiss Shy Shy (Korean Ver.)",
+        "If I'm S, Can You Be My N? (Live)",
+        "Brand New Day",
+        "내가 S면 넌 나의 N이 되어줘(If Im S, Can You Be My N) (Live)",
+        "Oh Mymy : 7s (Live)",
+        "Uptown Girl",
+        "Double Take (Live)"
       ],
-      "members": [
-        "Yeji",
-        "Lia",
-        "Ryujin",
-        "Chaeryeong",
-        "Yuna"
+      "sources": [
+        "netease"
       ],
-      "cover": "https://p2.music.126.net/32hj7c1jgLN_Eux8SdTXCw==/109951173202821065.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "g-i-dle",
-      "name": "(G)I-DLE",
-      "nameZh": "女娃",
-      "type": "group",
-      "aliases": [
-        "아이들",
-        "GIDLE"
-      ],
-      "members": [
-        "Miyeon",
-        "Minnie",
-        "Soyeon",
-        "Yuqi",
-        "Shuhua"
-      ],
-      "cover": "https://p2.music.126.net/34DvxAQF3STYmvuUmK5kyw==/109951174034790875.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "red-velvet",
-      "name": "Red Velvet",
-      "nameZh": "红毛",
-      "type": "group",
-      "aliases": [
-        "레드벨벳"
-      ],
-      "members": [
-        "Irene",
-        "Seulgi",
-        "Wendy",
-        "Joy",
-        "Yeri"
-      ],
-      "cover": "https://p1.music.126.net/tu-ADMGzdzcI1-JViPUrgQ==/109951170290687645.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "exo",
-      "name": "EXO",
-      "nameZh": "茶蛋",
-      "type": "group",
-      "aliases": [
-        "엑소"
-      ],
-      "members": [
-        "Xiumin",
-        "Suho",
-        "Lay",
-        "Baekhyun",
-        "Chen",
-        "Chanyeol",
-        "D.O.",
-        "Kai",
-        "Sehun"
-      ],
-      "cover": "https://p2.music.126.net/vY_0HYqgraysBLWXuJ5tIQ==/109951168721913427.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "shinee",
-      "name": "SHINee",
-      "nameZh": "闪",
-      "type": "group",
-      "aliases": [
-        "샤이니"
-      ],
-      "members": [
-        "Onew",
-        "Key",
-        "Minho",
-        "Taemin"
-      ],
-      "cover": "https://p2.music.126.net/cBVLSq_tTa0QqgAUk3DDZw==/109951168695082856.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "bigbang",
-      "name": "BIGBANG",
-      "nameZh": "大棒",
-      "type": "group",
-      "aliases": [
-        "빅뱅"
-      ],
-      "members": [
-        "G-Dragon",
-        "Taeyang",
-        "Daesung",
-        "T.O.P"
-      ],
-      "cover": "https://p1.music.126.net/YZ7_zYI5e5kJdd8tcKjlGw==/109951173904581661.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "2ne1",
-      "name": "2NE1",
-      "nameZh": "2NE1",
-      "type": "group",
-      "aliases": [
-        "투애니원"
-      ],
-      "members": [
-        "CL",
-        "Bom",
-        "Dara",
-        "Minzy"
-      ],
-      "cover": "https://p2.music.126.net/5Ownga3tCwMzYQJ0NoEoyQ==/109951169806308197.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "girls-generation",
-      "name": "Girls' Generation",
-      "nameZh": "少女时代",
-      "type": "group",
-      "aliases": [
-        "SNSD",
-        "소녀시대"
-      ],
-      "members": [
-        "Taeyeon",
-        "Sunny",
-        "Tiffany",
-        "Hyoyeon",
-        "Yuri",
-        "Sooyoung",
-        "Yoona",
-        "Seohyun"
-      ],
-      "cover": "https://p2.music.126.net/_HYJgCgSQTcYezK79BXDDw==/109951167749851415.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "super-junior",
-      "name": "SUPER JUNIOR",
-      "nameZh": "老少年",
-      "type": "group",
-      "aliases": [
-        "슈퍼주니어",
-        "SJ"
-      ],
-      "cover": "https://p1.music.126.net/cxmFAAPwt3HNNhVD213O0A==/109951169677026088.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "monsta-x",
-      "name": "MONSTA X",
-      "nameZh": "芒叉",
-      "type": "group",
-      "aliases": [
-        "몬스타엑스"
-      ],
-      "cover": "https://p1.music.126.net/yjXTQI65EPdJwglR6tykwA==/109951173788795230.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "ateez",
-      "name": "ATEEZ",
-      "nameZh": "梯",
-      "type": "group",
-      "aliases": [
-        "에이티즈"
-      ],
-      "cover": "https://p1.music.126.net/f3DnvCaWS8Zf05SZ3kw27A==/109951173408383487.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "got7",
-      "name": "GOT7",
-      "nameZh": "搞七",
-      "type": "group",
-      "aliases": [
-        "갓세븐"
-      ],
-      "cover": "https://p1.music.126.net/WsQt-7IFvdal8r_VP8pAwg==/109951167394488494.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "mamamoo",
-      "name": "MAMAMOO",
-      "nameZh": "妈妈木",
-      "type": "group",
-      "aliases": [
-        "마마무"
-      ],
-      "members": [
-        "Solar",
-        "Moonbyul",
-        "Wheein",
-        "Hwasa"
-      ],
-      "cover": "https://p1.music.126.net/VMOSTY5p3-6aCve1WytbZQ==/109951171008236154.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
+      "dataUpdatedAt": "2026-10-26"
     },
     {
       "key": "winner",
@@ -525,86 +2004,46 @@
       ],
       "cover": "https://p2.music.126.net/guuxT37zbF0aCfJFBr_9SA==/109951167699927480.jpg?param=1000y1000",
       "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "ikon",
-      "name": "iKON",
-      "nameZh": "康",
-      "type": "group",
-      "aliases": [
-        "아이콘"
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "members": [
+        "姜昇润",
+        "金秦禹",
+        "李昇勋",
+        "宋旻浩"
       ],
-      "cover": "https://p1.music.126.net/EaYQtN7eVqgCDTcdzqujWQ==/109951167699866387.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "nmixx",
-      "name": "NMIXX",
-      "nameZh": "恩米克斯",
-      "type": "group",
-      "aliases": [
-        "엔믹스"
+      "debut": "2014 年",
+      "debutYear": 2014,
+      "agency": "YG Entertainment",
+      "works": "REALLY REALLY、FOOL、LOVE ME LOVE ME、ISLAND、MILLIONS",
+      "awards": [
+        "2014年 MAMA颁奖礼-最佳新人",
+        "2014年 金唱片奖－音源部门新人奖",
+        "2014年 Melon颁奖礼-TOP10",
+        "最佳新人奖",
+        "第32届金唱片大赏-数字音源部门本赏"
       ],
-      "cover": "https://p2.music.126.net/VCM3Gk6yr7QjW87OU2kYLw==/109951174117076575.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "kep1er",
-      "name": "Kep1er",
-      "nameZh": "葡",
-      "type": "group",
-      "aliases": [
-        "케플러"
+      "songs": [
+        "공허해",
+        "REALLY REALLY",
+        "ISLAND",
+        "FOOL",
+        "Different",
+        "LOVE ME LOVE ME",
+        "HAVE A GOOD DAY",
+        "센치해",
+        "끼부리지마",
+        "EMPTY"
       ],
-      "cover": "https://p2.music.126.net/4S8LFKhgcEenRwoVmKPIag==/109951173114913621.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "babymonster",
-      "name": "BABYMONSTER",
-      "nameZh": "宝怪",
-      "type": "group",
-      "aliases": [
-        "베이비몬스터"
+      "bio": "WINNER（위너）是韩国YG Entertainment于2014年推出的男子组合，出道时由姜昇润、金秦禹、李昇勋、宋旻浩和南太铉五名成员组成，自2016年开始，以姜昇润、金秦禹、李昇勋、宋旻浩四人形式展开活动。2013年8月23日，WINNER成员在《WIN:WHO IS NEXT》节目中与同公司练习生分为A队、B队展开对决，最终所在的A队胜利获得出道的资格。2014年8月14日，发行首张正规专辑《2014 S/S》；8月17日通过",
+      "baikeTitle": "WINNER",
+      "baikeUrl": "https://baike.baidu.com/item/WINNER",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/8d5494eef01f3a292df55fd2276dab315c6034a8d6dc?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
       ],
-      "cover": "https://p2.music.126.net/iy67u-2s7nfwI1CJWcRpQw==/109951173460219603.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "illit",
-      "name": "ILLIT",
-      "nameZh": "礼",
-      "type": "group",
-      "aliases": [
-        "아일릿"
-      ],
-      "cover": "https://p2.music.126.net/YaVGP1k5hzRTYrY2fN6wBw==/109951170610841384.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "riize",
-      "name": "RIIZE",
-      "nameZh": "赖子",
-      "type": "group",
-      "aliases": [
-        "라이즈"
-      ],
-      "cover": "https://p1.music.126.net/COfuMUk983T2SsLPHHQLxg==/109951169697125367.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "Inner Circle"
     },
     {
       "key": "zerobaseone",
@@ -617,86 +2056,242 @@
       ],
       "cover": "https://p1.music.126.net/XedNkyYDW-4EeW6_b83ftg==/109951173367982202.jpg?param=1000y1000",
       "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "boynextdoor",
-      "name": "BOYNEXTDOOR",
-      "nameZh": "门童",
-      "type": "group",
-      "aliases": [
-        "보이넥스트도어"
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "members": [
+        "成韩彬",
+        "石友铉",
+        "朴乾煜",
+        "金太来",
+        "金地雄"
       ],
-      "cover": "https://p2.music.126.net/oqcgJBPdgdq100ZRwLDtTg==/109951173351176045.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "tws",
-      "name": "TWS",
-      "nameZh": "吐司",
-      "type": "group",
-      "aliases": [
-        "투어스"
+      "debut": "2023 年 7 月 10 日",
+      "debutYear": 2023,
+      "agency": "WAKEONE",
+      "works": "In Bloom、New Kidz on the Block、CRUSH、ゆらゆら -運命の花-",
+      "awards": [
+        "2023Mnet亚洲音乐大奖“最佳男子新人”奖",
+        "2023年Melon音乐颁奖典礼“最佳新人”奖",
+        "第33届首尔歌谣大赏本赏及“最佳新人”奖",
+        "第38届韩国金唱片奖“最佳新人”奖",
+        "第31届韩国HANTEO音乐奖“年度艺人”奖"
       ],
-      "cover": "https://p1.music.126.net/2vJiuqU4kvsqU3vY0ZXeDg==/109951169230924560.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "kiss-of-life",
-      "name": "KISS OF LIFE",
-      "nameZh": "吻",
-      "type": "group",
-      "aliases": [
-        "키스오브라이프"
+      "songs": [
+        "Doctor! Doctor!",
+        "Feel the POP",
+        "In Bloom",
+        "ICONIK",
+        "Insomnia",
+        "SWEAT",
+        "BLUE",
+        "KILL THE ROMEO",
+        "GOOD SO BAD",
+        "Only One Story"
       ],
-      "cover": "https://p2.music.126.net/c7caxzNdolyNl9XeSTUq8A==/109951172236895252.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "stayc",
-      "name": "STAYC",
-      "nameZh": "思黛西",
-      "type": "group",
-      "aliases": [
-        "스테이씨"
+      "bio": "ZEROBASEONE（제로베이스원），简称ZB1，是WAKEONE于2023年4月20日推出的韩国男子演唱组合，由成韩彬（队长）、石友铉、朴乾煜、金太来、金地雄五名成员组成。2023年4月20日，韩国M-net选秀节目《BOYS PLANET》正式收官，九名成员加入组合ZEROBASEONE，正式成团；6月22日，团体冒险真人秀《CAMP ZEROBASEONE》首播；7月10日，发行首张迷你专辑《YOUTH IN THE SHADE",
+      "baikeTitle": "ZEROBASEONE",
+      "baikeUrl": "https://baike.baidu.com/item/ZEROBASEONE",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/500fd9f9d72a6059252db12afa68239b033b5bb50cf4?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
       ],
-      "cover": "https://p1.music.126.net/_K9HqT_lc7N1uFSFPvQJdQ==/109951173348753620.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "ZE_ROSE"
     },
     {
-      "key": "everglow",
-      "name": "EVERGLOW",
-      "nameZh": "阁楼",
-      "type": "group",
-      "aliases": [
-        "에버글로우"
-      ],
-      "cover": "https://p1.music.126.net/uww8je_xB5hti6omVfKNMg==/109951166680094244.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "iu",
-      "name": "IU",
-      "nameZh": "李知恩",
+      "key": "baekhyun",
+      "name": "Baekhyun",
+      "nameZh": "边伯贤",
       "type": "solo",
       "aliases": [
-        "아이유"
+        "백현",
+        "边伯贤"
       ],
-      "cover": "https://p1.music.126.net/7sJ9hIFwUvqWZMfqWAfXcA==/109951173919715488.jpg?param=1000y1000",
+      "cover": "https://p1.music.126.net/s48NSIDub9lw6UMJv64x_g==/109951170984103139.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2012 年 4 月 8 日",
+      "debutYear": 2012,
+      "agency": "S.M.Entertainment（团体活动）、INB100（个人、小分队活动）",
+      "works": "City Lights、步步惊心：丽、Dream、心动、The Day、Candy、Bambi",
+      "awards": [
+        "第4届音悦V榜年度盛典 韩国区最具人气歌手",
+        "2016年亚洲明星盛典Asia Artist Awards 个人人气奖",
+        "2016年Music Style Award R&B",
+        "SOUL (MMA)",
+        "2016年MAMA Best Collaboration Award (MAMA)"
+      ],
+      "songs": [
+        "我对缘分小心翼翼(《逐玉》主题曲）",
+        "봄눈 (春雪)",
+        "空白",
+        "Only Love",
+        "悬溺",
+        "呼吸有害",
+        "Black Black Heart",
+        "阳光下的星星",
+        "诗仙",
+        "泪桥"
+      ],
+      "bio": "边伯贤（변백현、BAEK HYUN），艺名BAEK HYUN，1992年5月6日生于韩国京畿道富川市，韩国男歌手、演员，男子演唱组合EXO、EXO-K、EXO-CBX、SuperM成员。2012年4月8日，随EXO-K发行首张迷你专辑《MAMA》并正式出道，专辑发行一个月后售出7万张。2013年8月14日，在纪念韩国与秘鲁两国建交50周年的足球友谊赛中，献唱韩国国歌。2014年2月16日，与SUHO担任音乐节目《人气歌谣》的主持人。20",
+      "baikeTitle": "边伯贤",
+      "baikeUrl": "https://baike.baidu.com/item/%E8%BE%B9%E4%BC%AF%E8%B4%A4",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/8435e5dde71190ef76c6a281a2468a16fdfaaf51ca62?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "group": "EXO、EXO-K、EXO-CBX、SuperM"
+    },
+    {
+      "key": "chungha",
+      "name": "CHUNG HA",
+      "nameZh": "请夏",
+      "type": "solo",
+      "aliases": [
+        "Chungha",
+        "请夏",
+        "金请夏",
+        "청하"
+      ],
+      "cover": "https://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2016 年 4 月 1 日",
+      "debutYear": 2016,
+      "agency": "MORE VISION",
+      "works": "Dream Girls、Why Don't You Know、Roller Coaster、Wow Thing、已经12点、Snapping、Stay Tonight、BICYCLE、Sparkling",
+      "awards": [
+        "第19届Mnet亚洲音乐大奖Best of Next奖",
+        "第20届Mnet亚洲音乐大奖最佳SOLO舞蹈表演奖",
+        "第21届Mnet亚洲音乐大奖最佳女SOLO歌手奖"
+      ],
+      "songs": [
+        "’___‘의 밤",
+        "청춘상실",
+        "너의 방",
+        "[0623]",
+        "초여름의 우리",
+        "꽤나 멀어지고 나서 떠올리는 여름",
+        "baby",
+        "그대가 사랑한 모든 걸 사랑하려 해",
+        "36.2℃",
+        "어느 아침, 세상에 남겨진 건"
+      ],
+      "bio": "金请夏（김청하、Kim Chung Ha），原名金灿美（김찬미），1996年2月9日出生于韩国首尔，韩国女歌手。2015年12月，以练习生的身份参加《PRODUCE 101》。2016年4月1日，在节目中以限定组合I.O.I成员的身份出道，进行为期1年的活动；4月5日，随I.O.I发布首支单曲《CRUSH》；5月4日，随I.O.I发布首张迷你专辑《Chrysalis》；同月，随组合出演团体实境节目《Standby I.O.I》；8月9日",
+      "baikeTitle": "金请夏",
+      "baikeUrl": "https://baike.baidu.com/item/%E9%87%91%E8%AF%B7%E5%A4%8F",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/d01373f082025aafa40f06f571b9bc64034f78f0accb?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26"
+    },
+    {
+      "key": "g-dragon",
+      "name": "G-Dragon",
+      "nameZh": "权志龙",
+      "type": "solo",
+      "aliases": [
+        "지드래곤",
+        "GD",
+        "权志龙"
+      ],
+      "cover": "https://p2.music.126.net/0qLOLAN7XxmfcnADNaikdg==/109951170699826542.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2006 年",
+      "debutYear": 2006,
+      "agency": "Galaxy Corporation",
+      "works": "Crayon、无题、HOME SWEET HOME、PO￦ER、Crooked、Black、少年呀、Who You、Today、Heartbreaker、One Of A Kind、COUP D'ETAT、谎言、一天一天、Fantastic Baby",
+      "awards": [
+        "韩国MAMA奖最佳年度歌手奖",
+        "韩国金唱片奖音源本奖",
+        "CeCi人气奖",
+        "韩国MAMA奖最佳男歌手奖",
+        "韩国金唱片奖年度专辑本奖",
+        "韩国甜瓜音乐奖年度专辑奖",
+        "MTV欧洲音乐奖全球最佳艺人奖",
+        "首尔歌谣大赏年度本奖"
+      ],
+      "songs": [
+        "TAKE ME",
+        "Black",
+        "HOME SWEET HOME",
+        "나만 바라봐 (Part 2)",
+        "삐딱하게 (Crooked)",
+        "I Need A Girl",
+        "소년이여",
+        "니가 뭔데 (Who You?)",
+        "무제(無題) (Untitled, 2014)",
+        "팔레트"
+      ],
+      "bio": "G-DRAGON，本名权志龙（권지용，Kwon Ji‑yong），1988年8月18日出生于韩国首尔，韩国流行乐男歌手、词曲作者、音乐制作人，男子演唱组合BIGBANG队长。组合出道：2006年，以BIGBANG组合队长的身份正式出道。此后数年，他随组合相继推出《Always》《Hot Issue》《Stand Up》等多张销量成绩颇佳的音乐专辑，不仅在韩国各家唱片销量排行榜中收获多项冠军，还凭借歌曲《谎言》《一天一天》《最后的问候》在",
+      "baikeTitle": "G-DRAGON",
+      "baikeUrl": "https://baike.baidu.com/item/G-DRAGON",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/0b55b319ebc4b74543a9fbc4a4a109178a82b801bf96?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "group": "BIGBANG"
+    },
+    {
+      "key": "hanni",
+      "name": "Hanni",
+      "nameZh": "哈尼",
+      "type": "solo",
+      "aliases": [
+        "하니"
+      ],
+      "cover": "https://p2.music.126.net/PWCOra8RdtVDDXnpUFfzCw==/109951168753860525.jpg?param=1000y1000",
       "coverSource": "NetEase Cloud Music artist photo",
       "bvid": "",
       "coverCredit": "NetEase Cloud Music artist photo"
+    },
+    {
+      "key": "hwasa",
+      "name": "Hwasa",
+      "nameZh": "华莎",
+      "type": "solo",
+      "aliases": [
+        "화사"
+      ],
+      "cover": "https://p2.music.126.net/xqgWr8qsvruKmBv0v0ZYbg==/109951166291998635.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2014 年 6 月 18 日",
+      "debutYear": 2014,
+      "agency": "P Nation",
+      "works": "TWIT、别给我、Maria、Play With Life、I'm a B",
+      "awards": [
+        "第2届Asia Artist Awards Best lcon赏"
+      ],
+      "songs": [
+        "마리아 (Maria)",
+        "주지마",
+        "Love Is Ugly (Feat. 화사)",
+        "I Love My Body",
+        "멍청이(twit)",
+        "Always Remember Us This Way (2024我这样的歌手 Moving Voices现场)",
+        "Orbit",
+        "So Cute",
+        "Chili",
+        "Somebody!"
+      ],
+      "bio": "安惠真（안혜진），艺名华莎（Hwa Sa），1995年7月23日出生于韩国全州，韩国女歌手，女子演唱团体MAMAMOO成员。2014年6月18日，随组合发布首张迷你专辑《Hello》，并以MAMAMOO成员身份正式出道。2015年4月2日，随组合与eSNa发布单曲《AHH OOP!》；6月19日，随组合发布第三张迷你专辑《Pink Funky》；2016年2月26日，随组合正式发行首张正规专辑《Melting》；11月7日，随组合发行第",
+      "baikeTitle": "安惠真",
+      "baikeUrl": "https://baike.baidu.com/item/%E5%AE%89%E6%83%A0%E7%9C%9F",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/960a304e251f95cad1c8944ba54a683e6709c83df483?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "group": "MAMAMOO"
     },
     {
       "key": "hyuna",
@@ -705,26 +2300,98 @@
       "type": "solo",
       "aliases": [
         "泫雅",
-        "현아"
+        "현아",
+        "Kim HyunA",
+        "金泫雅"
       ],
       "cover": "https://p2.music.126.net/BV_3s0JSN9yfQYGv9YJVww==/109951173974984350.jpg?param=1000y1000",
       "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2007 年",
+      "debutYear": 2007,
+      "agency": "AT AREA",
+      "works": "Change、Bubble Pop!、Ice Cream、RED、因为红、怎样？、BABE、Lip & Hip、Flower Shower、I'm Not Cool",
+      "awards": [
+        "2010年亚洲人气歌手奖",
+        "第24届首尔歌谣大赏最佳舞蹈表演奖",
+        "第27届韩国金唱片大赏最佳舞蹈表演奖",
+        "第29届韩国金唱片大赏音源本赏大奖",
+        "全球年度偶像排行第六名",
+        "最性感idol Best 10第一名",
+        "2015年Mnet亚洲音乐大奖最佳solo舞蹈表演奖",
+        "亚洲流行音乐大奖2021最佳合作单曲"
+      ],
+      "songs": [
+        "Change",
+        "베베 (BABE)",
+        "잘나가서 그래",
+        "Lip & Hip",
+        "Bubble Pop!",
+        "I'm Not Cool",
+        "어때?",
+        "빨개요",
+        "꼬리쳐",
+        "Young & One"
+      ],
+      "bio": "金泫雅（김현아 /Kim Hyun A），1992年6月6日出生于韩国首尔，韩国女歌手、主持人、舞者，前女子组合4Minute、Wonder Girls成员。2007年，以组合Wonder Girls出道，后因身体问题退出。2009年，重返演艺圈，以4Minute组合再次出道。2010年1月，发行个人首支单曲《Change》，掀起骨盆舞模仿热潮。2011年7月，发行首张个人迷你专辑《Bubble Pop!》，同名主打歌使其成为韩国首位M",
+      "baikeTitle": "金泫雅",
+      "baikeUrl": "https://baike.baidu.com/item/%E9%87%91%E6%B3%AB%E9%9B%85",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/3bf33a87e950352ac65cbf4fc40aecf2b21193131d68?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "A-ing"
     },
     {
-      "key": "taeyeon",
-      "name": "Taeyeon",
-      "nameZh": "金泰妍",
+      "key": "iu",
+      "name": "IU",
+      "nameZh": "李知恩",
       "type": "solo",
       "aliases": [
-        "泰妍",
-        "태연"
+        "아이유",
+        "李知恩"
       ],
-      "cover": "https://p2.music.126.net/hrydlBZ5ljXuy-03iPjhmg==/109951170152102361.jpg?param=1000y1000",
+      "cover": "https://p1.music.126.net/7sJ9hIFwUvqWZMfqWAfXcA==/109951173919715488.jpg?param=1000y1000",
       "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2008 年",
+      "debutYear": 2008,
+      "agency": "EDAM Entertainment",
+      "works": "好日子、你和我、星期五见面、夜信、BBIBBI、Blueming、Celebrity、我的大叔、德鲁纳酒店、The Golden Hour",
+      "awards": [
+        "2018年韩国金唱片大赏音源大赏",
+        "2015年韩国大众文化艺术奖国务总理表彰",
+        "2014年MMA年度艺人",
+        "2014年Mnet亚洲音乐大奖最佳女歌手",
+        "2012年Mnet亚洲音乐大奖最佳女歌手",
+        "第4届青龙电视剧大赏人气明星奖",
+        "第4届青龙电视剧大赏最佳女主角",
+        "2025首尔电视剧大赏韩剧视后"
+      ],
+      "songs": [
+        "Dear my crazy soulmate",
+        "Blueming",
+        "삐삐",
+        "Celebrity",
+        "봄 사랑 벚꽃 말고",
+        "팔레트",
+        "잼잼",
+        "이 별로부터",
+        "좋은 날",
+        "금요일에 만나요"
+      ],
+      "bio": "IU，本名李知恩（이지은、Lee Ji Eun），1993年5月16日出生于韩国首尔特别市，毕业于同德女子高等学校，韩国流行乐女歌手、影视演员、节目主持人。演艺经历：2008年在音乐节目《M! Countdown》演唱《迷儿》正式出道，随后发行首张迷你专辑《Lost And Found》。2010年凭借歌曲《好日子》横扫音源榜单，国民知名度大幅提升。2011年跨界出演校园剧《Dream High》，开启影视歌多栖发展。2019年主演《德",
+      "baikeTitle": "IU",
+      "baikeUrl": "https://baike.baidu.com/item/IU",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/b999a9014c086e061d95fc5512536cf40ad162d95d23?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "fandom": "U爱娜(Uaena)"
     },
     {
       "key": "j-y-park",
@@ -737,8 +2404,24 @@
       ],
       "cover": "https://p1.music.126.net/RpLyXtOWXx3aMVXvxkbASw==/109951173601873045.jpg?param=1000y1000",
       "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "works": "WET、니가 사는 그 집、When We Disco、사랑이 제일 낫더라、Switch to me",
+      "songs": [
+        "WET",
+        "니가 사는 그 집",
+        "When We Disco",
+        "사랑이 제일 낫더라",
+        "Switch to me",
+        "Honey",
+        "어머님이 누구니",
+        "그녀는 예뻤다",
+        "Classic",
+        "Groove Back"
+      ],
+      "sources": [
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26"
     },
     {
       "key": "jennie",
@@ -746,9 +2429,189 @@
       "nameZh": "金珍妮",
       "type": "solo",
       "aliases": [
-        "제니"
+        "제니",
+        "金珍妮"
       ],
       "cover": "https://p2.music.126.net/0KYkhGO7PpDOuf43V-nFCw==/109951173627697180.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2016 年 8 月",
+      "debutYear": 2016,
+      "agency": "YG Entertainment、ODD ATELIER",
+      "works": "SOLO、KILL THIS LOVE、How You Like That、Lovesick Girls、You & Me",
+      "awards": [
+        "第12届SBS演艺大奖女子新人奖",
+        "2020年第34届金唱片音源部门本赏"
+      ],
+      "songs": [
+        "One Of The Girls",
+        "Black",
+        "like JENNIE",
+        "SOLO",
+        "Dracula (JENNIE Remix)",
+        "Seoul City",
+        "You & Me",
+        "Mantra",
+        "Handlebars",
+        "with the IE (way up)"
+      ],
+      "bio": "金珍妮（김제니、Jennie Kim），1996年1月16日出生于韩国首尔特别市江南区清潭洞，韩国女歌手，女子演唱组合BLACKPINK成员。早年经历：10岁时前往新西兰奥克兰并留学五年，后在YG娱乐公司接受了长达5年的训练，出道前曾与YG旗下艺人有很多合作。演艺经历：2016年8月，以BLACKPINK成员身份正式出道，并随组合发行首张单曲专辑《SQUARE ONE》。2018年，发行个人单曲《SOLO》，该歌曲在国际上荣登Billb",
+      "baikeTitle": "金珍妮",
+      "baikeUrl": "https://baike.baidu.com/item/%E9%87%91%E7%8F%8D%E5%A6%AE",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/0b7b02087bf40ad162d962a72c7b06dfa9ec8a136065?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "group": "BLACKPINK"
+    },
+    {
+      "key": "jisoo",
+      "name": "Jisoo",
+      "nameZh": "金智秀",
+      "type": "solo",
+      "aliases": [
+        "지수",
+        "金智秀"
+      ],
+      "cover": "https://p1.music.126.net/cYhPJco5A-lnghLL04JKSA==/109951168573664732.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2016 年 8 月 8 日",
+      "debutYear": 2016,
+      "agency": "YG Entertainment",
+      "works": "Flower、All Eyes On Me、雪滴花、新乌托邦",
+      "awards": [
+        "2022首尔电视剧大奖 韩流电视剧女子演技奖",
+        "2026年戛纳国际电视剧节Madame Figaro新星奖"
+      ],
+      "songs": [
+        "꽃(FLOWER)",
+        "All Eyes On Me",
+        "earthquake",
+        "雪の華 / JISOO [LIVE](BLACKPINK ARENA TOUR 2018 \"SPECIAL FINAL IN KYOCERA DOME OSAKA\")",
+        "Your Love",
+        "Clarity (Live)",
+        "Hugs & Kisses",
+        "TEARS",
+        "Flower (Mac Bigroom Remix)",
+        "LIAR (Live)"
+      ],
+      "bio": "金智秀（김지수，Kim Ji-soo），艺名JISOO，1995年1月3日出生于韩国京畿道果川市，韩国女歌手、演员、主持人，女子演唱组合BLACKPINK成员。演艺经历：2016年8月8日，以BLACKPINK成员身份正式出道，并随组合发行首张单曲专辑《SQUARE ONE》；11月，随组合发行第二张单曲专辑《SQUARE TWO》。2017年2月，开始担任音乐节目《人气歌谣》固定MC；8月，随组合正式发行日语出道音乐专辑《BLACKP",
+      "baikeTitle": "金智秀",
+      "baikeUrl": "https://baike.baidu.com/item/%E9%87%91%E6%99%BA%E7%A7%80",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/fd039245d688d43f8794edbc1043c51b0ef41bd58d72?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "group": "BLACKPINK"
+    },
+    {
+      "key": "jungkook",
+      "name": "Jung Kook",
+      "nameZh": "田柾国",
+      "type": "solo",
+      "aliases": [
+        "Jungkook",
+        "田柾国",
+        "정국",
+        "JK"
+      ],
+      "cover": "https://p2.music.126.net/9KC_ayU_ZnOzo7ux_NQIWQ==/109951169370027534.jpg",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2013 年 6 月",
+      "debutYear": 2013,
+      "agency": "HYBE旗下BIGHIT MUSIC（原Big Hit Entertainment）",
+      "works": "No More Dream、Boy in Luv、荷尔蒙战争、I Need U、DOPE、FIRE、血、汗、泪、DNA、FAKE LOVE",
+      "awards": [
+        "第32届金唱片大赏唱片部门大赏",
+        "2017Mnet亚洲音乐大奖年度歌手奖",
+        "第25届公告牌音乐奖最佳社群媒体艺人奖",
+        "TC Candler全球最帅气100张面孔的第一名"
+      ],
+      "songs": [
+        "Seven (feat. Latto) (basecamp Remix)",
+        "Left and Right (Feat. Jung Kook of BTS)",
+        "Standing Next to You (USHER Remix)",
+        "Dreamers [Music from the FIFA World Cup Qatar 2022 Official Soundtrack]",
+        "TOO MUCH",
+        "일하는 중",
+        "So far away",
+        "PAPER HEARTS (cover)",
+        "Dreamers (Music from the FIFA World Cup Qatar 2022 Official Soundtrack)",
+        "SOFA"
+      ],
+      "bio": "田柾国，1997年9月1日出生于韩国釜山广域市万德洞，韩国流行乐男歌手、舞者，男子演唱组合防弹少年团主唱、领舞、副rapper。2013年6月，随组合发行首张单曲专辑《2 COOL 4 SKOOL》，并在Mnet音乐节目《M! Countdown》中正式出道；9月，随组合推出首张迷你专辑《O!RUL8,2?》；11月，随组合获得第5届Melon音乐盛典最佳新人奖。2014年6月，随组合推出首张日文单曲辑《NO MORE DREAM -J",
+      "baikeTitle": "田柾国",
+      "baikeUrl": "https://baike.baidu.com/item/%E7%94%B0%E6%9F%BE%E5%9B%BD",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/d788d43f8794a4c2c61cd8d702f41bd5ad6e390a?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "group": "防弹少年团"
+    },
+    {
+      "key": "kai",
+      "name": "KAI",
+      "nameZh": "金钟仁",
+      "type": "solo",
+      "aliases": [
+        "金钟仁",
+        "카이",
+        "Kai"
+      ],
+      "cover": "https://p1.music.126.net/qLQpMOhMcoQNw6O5XnMybw==/109951168721803845.jpg",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2012 年 4 月 8 日",
+      "debutYear": 2012,
+      "agency": "S.M.Entertainment",
+      "works": "Rover、Mmmh、开、咆哮、Call Me Baby、Love Shot",
+      "awards": [
+        "2012年MAMA最佳亚洲新人团体奖",
+        "2013年MAMA年度最佳专辑奖",
+        "第13届音乐风云榜最受欢迎组合奖",
+        "2013亚洲偶像盛典最受欢迎组合奖",
+        "2013年首尔歌谣大赏大赏"
+      ],
+      "songs": [
+        "Rover",
+        "Mmmh",
+        "Hot & Cold (温差)",
+        "Blue",
+        "Peaches",
+        "Nothing On Me",
+        "Bomba",
+        "Reason",
+        "Domino",
+        "Pretty Boy"
+      ],
+      "bio": "金钟仁（김종인/Kim Jong In），艺名카이/KAI，1994年1月14日出生于韩国顺天市，韩国男歌手、舞者、演员，男子演唱组合EXO、EXO-K、Super M成员。2011年12月29日，于SBS《歌谣大战》上表演《The Sound of Hallyu》，首次亮相。2012年4月8日，随EXO-K发行首张迷你专辑《MAMA》并正式出道，专辑发行一个月后售出7万张；10月，加入限定组合Younique Unit，为现代汽车拍摄",
+      "baikeTitle": "金钟仁",
+      "baikeUrl": "https://baike.baidu.com/item/%E9%87%91%E9%92%9F%E4%BB%81",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/6a600c338744ebf81a4cecd4acaec02a6059242d099a?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "group": "EXO/EXO-K/Super M"
+    },
+    {
+      "key": "karina",
+      "name": "Karina",
+      "nameZh": "柳智敏",
+      "type": "solo",
+      "aliases": [
+        "카리나"
+      ],
+      "cover": "https://p2.music.126.net/KdDAb_SQ2pNre_GtrimlDA==/109951170048176491.jpg?param=1000y1000",
       "coverSource": "NetEase Cloud Music artist photo",
       "bvid": "",
       "coverCredit": "NetEase Cloud Music artist photo"
@@ -759,38 +2622,43 @@
       "nameZh": "拉莉莎",
       "type": "solo",
       "aliases": [
-        "리사"
+        "리사",
+        "Lalisa",
+        "拉莉莎"
       ],
       "cover": "https://p1.music.126.net/z3Wf7AQ7aqAN-zYfkkcYIg==/109951173886267456.jpg?param=1000y1000",
       "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "ros",
-      "name": "Rosé",
-      "nameZh": "朴彩英",
-      "type": "solo",
-      "aliases": [
-        "로제"
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2016 年 8 月",
+      "debutYear": 2016,
+      "agency": "LLOUD、RCA Records",
+      "works": "LALISA、WHISTLE、BOOMBAYAH、SQUARE TWO、THE ALBUM、BORN PINK、《白莲花大饭店》第三季",
+      "awards": [
+        "TC Candler亚太百大最美面孔第一位",
+        "MTV音乐录影带奖 最佳韩曲奖"
       ],
-      "cover": "https://p1.music.126.net/yIs2q-eA1ZXf2mS8MYwlRQ==/109951174106994287.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "jisoo",
-      "name": "Jisoo",
-      "nameZh": "金智秀",
-      "type": "solo",
-      "aliases": [
-        "지수"
+      "songs": [
+        "Dream",
+        "MONEY",
+        "SaWaDiKa",
+        "Bad Angel",
+        "Born Again",
+        "LALISA",
+        "Rockstar",
+        "New Woman (ft. ROSALíA)",
+        "Tarantino",
+        "Goals"
       ],
-      "cover": "https://p1.music.126.net/cYhPJco5A-lnghLL04JKSA==/109951168573664732.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
+      "bio": "Lisa，原名ลลิษา มโนบาล（英语：Lalisa Manobal、韩语：라리사 마노반），1997年3月27日出生于泰国曼谷，泰国流行乐女歌手、舞者，韩国女子演唱组合BLACKPINK成员。演艺经历：2016年8月，Lisa以BLACKPINK成员身份正式出道，并随组合发行首张单曲专辑《SQUARE ONE》。2017年7月，随组合在日本武道馆举行首场海外Showcase，正式宣布在日本出道；8月，又随组合正式发行日语出道音乐",
+      "baikeTitle": "Lisa",
+      "baikeUrl": "https://baike.baidu.com/item/Lisa",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/7af40ad162d9f2d3572cb191c4b19d13632762d06605?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "group": "BLACKPINK"
     },
     {
       "key": "minji",
@@ -806,14 +2674,280 @@
       "coverCredit": "NetEase Cloud Music artist photo"
     },
     {
-      "key": "hanni",
-      "name": "Hanni",
-      "nameZh": "哈尼",
+      "key": "ros",
+      "name": "Rosé",
+      "nameZh": "朴彩英",
       "type": "solo",
       "aliases": [
-        "하니"
+        "로제",
+        "Rose",
+        "朴彩英",
+        "Rosie"
       ],
-      "cover": "https://p2.music.126.net/PWCOra8RdtVDDXnpUFfzCw==/109951168753860525.jpg?param=1000y1000",
+      "cover": "https://p1.music.126.net/yIs2q-eA1ZXf2mS8MYwlRQ==/109951174106994287.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2016 年 8 月 8 日",
+      "debutYear": 2016,
+      "agency": "THE BLACK LABEL",
+      "works": "APT.、On The Ground、Gone、KILL THIS LOVE、WHISTLE、BOOMBAYAH、As If It's Your Last、How You Like That",
+      "awards": [
+        "2019年Mnet亚洲音乐大奖Worldwide Fans‘ Choice TOP10",
+        "Mnet亚洲音乐大奖“最佳女歌手”（提名）"
+      ],
+      "songs": [
+        "APT.",
+        "Gone",
+        "toxic till the end",
+        "new trick",
+        "number one girl",
+        "On The Ground",
+        "결국 (Feat. ROSÉ of BLACKPINK)",
+        "stay a little longer",
+        "dance all night",
+        "Let It Be+You And I+나만 바라봐 (Live)"
+      ],
+      "bio": "朴彩英（ROSÉ），1997年2月11日出生于新西兰奥克兰，新西兰籍韩裔女歌手，韩国女子演唱组合BLACKPINK成员。2016年8月8日，朴彩英成为BLACKPINK的成员从而正式出道，同时随组合发行首张单曲专辑《SQUARE ONE》；11月1日，随组合发行第二张单曲专辑《SQUARE TWO》。2017年7月20日，随组合在日本武道馆举行首场海外Showcase，正式宣布在日本出道；8月30日，随组合正式发行日语出道音乐专辑《Bl",
+      "baikeTitle": "朴彩英",
+      "baikeUrl": "https://baike.baidu.com/item/%E6%9C%B4%E5%BD%A9%E8%8B%B1",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/ac345982b2b7d0a20cf4db22a6b261094b36acaf2c44?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "group": "BLACKPINK",
+      "fandom": "number one"
+    },
+    {
+      "key": "somi",
+      "name": "Somi",
+      "nameZh": "全昭弥",
+      "type": "solo",
+      "aliases": [
+        "전소미"
+      ],
+      "cover": "https://p2.music.126.net/hdODXNV8ewyakT04z5G4UQ==/109951171490648100.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "agency": "THE BLACK LABEL",
+      "works": "BIRTHDAY、What You Waiting For、Chrysalis、Miss Me?、DUMB DUMB、XOXO、Fast Forward",
+      "songs": [
+        "Alien",
+        "Maisha",
+        "Black Enough",
+        "House of the Rising Sun",
+        "They're Like Ghosts",
+        "Two Dollar Day",
+        "Let Me",
+        "BLUE",
+        "Midnight Angels",
+        "Last Song"
+      ],
+      "bio": "全昭弥（Somi），2001年3月9日出生于加拿大安大略省，加拿大籍韩国女歌手、主持人。2015年5月，出演JYP Entertainment的女团选拔节目《SIXTEEN》。2016年，全昭弥以JYP Entertainment练习生的身份参加选秀节目《PRODUCE 101》，获得第1名，成为限定组合I.O.I成员；4月5日，随I.O.I发布首支单曲《CRUSH》；5月，随I.O.I发布首张迷你专辑《Chrysalis》；12月，随",
+      "baikeTitle": "全昭弥",
+      "baikeUrl": "https://baike.baidu.com/item/%E5%85%A8%E6%98%AD%E5%BC%A5",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/7c1ed21b0ef41bd5ad6e9532258796cb39dbb7fd97fa?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26"
+    },
+    {
+      "key": "sunmi",
+      "name": "Sunmi",
+      "nameZh": "宣美",
+      "type": "solo",
+      "aliases": [
+        "선미",
+        "李宣美",
+        "宣美"
+      ],
+      "cover": "https://p1.music.126.net/hPiTOtkoOcLXA9XKGTs5Gg==/109951172237096577.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2007 年 2 月 10 日",
+      "debutYear": 2007,
+      "agency": "ABYSS COMPANY",
+      "works": "24小时也不够、Full Moon、Gashina、Heroine、Siren、Noir、LALALAY、Noir、紫光夜、TAIL、You Can't Sit With Us、Heart Burn、STRANGER",
+      "awards": [
+        "Mnet亚洲音乐大奖最佳舞蹈表演Solo"
+      ],
+      "songs": [
+        "24시간이 모자라",
+        "꼬리 (TAIL)",
+        "멈춰버린 시간",
+        "Shivers (feat. Jessi & SUNMI)",
+        "사이렌(Siren)",
+        "보름달",
+        "열이올라요 (Heart Burn)",
+        "가시나",
+        "보라빛 밤 (pporappippam)",
+        "Forever July"
+      ],
+      "bio": "李宣美（이선미、Lee Sun Mi），艺名宣美，1992年5月2日出生于韩国庆州青旦县，毕业于东国大学，韩国女歌手。2007年2月10日，随演唱组合Wonder Girls出道，并获韩国最受欢迎歌手奖。2010年2月20日，因学业暂时退出Wonder Girls。2013年8月20日，以单曲《24小时也不够》回归乐坛。2014年2月17日，发行迷你专辑《Full Moon》；12月3日，获得2014Mnet亚洲音乐大奖最佳舞蹈表演奖。",
+      "baikeTitle": "李宣美",
+      "baikeUrl": "https://baike.baidu.com/item/%E6%9D%8E%E5%AE%A3%E7%BE%8E",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/35a85edf8db1cb13495412c9b609414e9258d009ddee?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26"
+    },
+    {
+      "key": "taemin",
+      "name": "Taemin",
+      "nameZh": "李泰民",
+      "type": "solo",
+      "aliases": [
+        "태민",
+        "李泰民"
+      ],
+      "cover": "https://p1.music.126.net/PTyRjyUduOBNc2l0Rqxykw==/109951167739181085.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2008 年 5 月 25 日",
+      "debutYear": 2008,
+      "agency": "Galaxy Corporation",
+      "works": "Danger、Press It、Move、Day and Night、WANT、2 KIDS、Criminal、IDEA、My Day、Advice、Guilty",
+      "awards": [
+        "第31届韩国金唱片大赏：本赏",
+        "2020年Mnet亚洲音乐大奖：最受欢迎男子SOLO舞蹈表演",
+        "第24届首尔歌谣大赏：人气赏",
+        "第29届金唱片大赏：本赏",
+        "人气赏",
+        "2013MBC演艺大赏：年度明星赏",
+        "Melon Music Awards:年度艺人"
+      ],
+      "songs": [
+        "Trap",
+        "Guilty",
+        "Criminal",
+        "MOVE",
+        "I'm Crying",
+        "Advice",
+        "Gooey",
+        "The Last Christmas",
+        "괴도 (Danger)",
+        "Let Me Be The One"
+      ],
+      "bio": "李泰民（Taemin），1993年7月18日出生于韩国首尔，韩国男歌手、演员，男子演唱组合SHINee成员之一。2008年5月25日，李泰民以演唱组合SHINee成员身份正式出道，组合发行出道单曲《姐姐真漂亮》。2012年1月，参与KBS电视台歌唱节目《不朽的名曲2》；同年9月，为SBS电视剧《致美丽的你》演唱插曲《就是你》。2013年4月，参与MBC综艺节目《我们结婚了》第四季；同年12月，为KBS2电视剧《总理和我》演唱插曲《脚步》",
+      "baikeTitle": "李泰民",
+      "baikeUrl": "https://baike.baidu.com/item/%E6%9D%8E%E6%B3%B0%E6%B0%91",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/7acb0a46f21fbe096b636a02fb2c1b338744ebf807da?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "group": "SHINee"
+    },
+    {
+      "key": "taeyang",
+      "name": "TAEYANG",
+      "nameZh": "太阳",
+      "type": "solo",
+      "aliases": [
+        "太阳",
+        "태양",
+        "东永裴",
+        "Taeyang"
+      ],
+      "cover": "https://p2.music.126.net/4icT8yK9AblsaA_erMkRgg==/109951173390683403.jpg",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2006 年",
+      "debutYear": 2006,
+      "agency": "THE BLACK LABEL",
+      "works": "眼，鼻，嘴、只看着我、I Need A Girl、RINGA LINGA、Wedding Dress、凌晨一点、WHITE NIGHT、BODY、Where U At、I'll Be There、Shoong!",
+      "awards": [
+        "2010年Mnet亚洲音乐大奖-第12届最佳男歌手奖",
+        "2010年All Kpop Awards - 最佳男歌手奖",
+        "2009年韩国大众音乐奖 - 最优秀R&B & Soul歌曲奖",
+        "2009年韩国大众音乐奖 - 网民选定男歌手奖",
+        "2014年MAMA亚洲音乐盛典-最佳演唱表演-男歌手"
+      ],
+      "songs": [
+        "눈, 코, 입",
+        "나만 바라봐",
+        "HOME SWEET HOME",
+        "I Need A Girl",
+        "ONLY LOOK AT ME (TAEYANG 2017 WORLD TOUR <WHITE NIGHT> IN JAPAN)",
+        "Wedding Dress",
+        "링가 링가",
+        "Only Look At Me",
+        "EYES, NOSE, LIPS (眼，鼻，嘴) (KR Ver._BIGBANG WORLD TOUR 2015~2016 [MADE] IN JAPAN)"
+      ],
+      "bio": "TAEYANG（太阳、태양），本名东永裴（동영배），1988年5月18日出生于韩国京畿道议政府市，韩国流行乐男歌手、演员，男子演唱组合BIGBANG成员。2006年，TAEYANG以演唱组合BIGBANG成员身份正式出道。2008年，首次发行个人首张迷你专辑《Hot》，在韩国同时荣获了最佳音乐及最佳专辑奖。2010年，发行个人首张正规专辑《Solar》，获得2010 Mnet亚洲音乐大奖最佳男歌手奖。2013年11月8日，发行单曲《RI",
+      "baikeTitle": "TAEYANG",
+      "baikeUrl": "https://baike.baidu.com/item/TAEYANG",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/f3d3572c11dfa9ec8a13f18d1c8de003918fa1ec6ba1?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "group": "BIGBANG"
+    },
+    {
+      "key": "taeyeon",
+      "name": "Taeyeon",
+      "nameZh": "金泰妍",
+      "type": "solo",
+      "aliases": [
+        "泰妍",
+        "태연",
+        "金泰妍"
+      ],
+      "cover": "https://p2.music.126.net/hrydlBZ5ljXuy-03iPjhmg==/109951170152102361.jpg?param=1000y1000",
+      "coverSource": "NetEase Cloud Music artist photo",
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2007 年 8 月 5 日",
+      "debutYear": 2007,
+      "agency": "韩国SM娱乐有限公司",
+      "works": "如果、听得见吗、I、Four Seasons、Fine、Something New、Spark、What Do I Call You、Weekend、Can't Control Myself、INVU",
+      "awards": [
+        "第23届韩国金唱片大赏人气奖",
+        "第29届首尔歌谣大赏音源大赏",
+        "2015年Mnet亚洲音乐大奖最佳女歌手奖",
+        "第30届金唱片大赏音源本赏&人气奖",
+        "2016Mnet亚洲音乐大奖最佳女歌手奖",
+        "第32届金唱片大赏唱片本赏"
+      ],
+      "songs": [
+        "I (feat. Verbal Jint)",
+        "To. X",
+        "INVU",
+        "그대라는 시",
+        "Priority",
+        "Weekend",
+        "만찬가",
+        "11:11",
+        "Why",
+        "四季 (Four Seasons)"
+      ],
+      "bio": "金泰妍（Taeyeon），1989年3月9日出生于韩国全罗北道全州市，韩国女歌手、主持人，女子演唱团体少女时代队长。2004年，金泰妍在第八届SM青少年选拔大赛中夺得第一名，成为韩国SM娱乐有限公司练习生。2007年8月5日，以组合少女时代出道。2008年，凭借OST《如果》《听得见吗》，分别获得韩国CYworld歌曲赏、金唱片大赏人气奖；同年首次主持电台节目《亲密朋友》，获得大韩民国演艺艺术奖女子广播主持奖。2015年10月7日，发行",
+      "baikeTitle": "金泰妍",
+      "baikeUrl": "https://baike.baidu.com/item/%E9%87%91%E6%B3%B0%E5%A6%8D",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/91ef76c6a7efce1b9d161a6c220ce4deb48f8c54cf5d?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
+      ],
+      "dataUpdatedAt": "2026-10-26",
+      "group": "少女时代"
+    },
+    {
+      "key": "winter",
+      "name": "Winter",
+      "nameZh": "金旼炡",
+      "type": "solo",
+      "aliases": [
+        "윈터"
+      ],
+      "cover": "https://p2.music.126.net/zi92lOQEBvjGrU7NBzK3CA==/109951170048181359.jpg?param=1000y1000",
       "coverSource": "NetEase Cloud Music artist photo",
       "bvid": "",
       "coverCredit": "NetEase Cloud Music artist photo"
@@ -832,58 +2966,6 @@
       "coverCredit": "NetEase Cloud Music artist photo"
     },
     {
-      "key": "karina",
-      "name": "Karina",
-      "nameZh": "柳智敏",
-      "type": "solo",
-      "aliases": [
-        "카리나"
-      ],
-      "cover": "https://p2.music.126.net/KdDAb_SQ2pNre_GtrimlDA==/109951170048176491.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "winter",
-      "name": "Winter",
-      "nameZh": "金旼炡",
-      "type": "solo",
-      "aliases": [
-        "윈터"
-      ],
-      "cover": "https://p2.music.126.net/zi92lOQEBvjGrU7NBzK3CA==/109951170048181359.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "hwasa",
-      "name": "Hwasa",
-      "nameZh": "华莎",
-      "type": "solo",
-      "aliases": [
-        "화사"
-      ],
-      "cover": "https://p2.music.126.net/xqgWr8qsvruKmBv0v0ZYbg==/109951166291998635.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "sunmi",
-      "name": "Sunmi",
-      "nameZh": "宣美",
-      "type": "solo",
-      "aliases": [
-        "선미"
-      ],
-      "cover": "https://p1.music.126.net/hPiTOtkoOcLXA9XKGTs5Gg==/109951172237096577.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
       "key": "zico",
       "name": "Zico",
       "nameZh": "禹智皓",
@@ -893,60 +2975,35 @@
       ],
       "cover": "https://p1.music.126.net/uDSofJiC2ErBDE5u45W6AQ==/109951165102431660.jpg?param=1000y1000",
       "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "baekhyun",
-      "name": "Baekhyun",
-      "nameZh": "边伯贤",
-      "type": "solo",
-      "aliases": [
-        "백현"
+      "coverCredit": "NetEase Cloud Music artist photo",
+      "debut": "2011 年 4 月",
+      "debutYear": 2011,
+      "agency": "KOZ Entertainment",
+      "works": "Any song；VERY GOOD；Boys And Girls；Break Up 2 Make Up",
+      "awards": [
+        "2016年荣获第18届Mnet亚洲音乐大奖 最佳男歌手奖"
       ],
-      "cover": "https://p1.music.126.net/s48NSIDub9lw6UMJv64x_g==/109951170984103139.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "g-dragon",
-      "name": "G-Dragon",
-      "nameZh": "权志龙",
-      "type": "solo",
-      "aliases": [
-        "지드래곤"
+      "songs": [
+        "아무노래",
+        "SoulMate",
+        "TICK TOCK (Prod. by ZICO, Crush)",
+        "Okey Dokey",
+        "풀어 (Pour Up)",
+        "Tic Tac Toe",
+        "유레카 (Feat. Zion.T)",
+        "LLLM (feat. 개코, ZICO) [prod. Tray B]",
+        "새삥 (Prod. ZICO)",
+        "Oasis"
       ],
-      "cover": "https://p2.music.126.net/0qLOLAN7XxmfcnADNaikdg==/109951170699826542.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "taemin",
-      "name": "Taemin",
-      "nameZh": "李泰民",
-      "type": "solo",
-      "aliases": [
-        "태민"
+      "bio": "禹智皓（우지호），艺名ZICO，1992年9月14日出生于首尔特别市，韩国流行乐男歌手、制作人、舞者、男子演唱组合Block B队长、KOZ Entertainment CEO。2011年4月，禹智皓随Block B组合发行了首张单曲《Do U Wanna B？》，正式出道；6月23日，随组合发行首张迷你专辑《New Kids On The Block》。2012年10月17日，随组合发行首张正规专辑《Blockbuster》。2013",
+      "baikeTitle": "禹智皓",
+      "baikeUrl": "https://baike.baidu.com/item/%E7%A6%B9%E6%99%BA%E7%9A%93",
+      "baikeImage": "https://bkimg.cdn.bcebos.com/pic/96dda144ad345982b2b7281c51a126adcbef77092ebd?x-bce-process=image/format,f_auto",
+      "sources": [
+        "baike",
+        "netease"
       ],
-      "cover": "https://p1.music.126.net/PTyRjyUduOBNc2l0Rqxykw==/109951167739181085.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
-    },
-    {
-      "key": "somi",
-      "name": "Somi",
-      "nameZh": "全昭弥",
-      "type": "solo",
-      "aliases": [
-        "전소미"
-      ],
-      "cover": "https://p2.music.126.net/hdODXNV8ewyakT04z5G4UQ==/109951171490648100.jpg?param=1000y1000",
-      "coverSource": "NetEase Cloud Music artist photo",
-      "bvid": "",
-      "coverCredit": "NetEase Cloud Music artist photo"
+      "dataUpdatedAt": "2026-10-26"
     }
   ]
 }

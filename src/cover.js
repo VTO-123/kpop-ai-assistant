@@ -9,6 +9,7 @@
  *   - 任何异常都降级成「无封面」，由前端用渐变占位兜底。
  */
 import { config } from './config.js';
+import { fetchBaikeProfile } from './baike.js';
 import { findGroup, normalizeName } from './groups.js';
 import { fetchQQArtist } from './qqmusic.js';
 
@@ -18,7 +19,7 @@ const MAX_ARTISTS = 6;
 const ALLOWED_HOST = 'music.126.net';
 const USER_AGENT = 'kpop-archive/0.1 (cover lookup)';
 
-/** @typedef {{ url: string, source: 'builtin' | 'netease' | 'none', cached?: boolean }} CoverResolution */
+/** @typedef {{ url: string, source: 'builtin' | 'netease' | 'qqmusic' | 'baike' | 'none', cached?: boolean }} CoverResolution */
 
 const cache = new Map(); // key -> { url, source, expiresAt }
 const inflight = new Map(); // key -> Promise<CoverResolution>
@@ -68,7 +69,7 @@ export async function resolveCover(rawName) {
   return task;
 }
 
-/** 先问网易云，再问 QQ 音乐；两边都没有才返回空。 */
+/** 先问网易云，再问 QQ 音乐，最后用百度百科词条首图；都没有才返回空。 */
 async function resolveRemoteCover(rawName) {
   const netease = await lookupArtistPhoto(rawName).catch(() => '');
   if (netease) return { url: netease, source: 'netease' };
@@ -78,7 +79,24 @@ async function resolveRemoteCover(rawName) {
     if (qq?.picUrl) return { url: qq.picUrl, source: 'qqmusic' };
   }
 
+  if (config.baikeLookup) {
+    const baike = await fetchBaikeProfile(rawName).catch(() => null);
+    if (baike?.image && isBaikeImage(baike.image)) return { url: baike.image, source: 'baike' };
+  }
+
   return { url: '', source: 'none' };
+}
+
+/** 百科首图只接受百度自家图片域名，避免接口返回任意地址。 */
+function isBaikeImage(raw) {
+  try {
+    const url = new URL(String(raw));
+    if (url.protocol !== 'https:') return false;
+    const host = url.hostname.toLowerCase();
+    return host.endsWith('.bcebos.com') || host.endsWith('.bdimg.com');
+  } catch {
+    return false;
+  }
 }
 
 function remember(key, result, ttl) {

@@ -7,7 +7,7 @@
  *
  * 安全：只允许白名单域名 + https，限制大小与超时，避免变成任意 URL 的开放代理。
  */
-const ALLOWED_HOSTS = ['hdslb.com', 'music.126.net'];
+const ALLOWED_HOSTS = ['hdslb.com', 'music.126.net', 'bcebos.com', 'bdimg.com'];
 const MAX_BYTES = 8 * 1024 * 1024;
 const TIMEOUT_MS = 8000;
 const TTL_MS = 30 * 60 * 1000;
@@ -51,7 +51,11 @@ export async function proxyImage(req, res, rawUrl) {
       headers: {
         'User-Agent':
           'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36',
-        Referer: url.hostname.endsWith('hdslb.com') ? 'https://www.bilibili.com/' : 'https://music.163.com/',
+        Referer: url.hostname.endsWith('hdslb.com')
+          ? 'https://www.bilibili.com/'
+          : url.hostname.endsWith('bcebos.com') || url.hostname.endsWith('bdimg.com')
+            ? 'https://baike.baidu.com/'
+            : 'https://music.163.com/',
         Accept: 'image/avif,image/webp,image/*,*/*;q=0.8',
       },
       signal: AbortSignal.timeout(TIMEOUT_MS),

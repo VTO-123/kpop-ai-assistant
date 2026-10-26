@@ -82,8 +82,17 @@ export const config = {
   coverTimeoutMs: Number.parseInt(process.env.COVER_TIMEOUT_MS || '2500', 10),
   coverQqLookup: process.env.COVER_QQ_LOOKUP !== '0',
 
-  // AI 生成前是否先抓网易云真实资料作为上下文（测试时可关掉）
+  // 生成前是否先抓网易云真实资料作为上下文（测试时可关掉）
   profileLookup: process.env.PROFILE_LOOKUP !== '0',
+
+  // 百度百科资料层：词条简介 + 信息卡（出道时间 / 成员 / 代表作品 / 主要成就）
+  baikeLookup: process.env.BAIKE_LOOKUP !== '0',
+  baikeApiBase: trimTrailingSlash(process.env.BAIKE_API_BASE || 'https://baike.baidu.com'),
+  baikeTimeoutMs: Number.parseInt(process.env.BAIKE_TIMEOUT_MS || '5000', 10),
+
+  // B 站：没有 bvid 映射时，服务端用搜索接口补一次（失败静默降级为搜索页）
+  biliLookup: process.env.BILI_LOOKUP !== '0',
+  biliTimeoutMs: Number.parseInt(process.env.BILI_TIMEOUT_MS || '5000', 10),
 };
 
 export default config;

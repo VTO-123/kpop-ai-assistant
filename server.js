@@ -1,5 +1,6 @@
 import http from 'node:http';
 import { renderArtistPage } from './src/artist-page.js';
+import { resolveArtistProfile } from './src/artist-profile.js';
 import { config } from './src/config.js';
 import { handleChat } from './src/chat.js';
 import { resolveCover } from './src/cover.js';
@@ -38,6 +39,18 @@ const server = http.createServer(async (req, res) => {
     if (pathname === '/api/chat') {
       if (req.method !== 'POST') return sendJson(res, 405, { error: '只支持 POST' });
       return await handleChat(req, res);
+    }
+
+    // 档案页「资料」面板：出道年 / 公司 / 成员 / 代表作 / 奖项 + 来源
+    if (pathname === '/api/artist-profile') {
+      if (req.method !== 'GET' && req.method !== 'HEAD') {
+        return sendJson(res, 405, { error: '只支持 GET' });
+      }
+      const name = sanitizeGroup(searchParams.get('name'));
+      if (!name) return sendJson(res, 400, { error: '缺少歌手名称' });
+
+      const profile = await resolveArtistProfile(name);
+      return sendJson(res, 200, profile);
     }
 
     // 封面兜底：内置没有 cover 时，按团体名自动取一张（带缓存）

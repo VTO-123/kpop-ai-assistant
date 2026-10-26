@@ -89,7 +89,35 @@ async function lookup(name) {
   );
   const artist = pickArtist(search?.result?.artists, name);
   if (!artist) return null;
+  return buildProfile(artist, artist.name || name);
+}
 
+/** 已知网易云歌手 id 时直接取详情，避免同名歌手（KAI / Kai）匹配错人。 */
+export async function fetchArtistById(rawId) {
+  const id = Number.parseInt(rawId, 10);
+  if (!Number.isFinite(id) || id <= 0) return null;
+  const key = `id:${id}`;
+
+  const hit = cache.get(key);
+  if (hit && Date.now() - hit.at < TTL_MS) return hit.value;
+  if (inflight.has(key)) return inflight.get(key);
+
+  const task = buildProfile({ id }, String(id))
+    .then((profile) => {
+      remember(key, profile);
+      return profile;
+    })
+    .catch(() => {
+      remember(key, null);
+      return null;
+    })
+    .finally(() => inflight.delete(key));
+
+  inflight.set(key, task);
+  return task;
+}
+
+async function buildProfile(artist, fallbackName) {
   const [detail, albums, songs] = await Promise.allSettled([
     getJson(`/api/artist/${artist.id}`),
     getJson(`/api/artist/albums/${artist.id}?limit=6&offset=0`),
@@ -111,7 +139,7 @@ async function lookup(name) {
 
   return {
     id: artist.id,
-    name: info.name || artist.name || name,
+    name: info.name || artist.name || fallbackName,
     aliases: info.alias || artist.alias || [],
     picUrl: info.picUrl || artist.picUrl || '',
     briefDesc: String(info.briefDesc || '').trim().slice(0, 600),

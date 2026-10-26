@@ -42,6 +42,7 @@ function init() {
   pushRecent(artist);
   guardCover();
   hydrateCover();
+  hydrateProfile();
   loadSongLinks();
   loadMembers();
 
@@ -153,9 +154,106 @@ function applyCover(url, source) {
 
   const credit = document.querySelector('.banner-credit');
   if (credit) {
-    const label = source === 'qqmusic' ? 'QQ 音乐' : '网易云音乐';
-    credit.textContent = `封面：${label} · 自动匹配`;
+    const labels = { qqmusic: 'QQ 音乐', baike: '百度百科', netease: '网易云音乐' };
+    credit.textContent = `封面：${labels[source] || '网易云音乐'} · 自动匹配`;
   }
+}
+
+
+/* ---------------- 资料速览 / 奖项 / 来源标注 ---------------- */
+
+/**
+ * 库里没有该歌手时，服务端只输出空面板；这里实时查百科 + 网易云补上。
+ * 库里已有资料时直接使用服务端渲染结果，不再请求。
+ */
+async function hydrateProfile() {
+  const panel = document.getElementById('profilePanel');
+  if (!panel || panel.dataset.mode === 'library') return;
+
+  try {
+    const res = await fetch(`/api/artist-profile?name=${encodeURIComponent(artist)}`);
+    if (!res.ok) return;
+    const data = await res.json();
+    if (!data) return;
+    applyProfile(data);
+  } catch {
+    /* 拿不到资料就保留「暂未收录」 */
+  }
+}
+
+const SOURCE_LABELS = { baike: '百度百科', netease: '网易云音乐', qqmusic: 'QQ音乐', bilibili: 'B站' };
+
+function el(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text != null) node.textContent = text;
+  return node;
+}
+
+function applyProfile(data) {
+  const old = document.getElementById('profilePanel');
+  if (!old) return;
+
+  const section = el('section', 'profile-panel');
+  section.id = 'profilePanel';
+  section.dataset.mode = data.facts?.length ? 'library' : 'live';
+  section.setAttribute('aria-labelledby', 'profileTitle');
+
+  const head = el('div', 'profile-head');
+  const title = el('h2', 'profile-panel__title', '资料速览');
+  title.id = 'profileTitle';
+  head.append(title);
+  if (data.baikeUrl) {
+    const link = el('a', 'baike-link', '百科词条 ↗');
+    link.href = data.baikeUrl;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    head.append(link);
+  }
+  section.append(head);
+
+  if (data.facts?.length) {
+    const dl = el('dl', 'fact-list');
+    for (const fact of data.facts) {
+      const row = el('div', 'fact');
+      row.append(el('dt', 'fact-label', fact.label));
+      const value = el('dd', 'fact-value', fact.value);
+      const label = SOURCE_LABELS[fact.source];
+      if (label) value.append(el('span', 'fact-source', label));
+      row.append(value);
+      dl.append(row);
+    }
+    section.append(dl);
+  } else {
+    section.append(el('p', 'fact-empty', '暂未收录'));
+  }
+
+  const awards = el('div', 'awards-panel');
+  awards.append(el('h3', 'profile-panel__subtitle', '奖项 / 代表舞台'));
+  const list = el('ul', 'award-list');
+
+  for (const award of data.awards || []) {
+    const item = el('li', 'award-item');
+    item.append(el('span', 'award-text', award));
+    item.append(el('span', 'award-source', '百度百科'));
+    list.append(item);
+  }
+  if (data.stage?.url) {
+    const item = el('li', 'award-item award-item--stage');
+    const link = el('a', 'stage-link', data.stage.title || '代表舞台');
+    link.href = data.stage.url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    item.append(link, el('span', 'award-source', 'B站'));
+    list.append(item);
+  }
+  if (!list.children.length) list.append(el('li', 'award-empty', '暂未收录'));
+  awards.append(list);
+  section.append(awards);
+
+  section.append(el('p', 'source-line', data.sourceLine || '资料参考：B站'));
+
+  old.replaceWith(section);
 }
 
 

@@ -111,7 +111,7 @@ const postChat = (base, group) =>
 
 /* ---------------- 假上游（OpenAI 兼容） ---------------- */
 
-const FAKE_PARTS = ['## 一句话\n', '假上游返回的流式内容。\n', '## 三首必听\n', '1. **Fake Song** — 测试用\n'];
+const FAKE_PARTS = ['## 一句话\n', '假上游返回的流式内容。\n', '## 热门歌曲\n', '1. **Fake Song** — 测试用\n'];
 let fakeAuth = '';
 let fakeModel = '';
 let fakeCalls = 0;
@@ -202,6 +202,8 @@ async function demoSuite() {
     AI_API_KEY: '',
     COVER_API_BASE: `http://127.0.0.1:${coverApi.port}`,
     COVER_QQ_LOOKUP: '0',
+    BAIKE_LOOKUP: '0',
+    BILI_LOOKUP: '0',
   });
   try {
     check('DEMO 服务启动', app.up, app.up ? '' : serverLog.slice(0, 300));
@@ -240,6 +242,7 @@ async function demoSuite() {
     check('首页有 VTO 版权标识', htmlText.includes('class="vto-mark"'));
     check('首页不再有页脚文案', !htmlText.includes('作品仅供学习与交流'));
     check('首页有搜索联想容器', htmlText.includes('id="suggestPanel"'));
+    check('首页无 AI 痕迹字样', !/deepseek|检索生成|三首必听|\bAI\b/i.test(htmlText));
 
     const artistsRes = await fetch(`${app.base}/api/artists`);
     const artistsJson = await artistsRes.json();
@@ -249,6 +252,14 @@ async function demoSuite() {
       '歌手索引含中英文名',
       artistList.every((item) => item.name && item.nameZh) &&
         artistList.some((item) => item.name === 'BTS' && item.nameZh === '防弹少年团'),
+    );
+
+    // 阶段 A：新增歌手都能被搜索索引到
+    const newArtists = ['NCT 127', 'Apink', 'OH MY GIRL', 'TAEYANG', 'CHUNG HA', 'KAI', 'Jung Kook'];
+    check(
+      '新增歌手进入搜索索引',
+      newArtists.every((name) => artistList.some((item) => item.name === name)),
+      newArtists.filter((name) => !artistList.some((item) => item.name === name)).join(',') || '全部命中',
     );
 
     // 详情页：顶部是该团体自己的歌手照片，不再放轮播
@@ -262,6 +273,11 @@ async function demoSuite() {
     );
     check('歌手页有 VTO 标识', artistText.includes('class="vto-mark"'));
     check('歌手页不再有页脚与来源提示', !artistText.includes('作品仅供学习与交流') && !artistText.includes('archive-note'));
+    check('歌手页有资料速览', artistText.includes('id="profilePanel"') && artistText.includes('资料速览'));
+    check('歌手页资料字段带来源', artistText.includes('class="fact-source"'));
+    check('歌手页有奖项 / 代表舞台板块', artistText.includes('奖项 / 代表舞台'));
+    check('歌手页有来源标注', /资料参考：.*百度百科/.test(artistText));
+    check('歌手页无 AI 痕迹字样', !/deepseek|检索生成|三首必听|\bAI\b/i.test(artistText));
     check('详情页不再有轮播', !artistText.includes('coverCarousel'));
     check('详情页不引用轮播脚本', !artistText.includes('/flex-carousel.css'));
     check(
@@ -297,6 +313,37 @@ async function demoSuite() {
     const knownPage = await fetch(`${app.base}/artist/BIGBANG`);
     const knownText = await knownPage.text();
     check('扩充后的团体有封面', knownText.includes('data-cover-img'));
+
+    // 阶段 A：抽测 3 个新加歌手，档案页与资料接口字段都不为空
+    for (const name of ['ATEEZ', 'Apink', 'TAEYANG']) {
+      const page = await fetch(`${app.base}/artist/${encodeURIComponent(name)}`);
+      const text = await page.text();
+      check(
+        `新歌手档案页可用：${name}`,
+        page.status === 200 &&
+          text.includes('id="profilePanel"') &&
+          text.includes('出道时间') &&
+          text.includes('资料参考：'),
+      );
+    }
+
+    const ateezProfile = await (
+      await fetch(`${app.base}/api/artist-profile?name=${encodeURIComponent('ATEEZ')}`)
+    ).json();
+    check(
+      '资料接口：字段齐全',
+      Array.isArray(ateezProfile.facts) &&
+        ateezProfile.facts.length >= 3 &&
+        ateezProfile.facts.every((fact) => fact.label && fact.value && fact.source),
+      JSON.stringify(ateezProfile.facts?.map((fact) => fact.label)),
+    );
+    check(
+      '资料接口：来源标注完整',
+      /资料参考：.*百度百科/.test(ateezProfile.sourceLine) && /B站/.test(ateezProfile.sourceLine),
+      ateezProfile.sourceLine,
+    );
+    check('资料接口：百科词条可追溯', String(ateezProfile.baikeUrl || '').includes('baike.baidu.com'));
+    check('资料接口：缺少 name 返回 400', (await fetch(`${app.base}/api/artist-profile`)).status === 400);
 
     // 没有名字 / 非法路径 → 回首页
     const noName = await fetch(`${app.base}/artist`, { redirect: 'manual' });
@@ -495,7 +542,22 @@ async function demoSuite() {
     const alias = await collectStream(await postChat(app.base, '粉墨'));
     check('别名「粉墨」命中 BLACKPINK', alias.text.includes('BLACK + PINK'));
 
-    const unknown = await collectStream(await postChat(app.base, 'Bigbang'));
+    // 阶段 A：新加歌手直接由真实资料出档案，不经过模型
+    const newbie = await collectStream(await postChat(app.base, 'ATEEZ'));
+    check('新增歌手能出档案', newbie.text.includes('## 团体档案') && newbie.text.includes('## 热门歌曲'));
+    check(
+      '新增歌手字段不空',
+      /- 出道时间：\S+/.test(newbie.text) &&
+        /- 成员名单：\S+/.test(newbie.text) &&
+        /- 代表作品：\S+/.test(newbie.text),
+    );
+    check('新增歌手标来源为资料库', newbie.meta?.kind === 'profile', newbie.meta?.kind);
+    check(
+      '新增歌手正文无 AI 痕迹',
+      !/deepseek|检索生成|三首必听|\bAI\b/i.test(newbie.text),
+    );
+
+    const unknown = await collectStream(await postChat(app.base, 'ZZZ 未知歌手'));
     check('未收录团体标记来源为 ai', unknown.meta?.source === 'ai', unknown.meta?.source);
     check('未收录团体不编造正文', unknown.text === '' && unknown.deltas === 0);
     check('未收录团体给出中性提示', /暂时无法生成/.test(unknown.error), unknown.error);
@@ -525,6 +587,8 @@ async function liveSuite() {
     AI_MODEL: 'fake-model',
     DEMO_MODE: '',
     PROFILE_LOOKUP: '0',
+    BAIKE_LOOKUP: '0',
+    BILI_LOOKUP: '0',
   });
 
   try {
@@ -540,8 +604,8 @@ async function liveSuite() {
     check('LIVE 内置团体标记 builtin', builtin.meta?.source === 'builtin', builtin.meta?.source);
     check('LIVE 内置团体不调用模型', fakeCalls === 0, `calls=${fakeCalls}`);
 
-    // 未收录团体（Bigbang）：必须交给模型实时生成
-    const ai = await collectStream(await postChat(app.base, 'Bigbang'));
+    // 未收录团体（库里没有）：必须交给模型实时生成
+    const ai = await collectStream(await postChat(app.base, 'ZZZ 未知歌手'));
     check('未收录团体标记 ai', ai.meta?.source === 'ai', ai.meta?.source);
     check('未收录团体调用模型', fakeCalls === 1, `calls=${fakeCalls}`);
     check('LIVE 转发模型名', fakeModel === 'fake-model', fakeModel);

@@ -1,4 +1,5 @@
 import { config } from './config.js';
+import { fetchBaikeProfile } from './baike.js';
 import { streamDemo } from './demo.js';
 import { fetchArtistProfile, profileToContext } from './netease.js';
 import { buildMessages, sanitizeGroup } from './prompt.js';
@@ -104,11 +105,13 @@ export async function handleChat(req, res) {
       type: 'meta',
       model: config.demo ? 'demo' : config.model,
       demo: config.demo,
-      source,
+      source: source === 'ai' ? 'ai' : 'builtin',
+      kind: source,
+      sources: entry?.sources || [],
     });
 
-    if (source === 'builtin') {
-      // 内置资料准确且免费，优先使用；未知团体才走模型
+    if (source === 'builtin' || source === 'profile') {
+      // 内置精选或歌手库资料：直接用真实资料出档案，不调用模型
       await streamDemo({ text: entry.text, send, signal: controller.signal });
     } else if (config.demo) {
       // 没配 Key 又不在内置清单里：明确告知，绝不编造假档案
@@ -117,19 +120,28 @@ export async function handleChat(req, res) {
         { expected: true },
       );
     } else {
-      // 先抓网易云 + QQ 音乐的真实资料，合并后作为上下文喂给模型
+      // 先抓网易云 + QQ 音乐 + 百度百科的真实资料，合并后作为上下文
       let context = '';
       let profileName = '';
       const sources = [];
-      if (config.profileLookup) {
-        const [netease, qq] = await Promise.allSettled([
-          fetchArtistProfile(group),
-          fetchQQArtist(group),
+      if (config.profileLookup || config.baikeLookup) {
+        const [netease, qq, baike] = await Promise.allSettled([
+          config.profileLookup ? fetchArtistProfile(group) : Promise.resolve(null),
+          config.profileLookup ? fetchQQArtist(group) : Promise.resolve(null),
+          config.baikeLookup ? fetchBaikeProfile(group) : Promise.resolve(null),
         ]);
         const ne = netease.status === 'fulfilled' ? netease.value : null;
         const qqProfile = qq.status === 'fulfilled' ? qq.value : null;
+        const bk = baike.status === 'fulfilled' ? baike.value : null;
 
         const parts = [];
+        if (bk) {
+          const fields = Object.entries(bk.fields || {})
+            .map(([label, value]) => `${label}：${value}`)
+            .join('\n');
+          parts.push(`【百度百科资料】\n名称：${bk.title}\n词条定性：${bk.desc}\n${fields}\n简介：${bk.abstract}`);
+          sources.push('baike');
+        }
         if (ne) {
           parts.push(`【网易云音乐资料】\n${profileToContext(ne)}`);
           sources.push('netease');
@@ -139,7 +151,7 @@ export async function handleChat(req, res) {
           sources.push('qqmusic');
         }
         context = parts.join('\n\n');
-        profileName = ne?.name || qqProfile?.name || '';
+        profileName = ne?.name || qqProfile?.name || bk?.title || '';
       }
 
       send({ type: 'context', grounded: Boolean(context), profileName, sources });
