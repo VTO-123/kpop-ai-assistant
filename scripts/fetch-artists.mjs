@@ -48,7 +48,7 @@ const TARGETS = [
   { name: 'IU', nameZh: '李知恩', type: 'solo', baike: 'IU', netease: 'IU', aliases: ['李知恩', '아이유'] },
   { name: 'HyunA', nameZh: '金泫雅', type: 'solo', baike: '泫雅', netease: '金泫雅', aliases: ['泫雅', '현아', 'Kim HyunA'] },
   { name: 'Taeyeon', nameZh: '金泰妍', type: 'solo', baike: '金泰妍', netease: '太妍', aliases: ['金泰妍', '泰妍', '태연'] },
-  { name: 'Baekhyun', nameZh: '边伯贤', type: 'solo', baike: '伯贤', netease: '伯贤', aliases: ['边伯贤', '백현'] },
+  { name: 'Baekhyun', nameZh: '边伯贤', type: 'solo', baike: '伯贤', netease: '伯贤', aliases: ['伯贤', '边伯贤', '백현'] },
   { name: 'G-Dragon', nameZh: '权志龙', type: 'solo', baike: 'G-DRAGON', netease: 'G-DRAGON', aliases: ['GD', '权志龙', '지드래곤'] },
   { name: 'TAEYANG', nameZh: '太阳', type: 'solo', baike: 'TAEYANG', netease: 'TAEYANG', aliases: ['太阳', '태양', '东永裴', 'Taeyang'] },
   { name: 'Lisa', nameZh: '拉莉莎', type: 'solo', baike: 'Lisa', netease: 'Lisa', aliases: ['리사', 'Lalisa'] },
@@ -57,7 +57,7 @@ const TARGETS = [
   { name: 'Jisoo', nameZh: '金智秀', type: 'solo', baike: '金智秀', netease: 'Jisoo', aliases: ['金智秀', '지수'] },
   { name: 'Sunmi', nameZh: '宣美', type: 'solo', baike: '宣美', netease: '宣美', aliases: ['李宣美', '선미'] },
   { name: 'CHUNG HA', nameZh: '请夏', type: 'solo', baike: '请夏', netease: '청하', aliases: ['Chungha', '请夏', '金请夏', '청하'] },
-  { name: 'Taemin', nameZh: '李泰民', type: 'solo', baike: '泰民', netease: '泰民', aliases: ['李泰民', '태민'] },
+  { name: 'Taemin', nameZh: '李泰民', type: 'solo', baike: '泰民', netease: '泰民', aliases: ['泰民', '李泰民', '태민'] },
   { name: 'KAI', nameZh: '金钟仁', type: 'solo', baike: 'KAI', netease: '金钟仁', neteaseId: 990210, aliases: ['金钟仁', '카이', 'Kai'] },
   { name: 'Jung Kook', nameZh: '田柾国', type: 'solo', baike: '田柾国', netease: 'Jung Kook', aliases: ['Jungkook', '田柾国', '정국', 'JK'] },
 ];
