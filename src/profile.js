@@ -59,7 +59,7 @@ export function getLibraryProfile(rawName) {
   push('出道时间', group.debut, 'baike');
   push('所属公司', group.agency, 'baike');
   if (group.type === 'group' && members.length) {
-    push('成员', members.join('、'), 'baike');
+    push('成员名单', members.join('、'), 'baike');
   }
   if (group.fandom) push('粉丝名', group.fandom, 'baike');
   if (group.type === 'solo' && group.group) {
@@ -108,10 +108,15 @@ function oneLiner(profile) {
 /**
  * 用真实资料拼出档案正文（Markdown，与页面渲染契约一致）。
  * 只写抓到的内容，缺的章节明确写「暂未收录」。
- * @param {ReturnType<typeof getLibraryProfile>} profile
+ * @param {{ name: string, type?: string, facts?: Array, songs?: string[], bio?: string }} profile
  */
 export function buildProfileArchive(profile) {
   if (!profile) return '';
+
+  const facts =
+    Array.isArray(profile.facts) && profile.facts.length
+      ? profile.facts
+      : deriveFacts(profile);
 
   const lines = [];
   const one = oneLiner(profile);
@@ -120,22 +125,21 @@ export function buildProfileArchive(profile) {
   lines.push('');
 
   lines.push(profile.type === 'solo' ? '## 个人档案' : '## 团体档案');
-  if (profile.debut) lines.push(`- 出道时间：${profile.debut}`);
-  if (profile.agency) lines.push(`- 所属公司：${profile.agency}`);
-  if (profile.type === 'solo' && profile.group) lines.push(`- 所属组合：${profile.group}`);
-  if (profile.type === 'group' && profile.members.length) {
-    lines.push(`- 成员名单：${profile.members.join('、')}`);
-  }
-  if (profile.fandom) lines.push(`- 粉丝名：${profile.fandom}`);
-  if (profile.works) lines.push(`- 代表作品：${profile.works}`);
-  if (!profile.debut && !profile.agency && !profile.members.length && !profile.works) {
+  if (facts.length) {
+    for (const fact of facts) {
+      const label = String(fact.label || '').trim();
+      const value = String(fact.value || '').trim();
+      if (label && value) lines.push(`- ${label}：${value}`);
+    }
+  } else {
     lines.push('- 暂未收录');
   }
   lines.push('');
 
   lines.push('## 热门歌曲');
-  if (profile.songs.length) {
-    profile.songs.slice(0, 6).forEach((song, index) => {
+  const songs = asArray(profile.songs);
+  if (songs.length) {
+    songs.slice(0, 6).forEach((song, index) => {
       lines.push(`${index + 1}. **${song}**`);
     });
   } else {
@@ -151,6 +155,22 @@ export function buildProfileArchive(profile) {
   lines.push('暂未收录');
 
   return lines.join('\n');
+}
+
+/** 没有 facts 时，从结构化字段里拼一份（内置歌手库的旧数据走这里）。 */
+function deriveFacts(profile) {
+  const facts = [];
+  const push = (label, value) => {
+    const text = String(value || '').trim();
+    if (text) facts.push({ label, value: text });
+  };
+  push('出道时间', profile.debut);
+  push('所属公司', profile.agency);
+  if (profile.type === 'solo') push('所属组合', profile.group);
+  if (profile.members?.length) push('成员名单', profile.members.join('、'));
+  push('粉丝名', profile.fandom);
+  push('代表作品', profile.works);
+  return facts;
 }
 
 /** 判断一个名字是否已经在歌手库里（含别名、中文名）。 */

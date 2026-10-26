@@ -1,6 +1,8 @@
 import { config } from './config.js';
 import { fetchBaikeProfile } from './baike.js';
+import { resolveArtistProfile } from './artist-profile.js';
 import { streamDemo } from './demo.js';
+import { buildProfileArchive } from './profile.js';
 import { fetchArtistProfile, profileToContext } from './netease.js';
 import { buildMessages, sanitizeGroup } from './prompt.js';
 import { fetchQQArtist, qqToContext } from './qqmusic.js';
@@ -101,20 +103,34 @@ export async function handleChat(req, res) {
   };
 
   try {
+    // 不在歌手库里的名字：先实时查百科 / 网易云，抓得到就按资料出档案，
+    // 抓不到才交给模型（DEMO 模式下直接说明无法生成，绝不编造）。
+    let live = null;
+    if (source === 'ai') {
+      live = await resolveArtistProfile(group).catch(() => null);
+    }
+    const liveReady = Boolean(live?.hasData);
+    const effectiveSource = source === 'ai' ? (liveReady ? 'builtin' : 'ai') : 'builtin';
+    const effectiveKind = source === 'ai' ? (liveReady ? 'live' : 'ai') : source;
+
     send({
       type: 'meta',
       model: config.demo ? 'demo' : config.model,
       demo: config.demo,
-      source: source === 'ai' ? 'ai' : 'builtin',
-      kind: source,
-      sources: entry?.sources || [],
+      source: effectiveSource,
+      kind: effectiveKind,
+      sources: source === 'ai' ? live?.sources || [] : entry?.sources || [],
     });
 
     if (source === 'builtin' || source === 'profile') {
       // 内置精选或歌手库资料：直接用真实资料出档案，不调用模型
       await streamDemo({ text: entry.text, send, signal: controller.signal });
+    } else if (liveReady) {
+      // 实时抓到的百科 / 网易云资料：同样直接成稿
+      send({ type: 'context', grounded: true, profileName: live.name || group, sources: live.sources });
+      await streamDemo({ text: buildProfileArchive(live), send, signal: controller.signal });
     } else if (config.demo) {
-      // 没配 Key 又不在内置清单里：明确告知，绝不编造假档案
+      // 没配 Key 又没有任何公开资料：明确告知，绝不编造假档案
       throw Object.assign(
         new Error(`「${group}」的档案暂时无法生成，请稍后再试。`),
         { expected: true },

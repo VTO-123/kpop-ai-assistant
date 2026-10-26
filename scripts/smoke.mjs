@@ -14,6 +14,7 @@ import { setTimeout as delay } from 'node:timers/promises';
 import { fileURLToPath } from 'node:url';
 import { parseEnv } from '../src/config.js';
 import { buildSearchKeyword } from '../src/bilibili.js';
+import { isAllowedImageUrl } from '../src/image-proxy.js';
 import { SYSTEM_PROMPT } from '../src/prompt.js';
 import { renderMarkdown } from '../public/js/md.js';
 
@@ -204,6 +205,8 @@ function envSuite() {
     'B站关键词：remix 后缀去掉',
     buildSearchKeyword('How You Like That - Remix', 'BLACKPINK') === 'How You Like That BLACKPINK MV',
   );
+  check('图片代理：允许百科图片域名', isAllowedImageUrl('https://bkimg.cdn.bcebos.com/pic/x.jpg'));
+  check('图片代理：仍拒绝任意域名', !isAllowedImageUrl('https://evil.example.com/x.jpg'));
 }
 
 async function demoSuite() {
@@ -215,6 +218,7 @@ async function demoSuite() {
     COVER_QQ_LOOKUP: '0',
     BAIKE_LOOKUP: '0',
     BILI_LOOKUP: '0',
+    PROFILE_LOOKUP: '0',
   });
   try {
     check('DEMO 服务启动', app.up, app.up ? '' : serverLog.slice(0, 300));
@@ -636,6 +640,137 @@ async function demoSuite() {
   }
 }
 
+/* ---------------- 假百度百科接口 ---------------- */
+
+let baikeCalls = 0;
+
+function startFakeBaikeApi() {
+  const port = randomPort(4950);
+  const server = http.createServer((req, res) => {
+    const url = new URL(req.url, `http://127.0.0.1:${port}`);
+    if (url.pathname !== '/api/openapi/BaikeLemmaCardApi') {
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.end('not found');
+      return;
+    }
+
+    baikeCalls += 1;
+    const key = url.searchParams.get('bk_key') || '';
+
+    if (key === 'NOLEMMA') {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({}));
+      return;
+    }
+
+    const title = key || 'Unknown';
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(
+      JSON.stringify({
+        id: 1,
+        key: title,
+        title,
+        desc: '韩国女子演唱组合',
+        abstract: `${title}是于2020年6月30日正式出道的韩国女子演唱组合，代表作为《Tag Me》。`,
+        image: 'https://bkimg.cdn.bcebos.com/pic/fake-cover.jpg',
+        card: [
+          { name: '组合成员', value: ['金甲、朴乙'], format: ['<a>金甲</a>、<a>朴乙</a>'] },
+          { name: '成立时间', value: ['2020年6月30日'] },
+          { name: '经纪公司', value: ['Fake Entertainment'] },
+          { name: '代表作品', value: ['Tag Me'] },
+          { name: '主要成就', value: ['2020 MAMA 新人奖'] },
+        ],
+      }),
+    );
+  });
+
+  return new Promise((resolve) => {
+    server.listen(port, '127.0.0.1', () => resolve({ server, port }));
+  });
+}
+
+async function baikeSuite() {
+  const baike = await startFakeBaikeApi();
+  const coverApi = await startFakeCoverApi();
+  const app = await startApp({
+    DEMO_MODE: '1',
+    AI_API_KEY: '',
+    PROFILE_LOOKUP: '0',
+    BAIKE_LOOKUP: '1',
+    BAIKE_API_BASE: `http://127.0.0.1:${baike.port}`,
+    COVER_API_BASE: `http://127.0.0.1:${coverApi.port}`,
+    COVER_QQ_LOOKUP: '0',
+    BILI_LOOKUP: '0',
+  });
+
+  try {
+    check('百科资料服务启动', app.up, app.up ? '' : serverLog.slice(0, 300));
+    if (!app.up) return;
+
+    // 冷门歌手：库里没有，靠百科实时抓
+    const profile = await (
+      await fetch(`${app.base}/api/artist-profile?name=${encodeURIComponent('Weeekly')}`)
+    ).json();
+    check(
+      '百科：冷门歌手抓到资料',
+      profile.facts?.length >= 3 &&
+        profile.facts.some((fact) => fact.label === '出道时间') &&
+        profile.facts.some((fact) => fact.label === '成员名单'),
+      JSON.stringify(profile.facts?.map((fact) => fact.label)),
+    );
+    check(
+      '百科：每条资料都标来源',
+      profile.facts.every((fact) => fact.source === 'baike') && /资料参考：.*百度百科/.test(profile.sourceLine),
+      profile.sourceLine,
+    );
+    check('百科：词条首图可作为封面', profile.cover.includes('bcebos.com'), profile.cover);
+    check('百科：词条地址可追溯', profile.baikeUrl.includes('baike.baidu.com'));
+
+    const liveChat = await collectStream(await postChat(app.base, 'Weeekly'));
+    check(
+      '百科：冷门歌手也能直接出档案',
+      liveChat.text.includes('出道时间') &&
+        liveChat.text.includes('代表作品') &&
+        liveChat.text.includes('## 热门歌曲'),
+    );
+    check('百科：来源标记为实时资料', liveChat.meta?.kind === 'live', liveChat.meta?.kind);
+    check(
+      '百科：实时资料也算作内置来源',
+      liveChat.meta?.source === 'builtin',
+      liveChat.meta?.source,
+    );
+
+    // 抓不到词条时：接口降级为空资料，页面仍完整
+    const noLemma = await (
+      await fetch(`${app.base}/api/artist-profile?name=NOLEMMA`)
+    ).json();
+    check('百科：无词条时降级为空资料', !noLemma.hasData && Array.isArray(noLemma.facts));
+
+    const noLemmaPage = await fetch(`${app.base}/artist/NOLEMMA`);
+    const noLemmaHtml = await noLemmaPage.text();
+    check(
+      '百科：抓不到时页面仍完整可用',
+      noLemmaPage.status === 200 &&
+        noLemmaHtml.includes('id="profilePanel"') &&
+        noLemmaHtml.includes('暂未收录') &&
+        noLemmaHtml.includes('资料参考：'),
+    );
+
+    // 封面链路的百科兜底：网易云 500 时用百科首图
+    const cover = await (await fetch(`${app.base}/api/cover?name=FAIL`)).json();
+    check(
+      '百科：封面兜底生效',
+      cover.source === 'baike' && cover.url.includes('bcebos.com'),
+      JSON.stringify(cover),
+    );
+    check('百科：封面请求确实走了词条', baikeCalls > 0, `calls=${baikeCalls}`);
+  } finally {
+    app.child.kill();
+    baike.server.close();
+    coverApi.server.close();
+  }
+}
+
 /* ---------------- 假 B 站接口（搜索 / 指纹） ---------------- */
 
 let biliCalls = 0;
@@ -802,6 +937,7 @@ async function liveSuite() {
 try {
   envSuite();
   await demoSuite();
+  await baikeSuite();
   await biliSuite();
   await liveSuite();
 } catch (err) {

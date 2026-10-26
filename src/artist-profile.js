@@ -22,7 +22,7 @@ function buildLiveFromBaike(baike) {
   };
   push('出道时间', baike.fields['出道'], 'baike');
   push('所属公司', baike.fields['经纪公司'], 'baike');
-  if (baike.fields['成员']) push('成员', baike.fields['成员'], 'baike');
+  if (baike.fields['成员']) push('成员名单', baike.fields['成员'], 'baike');
   if (baike.fields['所属组合']) push('所属组合', baike.fields['所属组合'], 'baike');
   push('代表作品', baike.fields['代表作品'], 'baike');
 
@@ -85,6 +85,10 @@ function profileToPayload(profile) {
     baikeUrl: profile.baikeUrl || '',
     sources,
     sourceLine: formatSourceLine(sources),
+    hasData:
+      (profile.facts?.length || 0) > 0 ||
+      (profile.songs?.length || 0) > 0 ||
+      (profile.awards?.length || 0) > 0,
   };
 }
 
