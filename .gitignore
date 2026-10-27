@@ -14,3 +14,10 @@ pnpm-debug.log*
 
 .DS_Store
 Thumbs.db
+
+# 数据备份与前端改版备份，不入库
+data/*.bak
+public/_backup_mobile/
+
+# 用户账号与云端数据（注册/登录产生的真实用户数据，绝不入库）
+data/users/

@@ -248,26 +248,28 @@ async function demoSuite() {
       jsModule.status === 200 && /javascript/.test(jsModule.headers.get('content-type') || ''),
     );
 
-    // 首页：搜索入口 + 热门视频 3D 轮播（已移除「试试这些」与说明文字）
-    check('首页是搜索页', htmlText.includes('id="searchBtn"') && !htmlText.includes('id="output"'));
-    check('首页有热门视频轮播', htmlText.includes('id="hotSongsCarousel"'));
-    check('首页板块标题是「热门视频」', htmlText.includes('热门视频') && !htmlText.includes('热门团体'));
-    check('首页引用 FlexCarousel 样式', htmlText.includes('/flex-carousel.css'));
+    // 首页：移动端 App 壳（发现/热门/我的 三 tab + 品牌 + PWA，已移除 PC 搜索页/轮播）
+    check(
+      '首页是移动端 App 壳',
+      htmlText.includes('id="app"') && htmlText.includes('id="view"') && htmlText.includes('tabbar'),
+    );
+    check(
+      '首页有发现/热门/我的三 tab',
+      htmlText.includes('data-view="home"') &&
+        htmlText.includes('data-view="hot"') &&
+        htmlText.includes('data-view="mine"'),
+    );
+    check('首页品牌是 K-POP 档案室', htmlText.includes('K-POP 档案室') && htmlText.includes('我的追星站'));
+    check('首页引用 mobile.css', htmlText.includes('/mobile.css') && !htmlText.includes('/flex-carousel.css'));
+    check('首页支持 PWA', htmlText.includes('rel="manifest"') && htmlText.includes('apple-mobile-web-app-capable'));
     check('首页不再有「试试这些」', !htmlText.includes('试试这些') && !htmlText.includes('data-group='));
     check('首页不再有内置资料说明', !htmlText.includes('会由 AI 实时生成'));
-    check('首页有 VTO 版权标识', htmlText.includes('class="vto-mark"'));
+    check('首页加载移动端逻辑 app.js', htmlText.includes('/app.js') && htmlText.includes('type="module"'));
     check('首页不再有页脚文案', !htmlText.includes('作品仅供学习与交流'));
-    check('首页有搜索联想容器', htmlText.includes('id="suggestPanel"'));
     check('首页无 AI 痕迹字样', !/deepseek|检索生成|三首必听|\bAI\b/i.test(htmlText));
 
-    // 阶段 D：最近查过（本地记录 + 清空入口）
-    check(
-      '首页有最近查过与清空入口',
-      htmlText.includes('id="recentWrap"') &&
-        htmlText.includes('id="recentList"') &&
-        htmlText.includes('id="recentClear"') &&
-        htmlText.includes('最近查过'),
-    );
+    // 阶段 D：本地记录（收藏 / 最近看过）由移动端 store 管理，旧 PC 最近查过入口已移除
+    check('首页不再有 PC 版最近查过入口', !htmlText.includes('id="recentWrap"'));
     const storeJs = await (await fetch(`${app.base}/js/store.js`)).text();
     check(
       '最近记录最多 6 条且可清空',

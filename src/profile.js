@@ -147,10 +147,20 @@ export function buildProfileArchive(profile) {
   }
   lines.push('');
 
+  // 百科简介全文：一句话之外的信息也写进去（不编造，只展示真实抓到的简介）
+  if (profile.bio) {
+    const full = String(profile.bio).trim();
+    if (full && full.length > 20) {
+      lines.push('## 简介');
+      lines.push(full);
+      lines.push('');
+    }
+  }
+
   lines.push('## 热门歌曲');
   const songs = asArray(profile.songs);
   if (songs.length) {
-    songs.slice(0, 6).forEach((song, index) => {
+    songs.slice(0, 8).forEach((song, index) => {
       lines.push(`${index + 1}. **${song}**`);
     });
   } else {
@@ -159,11 +169,21 @@ export function buildProfileArchive(profile) {
   lines.push('');
 
   lines.push('## 入坑观看');
-  lines.push('暂未收录');
+  if (profile.stage && profile.stage.url) {
+    lines.push(`代表舞台：${profile.stage.url}`);
+  } else if (profile.bvid) {
+    lines.push(`代表舞台：https://www.bilibili.com/video/${profile.bvid}`);
+  } else {
+    lines.push('暂未收录');
+  }
   lines.push('');
 
   lines.push('## 冷知识');
-  lines.push('暂未收录');
+  if (profile.fandom) {
+    lines.push(`粉丝名：${profile.fandom}`);
+  } else {
+    lines.push('暂未收录');
+  }
 
   return lines.join('\n');
 }

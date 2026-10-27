@@ -1,296 +1,602 @@
-/* 首页：只负责「搜索 → 跳转详情页」。档案内容全部在 /artist/[name] 里生成。 */
-import { clearRecent, pushRecent, renderRecent } from './js/store.js';
+/* ===== K-POP 档案室 · 移动端 App 逻辑 =====
+   多视图（hash 路由）+ 底部导航 + AI 流式档案。
+   账号体系：登录后收藏 / 最近看过 / 搜索历史云端同步，每用户独立。
+   复用后端 /api/* 与 js/stream.js、js/md.js。 */
+import { postChat, consumeStream } from './js/stream.js';
+import { renderMarkdown, escapeHtml } from './js/md.js';
 
-const form = document.getElementById('askForm');
-const input = document.getElementById('groupInput');
-const recentWrap = document.getElementById('recentWrap');
-const recentList = document.getElementById('recentList');
-const recentClear = document.getElementById('recentClear');
-const modeBadge = document.getElementById('modeBadge');
-const modeText = document.getElementById('modeText');
+/* ---------- 工具 ---------- */
+const $ = (sel, root = document) => root.querySelector(sel);
+const view = $('#view');
+const TOKEN_KEY = 'kpopfan:token';
+const USER_KEY = 'kpopfan:user';
 
-const artistUrl = (name) => `/artist/${encodeURIComponent(name)}`;
-
-function go(rawName) {
-  const name = String(rawName || '').trim().slice(0, 40);
-  if (!name) {
-    input.focus();
-    return;
-  }
-  pushRecent(name);
-  window.location.assign(artistUrl(name));
+function toast(msg) {
+  const el = $('#toast');
+  el.textContent = msg;
+  el.hidden = false;
+  clearTimeout(el._t);
+  el._t = setTimeout(() => { el.hidden = true; }, 1800);
 }
 
-form.addEventListener('submit', (event) => {
-  event.preventDefault();
-  go(input.value);
-});
+const proxy = (url) => (url ? `/api/img?u=${encodeURIComponent(url)}` : '');
 
-renderRecent({ wrap: recentWrap, list: recentList, clear: recentClear }, go);
-
-recentClear?.addEventListener('click', () => {
-  clearRecent();
-  renderRecent({ wrap: recentWrap, list: recentList, clear: recentClear }, go);
-  input.focus();
-});
-
-// 从详情页返回（含 bfcache）时，最近记录可能已经变化
-window.addEventListener('pageshow', () => {
-  renderRecent({ wrap: recentWrap, list: recentList, clear: recentClear }, go);
-});
-
-/* ---------------- 搜索联想 ---------------- */
-
-const suggestPanel = document.getElementById('suggestPanel');
-let artists = [];
-let suggestItems = [];
-let suggestIndex = -1;
-
-const normalizeQuery = (value) =>
-  String(value || '')
-    .toLowerCase()
-    .replace(/[\s\-_.·'"“”‘’()（）[\]]/g, '')
-    .trim();
-
-async function loadArtists() {
+/* ---------- 会话 ---------- */
+function getToken() { return localStorage.getItem(TOKEN_KEY) || ''; }
+function getMe() {
   try {
-    const res = await fetch('/api/artists');
-    if (!res.ok) return;
-    const data = await res.json();
-    artists = Array.isArray(data.artists) ? data.artists : [];
-  } catch {
-    /* 拿不到索引就不显示联想，不影响搜索 */
-  }
+    const raw = JSON.parse(localStorage.getItem(USER_KEY) || 'null');
+    return raw && raw.username ? raw : null;
+  } catch { return null; }
+}
+function setSession(token, username) {
+  localStorage.setItem(TOKEN_KEY, token);
+  localStorage.setItem(USER_KEY, JSON.stringify({ username }));
+}
+function clearSession() {
+  localStorage.removeItem(TOKEN_KEY);
+  localStorage.removeItem(USER_KEY);
 }
 
-function filterArtists(query) {
-  const q = normalizeQuery(query);
-  if (!q) return [];
-
-  const scored = [];
-  for (const artist of artists) {
-    const fields = [artist.name, artist.nameZh, ...(artist.aliases || [])]
-      .map(normalizeQuery)
-      .filter(Boolean);
-
-    let score = 0;
-    for (const field of fields) {
-      if (field.startsWith(q)) {
-        score = 2;
-        break;
-      }
-      if (field.includes(q)) score = Math.max(score, 1);
-    }
-    if (score > 0) scored.push({ artist, score });
-  }
-
-  scored.sort((a, b) => b.score - a.score || a.artist.name.localeCompare(b.artist.name));
-  return scored.slice(0, 8).map((item) => item.artist);
-}
-
-function renderSuggestions(query) {
-  suggestItems = filterArtists(query);
-  suggestIndex = -1;
-  suggestPanel.replaceChildren();
-
-  if (!suggestItems.length) {
-    closeSuggestions();
-    return;
-  }
-
-  suggestItems.forEach((artist, index) => {
-    const item = document.createElement('button');
-    item.type = 'button';
-    item.className = 'suggest-item';
-    item.setAttribute('role', 'option');
-    item.setAttribute('aria-selected', 'false');
-
-    const name = document.createElement('span');
-    name.className = 'suggest-item__name';
-    name.textContent = artist.name;
-
-    const zh = document.createElement('span');
-    zh.className = 'suggest-item__zh';
-    zh.textContent = artist.nameZh && artist.nameZh !== artist.name ? artist.nameZh : '';
-
-    const tag = document.createElement('span');
-    tag.className = 'suggest-item__tag';
-    tag.textContent = artist.type === 'solo' ? '个人' : '团体';
-
-    item.append(name, zh, tag);
-    item.addEventListener('mousedown', (event) => event.preventDefault());
-    item.addEventListener('click', () => pickSuggestion(index));
-    suggestPanel.append(item);
+/** 统一 API 请求：自动带 Bearer token；401 自动清会话。 */
+async function api(path, options = {}) {
+  const headers = { ...(options.headers || {}) };
+  const token = getToken();
+  if (token) headers.Authorization = `Bearer ${token}`;
+  if (options.body) headers['Content-Type'] = 'application/json';
+  const res = await fetch(path, {
+    method: options.method || 'GET',
+    headers,
+    body: options.body ? JSON.stringify(options.body) : undefined,
   });
-
-  suggestPanel.hidden = false;
-  input.setAttribute('aria-expanded', 'true');
-}
-
-function pickSuggestion(index) {
-  const artist = suggestItems[index];
-  if (!artist) return;
-  input.value = artist.name;
-  closeSuggestions();
-  input.focus();
-}
-
-function closeSuggestions() {
-  suggestPanel.hidden = true;
-  input.setAttribute('aria-expanded', 'false');
-  suggestIndex = -1;
-}
-
-function moveSuggestion(step) {
-  if (suggestPanel.hidden || !suggestItems.length) return;
-  suggestIndex = (suggestIndex + step + suggestItems.length) % suggestItems.length;
-  [...suggestPanel.children].forEach((item, index) => {
-    item.setAttribute('aria-selected', index === suggestIndex ? 'true' : 'false');
-  });
-  suggestPanel.children[suggestIndex]?.scrollIntoView({ block: 'nearest' });
-}
-
-input.addEventListener('input', () => {
-  if (!input.value.trim()) {
-    closeSuggestions();
-    return;
+  const data = await res.json().catch(() => ({}));
+  if (res.status === 401) {
+    clearSession();
+    throw Object.assign(new Error(data.error || '登录已失效，请重新登录'), { status: 401 });
   }
-  renderSuggestions(input.value);
-});
-
-input.addEventListener('keydown', (event) => {
-  if (event.key === 'ArrowDown') {
-    event.preventDefault();
-    moveSuggestion(1);
-  } else if (event.key === 'ArrowUp') {
-    event.preventDefault();
-    moveSuggestion(-1);
-  } else if (event.key === 'Escape') {
-    closeSuggestions();
-  } else if (event.key === 'Enter' && !suggestPanel.hidden && suggestIndex >= 0) {
-    event.preventDefault();
-    pickSuggestion(suggestIndex);
-  }
-});
-
-input.addEventListener('blur', () => window.setTimeout(closeSuggestions, 120));
-document.addEventListener('click', (event) => {
-  if (!event.target.closest('.input-wrap')) closeSuggestions();
-});
-
-loadArtists();
-// 兼容旧分享链接：/?g=Bigbang → /artist/Bigbang
-const preset = new URLSearchParams(window.location.search).get('g');
-if (preset) {
-  input.value = preset.slice(0, 40);
-  go(preset);
+  if (!res.ok) throw new Error(data.error || '请求失败');
+  return data;
 }
 
+/* ---------- 云端收藏 / 最近 / 搜索 ---------- */
+let cloudFavs = new Set();
+async function loadCloudFavs() {
+  cloudFavs = new Set();
+  if (!getMe()) return;
+  try {
+    const d = await api('/api/me/favorites');
+    cloudFavs = new Set((d.favorites || []).map((f) => f.name));
+  } catch { /* 会话失效已清除 */ }
+}
+function isFav(name) { return cloudFavs.has(name); }
+
+async function toggleFav(artist) {
+  if (!getMe()) {
+    toast('登录后才能收藏');
+    location.hash = '#/mine';
+    return false;
+  }
+  const remove = isFav(artist.name);
+  try {
+    const url = remove
+      ? `/api/me/favorites?name=${encodeURIComponent(artist.name)}`
+      : '/api/me/favorites';
+    const d = await api(url, {
+      method: remove ? 'DELETE' : 'POST',
+      body: remove ? undefined : { name: artist.name, nameZh: artist.nameZh || '', cover: artist.cover || '' },
+    });
+    cloudFavs = new Set((d.favorites || []).map((f) => f.name));
+    toast(remove ? `已取消收藏 ${artist.name}` : `已收藏 ${artist.name}`);
+    return isFav(artist.name);
+  } catch (err) {
+    toast(err.message || '操作失败');
+    return isFav(artist.name);
+  }
+}
+
+async function trackRecent(name) {
+  if (!getMe()) return;
+  try { await api('/api/me/recent', { method: 'POST', body: { name } }); } catch { /* 静默 */ }
+}
+async function trackSearch(keyword) {
+  if (!getMe()) return;
+  try { await api('/api/me/searches', { method: 'POST', body: { keyword } }); } catch { /* 静默 */ }
+}
+
+/* ---------- 加载配置（LIVE/DEMO 徽章） ---------- */
 async function loadConfig() {
+  const badge = $('#modeBadge');
+  const text = $('#modeText');
   try {
     const res = await fetch('/api/config');
-    if (!res.ok) throw new Error('config');
+    if (!res.ok) throw new Error();
     const data = await res.json();
-    modeBadge.hidden = false;
-    modeBadge.dataset.mode = data.demo ? 'demo' : 'live';
-
-    if (data.demo) {
-      modeText.textContent = '演示模式';
-    } else {
-      modeText.textContent = 'LIVE';
-    }
+    badge.hidden = false;
+    badge.dataset.mode = data.demo ? 'demo' : 'live';
+    text.textContent = data.demo ? '演示模式' : 'LIVE';
   } catch {
-    modeBadge.hidden = true;
+    badge.hidden = true;
   }
 }
 
-loadConfig();
-loadShowcase();
-input.focus();
+/* ================= 视图：首页 / 发现 ================= */
+async function renderHome() {
+  let artists = [];
+  try {
+    const res = await fetch('/api/artists');
+    if (res.ok) artists = (await res.json()).artists || [];
+  } catch { /* 静默 */ }
 
-/* ---------------- 首页热门视频 3D 轮播 ---------------- */
+  const picks = artists.slice(0, 10);
+  const rest = artists.slice(10);
 
-async function loadShowcase() {
-  const container = document.getElementById('hotSongsCarousel');
-  if (!container) return;
+  view.innerHTML = `
+    <div class="section">
+      <h1 class="section__title">今天想翻谁的牌子？<small>搜索或点击团体</small></h1>
+    </div>
+    <div class="search-box">
+      <div class="search-field">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg>
+        <input id="q" type="text" maxlength="40" placeholder="例如 BLACKPINK、NewJeans…" autocomplete="off" enterkeyhint="search" />
+      </div>
+      <button class="search-btn" id="go" type="button">搜索</button>
+    </div>
+    <div class="suggest" id="suggest" hidden></div>
 
-  let items = [];
+    <div class="section">
+      <h2 class="section__title">本命推荐</h2>
+      <div class="artist-grid" id="pickGrid"></div>
+    </div>
+
+    ${rest.length ? `
+    <div class="section">
+      <h2 class="section__title">更多团体</h2>
+      <div class="chip-list" id="moreChips"></div>
+    </div>` : ''}
+  `;
+
+  // 搜索
+  const input = $('#q');
+  const suggest = $('#suggest');
+  const goBtn = $('#go');
+
+  const doSearch = () => {
+    const name = input.value.trim().slice(0, 40);
+    if (!name) { input.focus(); return; }
+    trackSearch(name);
+    location.hash = `#/artist/${encodeURIComponent(name)}`;
+  };
+  goBtn.addEventListener('click', doSearch);
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter') doSearch(); });
+
+  // 联想
+  const norm = (s) => String(s || '').toLowerCase().replace(/[\s\-_.·'"“”‘’()（）[\]]/g, '');
+  input.addEventListener('input', () => {
+    const q = norm(input.value);
+    if (!q) { suggest.hidden = true; return; }
+    const hit = artists
+      .filter((a) => [a.name, a.nameZh, ...(a.aliases || [])].map(norm).some((f) => f.startsWith(q) || f.includes(q)))
+      .slice(0, 6);
+    if (!hit.length) { suggest.hidden = true; return; }
+    suggest.innerHTML = hit.map((a) => `
+      <button class="suggest-item" type="button" data-name="${escapeHtml(a.name)}">
+        <span class="suggest-item__zh">${escapeHtml(a.name)}</span>
+        <span class="suggest-item__tag">${a.type === 'solo' ? '个人' : '团体'}</span>
+      </button>`).join('');
+    suggest.hidden = false;
+  });
+  suggest.addEventListener('click', (e) => {
+    const item = e.target.closest('.suggest-item');
+    if (!item) return;
+    input.value = item.dataset.name;
+    suggest.hidden = true;
+    doSearch();
+  });
+
+  // 推荐卡片（懒加载封面）
+  const grid = $('#pickGrid');
+  grid.innerHTML = picks.map((a) => cardHtml(a)).join('');
+  grid.querySelectorAll('.artist-card__cover img').forEach((img) => {
+    img.addEventListener('error', () => { img.style.display = 'none'; }, { once: true });
+    img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
+    loadCover(img);
+  });
+
+  // 更多 chips
+  const chips = $('#moreChips');
+  if (chips) {
+    chips.innerHTML = rest.map((a) => `<button class="chip" data-name="${escapeHtml(a.name)}">${escapeHtml(a.name)}</button>`).join('');
+    chips.addEventListener('click', (e) => {
+      const chip = e.target.closest('.chip');
+      if (chip) { trackRecent(chip.dataset.name); location.hash = `#/artist/${encodeURIComponent(chip.dataset.name)}`; }
+    });
+  }
+  grid.addEventListener('click', (e) => {
+    const card = e.target.closest('.artist-card');
+    if (card) { trackRecent(card.dataset.name); location.hash = `#/artist/${encodeURIComponent(card.dataset.name)}`; }
+  });
+}
+
+function cardHtml(a) {
+  return `
+    <button class="artist-card" type="button" data-name="${escapeHtml(a.name)}">
+      <div class="artist-card__cover">
+        <img alt="" loading="lazy" referrerpolicy="no-referrer" />
+        <span class="artist-card__type">${a.type === 'solo' ? '个人' : '团体'}</span>
+      </div>
+      <div class="artist-card__body">
+        <div class="artist-card__name">${escapeHtml(a.name)}</div>
+        <div class="artist-card__zh">${escapeHtml(a.nameZh && a.nameZh !== a.name ? a.nameZh : '')}</div>
+      </div>
+    </button>`;
+}
+
+async function loadCover(img) {
+  const name = img.closest('.artist-card').dataset.name;
+  try {
+    const res = await fetch(`/api/cover?name=${encodeURIComponent(name)}`);
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    if (data && data.url) img.src = proxy(data.url);
+  } catch {
+    img.style.display = 'none';
+  }
+}
+
+/* ================= 视图：热门 ================= */
+async function renderHot() {
+  let songs = [];
   try {
     const res = await fetch('/api/songs');
-    if (res.ok) {
-      const data = await res.json();
-      items = Array.isArray(data.items) ? data.items : [];
-    }
-  } catch {
-    /* 拿不到数据就不显示展示区 */
-  }
+    if (res.ok) songs = (await res.json()).items || [];
+  } catch { /* 静默 */ }
 
-  if (!items.length) {
-    container.closest('.home-showcase')?.remove();
+  if (!songs.length) {
+    view.innerHTML = `<div class="error-box">热门加载失败，下拉刷新试试</div>`;
     return;
   }
 
-  try {
-    const { createFlexCarousel } = await import('./js/flex-carousel.js');
-    const instance = createFlexCarousel(container, {
-      items: items.map((item) => ({
-        id: item.id,
-        src: item.src,
-        title: item.title,
-        subtitle: item.subtitle || item.artist,
-        alt: `${item.title} 的 MV 封面`,
-      })),
-      preset: 'liquid',
-      intro: 'rise',
-      cardHeight: 0.5,
-      gap: 12,
-      radius: 0,
-      fit: 'natural',
-      focusOnClick: false,
-      captions: true,
-      // 点任意一张卡片 → 进入这首歌的详情页
-      onCardClick: (_index, item) => {
-        if (item && item.id) window.location.assign(`/song/${encodeURIComponent(item.id)}`);
-      },
-      onSelect: (_index, item) => {
-        if (item && item.id) window.location.assign(`/song/${encodeURIComponent(item.id)}`);
-      },
-    });
-
-    if (!instance) throw new Error('webgl2 unavailable');
-    container.dataset.engine = 'webgl';
-  } catch {
-    // WebGL2 不可用 / ogl 没装：降级成普通图片墙，不白屏
-    renderImageWall(container, items);
-  }
+  view.innerHTML = `
+    <div class="section">
+      <h1 class="section__title">热门 MV</h1>
+      <p style="color:var(--text-dim);font-size:13px;margin:-8px 0 4px;">点击歌曲跳转 B 站看视频</p>
+    </div>
+    <div class="song-list" id="songList"></div>
+  `;
+  const list = $('#songList');
+  list.innerHTML = songs.map((s) => `
+    <a class="song-row" href="/song/${encodeURIComponent(s.id)}">
+      <span class="song-row__cover"><img src="${escapeHtml(s.src)}" alt="" loading="lazy" referrerpolicy="no-referrer" /></span>
+      <span class="song-row__info">
+        <span class="song-row__title">${escapeHtml(s.title)}</span>
+        <span class="song-row__artist">${escapeHtml(s.subtitle || s.artist || '')}</span>
+      </span>
+      <span class="song-row__arrow">›</span>
+    </a>`).join('');
 }
 
-function renderImageWall(container, items) {
-  container.dataset.engine = 'fallback';
-  container.classList.add('flex-carousel--fallback');
-  container.replaceChildren();
+/* ================= 视图：我的 ================= */
+function authFormHtml() {
+  return `
+    <div class="section">
+      <h1 class="section__title">登录后云端同步<small>收藏 / 最近看过 / 搜索历史只属于你</small></h1>
+    </div>
+    <div class="auth-card">
+      <div class="auth-tabs">
+        <button class="auth-tab is-active" data-mode="login" type="button">登录</button>
+        <button class="auth-tab" data-mode="register" type="button">注册</button>
+      </div>
+      <div class="auth-body">
+        <input id="authUser" type="text" maxlength="20" placeholder="用户名（2-20 位，字母/数字/中文）" autocomplete="username" />
+        <input id="authPass" type="password" maxlength="64" placeholder="密码（至少 6 位）" autocomplete="current-password" />
+        <button class="btn-primary" id="authSubmit" type="button">登录</button>
+        <p class="auth-tip" id="authTip" hidden></p>
+      </div>
+    </div>
+  `;
+}
 
-  const grid = document.createElement('div');
-  grid.className = 'cover-fallback';
+async function renderMine() {
+  const me = getMe();
+  if (!me) {
+    view.innerHTML = authFormHtml();
+    let mode = 'login';
+    const userInput = $('#authUser');
+    const passInput = $('#authPass');
+    const submitBtn = $('#authSubmit');
+    const tip = $('#authTip');
 
-  items.slice(0, 8).forEach((item) => {
-    const figure = document.createElement('figure');
-    figure.className = 'cover-fallback__item';
+    const setMode = (m) => {
+      mode = m;
+      document.querySelectorAll('.auth-tab').forEach((t) => t.classList.toggle('is-active', t.dataset.mode === m));
+      submitBtn.textContent = m === 'login' ? '登录' : '注册';
+      passInput.setAttribute('autocomplete', m === 'login' ? 'current-password' : 'new-password');
+    };
+    document.querySelectorAll('.auth-tab').forEach((tab) => tab.addEventListener('click', () => setMode(tab.dataset.mode)));
 
-    const img = document.createElement('img');
-    img.src = item.src;
-    img.alt = `${item.title} 照片`;
-    img.loading = 'lazy';
-    img.decoding = 'async';
-    img.referrerPolicy = 'no-referrer';
-    img.addEventListener('error', () => figure.remove(), { once: true });
+    submitBtn.addEventListener('click', async () => {
+      const username = userInput.value.trim();
+      const password = passInput.value;
+      tip.hidden = true;
+      if (!username || !password) {
+        tip.textContent = '请填写用户名和密码';
+        tip.hidden = false;
+        return;
+      }
+      submitBtn.disabled = true;
+      try {
+        const res = await fetch(`/api/${mode}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.error || '操作失败');
+        setSession(data.token, data.username);
+        toast(`欢迎回来，${data.username}`);
+        await renderMine();
+      } catch (err) {
+        tip.textContent = err.message || '操作失败';
+        tip.hidden = false;
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+    return;
+  }
 
-    const caption = document.createElement('figcaption');
-    caption.textContent = item.title;
+  let data = { favorites: [], recent: [], searches: [] };
+  try {
+    data = await api('/api/me');
+  } catch {
+    if (!getMe()) return renderMine();
+  }
 
-    figure.append(img, caption);
-    grid.append(figure);
+  const favList = data.favorites || [];
+  const recent = data.recent || [];
+  const searches = data.searches || [];
+
+  view.innerHTML = `
+    <div class="section">
+      <div class="mine-head">
+        <div class="mine-user">
+          <span class="mine-avatar">${escapeHtml(String(me.username).slice(0, 1).toUpperCase())}</span>
+          <div>
+            <div class="mine-name">${escapeHtml(me.username)}</div>
+            <div class="mine-sub">已登录 · 数据云端同步</div>
+          </div>
+        </div>
+        <button class="btn-ghost" id="logoutBtn" type="button">退出登录</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section__title">我的收藏</h2>
+      ${favList.length
+        ? `<div class="artist-grid">${favList.map((f) => favCard(f)).join('')}</div>`
+        : `<div class="empty">
+             <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-9.5-8.2C.5 9.8 2 6 5.5 6c2 0 3.4 1 4.5 2.4C11 7 12.5 6 14.5 6 18 6 19.5 9.8 17.5 12.8 15 16.7 12 21 12 21z"/></svg>
+             <p>还没有收藏，去「发现」点几个喜欢的团体吧</p>
+           </div>`}
+    </div>
+
+    <div class="section">
+      <h2 class="section__title">最近看过</h2>
+      ${recent.length
+        ? `<div class="chip-list">${recent.map((n) => `<button class="chip" data-name="${escapeHtml(n)}">${escapeHtml(n)}</button>`).join('')}</div>`
+        : `<p style="color:var(--text-faint);font-size:13px;">暂无浏览记录</p>`}
+    </div>
+
+    <div class="section">
+      <h2 class="section__title">搜索历史${searches.length ? ` <button class="link-btn" id="clearSearches" type="button">清空</button>` : ''}</h2>
+      ${searches.length
+        ? `<div class="chip-list">${searches.map((s) => `<button class="chip" data-name="${escapeHtml(s)}">${escapeHtml(s)}</button>`).join('')}</div>`
+        : `<p style="color:var(--text-faint);font-size:13px;">暂无搜索记录</p>`}
+    </div>
+  `;
+
+  $('#logoutBtn').addEventListener('click', () => {
+    clearSession();
+    toast('已退出登录');
+    renderMine();
+  });
+  $('#clearSearches')?.addEventListener('click', async () => {
+    try { await api('/api/me/searches', { method: 'DELETE' }); renderMine(); } catch { /* 静默 */ }
+  });
+  view.querySelectorAll('.chip[data-name]').forEach((chip) => {
+    chip.addEventListener('click', () => { trackRecent(chip.dataset.name); location.hash = `#/artist/${encodeURIComponent(chip.dataset.name)}`; });
+  });
+  view.querySelectorAll('.artist-card[data-name]').forEach((card) => {
+    card.addEventListener('click', () => { location.hash = `#/artist/${encodeURIComponent(card.dataset.name)}`; });
+  });
+}
+
+function favCard(f) {
+  return `
+    <button class="artist-card" type="button" data-name="${escapeHtml(f.name)}">
+      <div class="artist-card__cover">
+        ${f.cover ? `<img src="${escapeHtml(proxy(f.cover))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'" />` : ''}
+        <span class="artist-card__type">收藏</span>
+      </div>
+      <div class="artist-card__body">
+        <div class="artist-card__name">${escapeHtml(f.name)}</div>
+        <div class="artist-card__zh">${escapeHtml(f.nameZh || '')}</div>
+      </div>
+    </button>`;
+}
+
+/* ================= 视图：歌手详情 ================= */
+const normKey = (s) => String(s || '').toLowerCase().replace(/[\s\-_.·'"“”‘’()（）[\]]/g, '');
+
+async function loadMemberLinks() {
+  try {
+    const res = await fetch('/api/members');
+    if (res.ok) return new Set((await res.json()).members.map((m) => normKey(m.name)));
+  } catch { /* 静默 */ }
+  return new Set();
+}
+
+async function loadSongLinks() {
+  try {
+    const res = await fetch('/api/song-links');
+    if (res.ok) return (await res.json()).links || {};
+  } catch { /* 静默 */ }
+  return {};
+}
+
+async function renderArtist(name) {
+  trackRecent(name);
+  view.innerHTML = `<div class="spinner"></div>`;
+  const [profile, members, songLinks] = await Promise.all([
+    fetch(`/api/artist-profile?name=${encodeURIComponent(name)}`).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+    loadMemberLinks(),
+    loadSongLinks(),
+  ]);
+  await loadCloudFavs();
+
+  const cover = await resolveCover(name, profile);
+  const facts = (profile && Array.isArray(profile.facts)) ? profile.facts : [];
+  const awards = (profile && Array.isArray(profile.awards)) ? profile.awards : [];
+  const songs = (profile && Array.isArray(profile.songs)) ? profile.songs : [];
+
+  view.innerHTML = `
+    <div class="detail">
+      <div class="detail__hero">
+        ${cover ? `<img class="detail__cover" src="${escapeHtml(proxy(cover))}" alt="" referrerpolicy="no-referrer" />` : ''}
+        <div class="detail__shade"></div>
+      </div>
+      <div class="detail__head">
+        <div class="detail__name">${escapeHtml(name)}</div>
+        <div class="detail__sub">
+          ${profile ? escapeHtml(profile.type === 'solo' ? '个人歌手' : '团体') : ''}
+          ${awards.length ? `<span>· ${awards.length} 项荣誉</span>` : ''}
+        </div>
+        <div style="display:flex;gap:10px;margin-top:14px;">
+          <button class="btn-ghost" id="favBtn" type="button">${isFav(name) ? '♥ 已收藏' : '♡ 收藏'}</button>
+          <button class="btn-ghost" id="regenBtn" type="button">↻ 重新生成</button>
+        </div>
+      </div>
+
+      ${facts.length ? `
+      <div class="detail__body">
+        <div class="detail__facts">
+          ${facts.map((f) => `
+            <div class="fact-row">
+              <span class="fact-row__label">${escapeHtml(f.label)}</span>
+              <span class="fact-row__value">${escapeHtml(f.value)}${f.source ? ` <span class="fact-row__src">· ${escapeHtml(f.source)}</span>` : ''}</span>
+            </div>`).join('')}
+        </div>
+      </div>` : ''}
+
+      <div class="detail__body detail__ai">
+        <div class="detail__ai" id="aiBox">
+          <div class="spinner"></div>
+        </div>
+        <div class="source-line" id="sourceLine" hidden></div>
+      </div>
+    </div>
+  `;
+
+  $('#favBtn').addEventListener('click', async (e) => {
+    const on = await toggleFav({ name, nameZh: profile?.nameZh || '' });
+    e.currentTarget.textContent = on ? '♥ 已收藏' : '♡ 收藏';
+    e.currentTarget.classList.toggle('is-on', on);
   });
 
-  container.append(grid);
+  let latestProfile = profile;
+  const run = async () => {
+    const box = $('#aiBox');
+    const sourceLine = $('#sourceLine');
+    box.innerHTML = `<div class="spinner"></div>`;
+    sourceLine.hidden = true;
+
+    let text = '';
+    let sources = [];
+    try {
+      const body = await postChat(name);
+      await consumeStream(body, (ev) => {
+        if (ev.type === 'meta') {
+          sources = Array.isArray(ev.sources) ? ev.sources : [];
+        } else if (ev.type === 'delta') {
+          text += ev.text || '';
+          box.innerHTML = renderMarkdown(text, {
+            songLinks,
+            members,
+            artist: name,
+            linkPrefix: '#/artist/',
+          }) + `<span class="cursor"></span>`;
+        } else if (ev.type === 'done') {
+          if (text) box.innerHTML = renderMarkdown(text, { songLinks, members, artist: name, linkPrefix: '#/artist/' });
+        } else if (ev.type === 'error') {
+          box.innerHTML = `<div class="error-box">${escapeHtml(ev.message || '生成失败')}</div>`;
+        }
+      });
+      if (sources.length) {
+        sourceLine.textContent = `资料参考：${sources.join(' · ')}`;
+        sourceLine.hidden = false;
+      }
+    } catch (err) {
+      box.innerHTML = `<div class="error-box">${escapeHtml(err.message || '加载失败')}<br><button class="btn-ghost retry-btn" id="retry">重试</button></div>`;
+      $('#retry')?.addEventListener('click', run);
+    }
+  };
+  $('#regenBtn').addEventListener('click', run);
+  run();
 }
+
+async function resolveCover(name, profile) {
+  // 优先内置/百科首图，其次 cover 接口兜底
+  if (profile && profile.imageUrl) return profile.imageUrl;
+  try {
+    const res = await fetch(`/api/cover?name=${encodeURIComponent(name)}`);
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.url) return data.url;
+    }
+  } catch { /* 静默 */ }
+  return '';
+}
+
+/* ================= 路由 ================= */
+const routes = {
+  home: renderHome,
+  hot: renderHot,
+  mine: renderMine,
+};
+
+async function navigate() {
+  const hash = location.hash || '#/home';
+  const match = /^#\/artist\/(.+)$/.exec(hash);
+  if (match) {
+    setActiveTab('');
+    view.scrollTop = 0;
+    await renderArtist(decodeURIComponent(match[1]));
+    return;
+  }
+  const tab = hash.replace(/^#\//, '').split('/')[0];
+  const name = routes[tab] ? tab : 'home';
+  setActiveTab(name);
+  view.scrollTop = 0;
+  await routes[name]();
+}
+
+function setActiveTab(name) {
+  document.querySelectorAll('.tab').forEach((tab) => {
+    tab.classList.toggle('is-active', tab.dataset.view === name);
+  });
+}
+
+document.querySelectorAll('.tab').forEach((tab) => {
+  tab.addEventListener('click', () => {
+    if (location.hash !== `#/${tab.dataset.view}`) {
+      location.hash = `#/${tab.dataset.view}`;
+    } else {
+      navigate();
+    }
+  });
+});
+window.addEventListener('hashchange', navigate);
+window.addEventListener('pageshow', navigate);
+
+loadConfig();
+navigate();

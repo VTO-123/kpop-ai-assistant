@@ -44,6 +44,22 @@ const TARGETS = [
   { name: '(G)I-DLE', nameZh: '女娃', type: 'group', baike: '(G)I-DLE', netease: 'i-dle', aliases: ['GIDLE', 'i-dle', '여자아이들', '(여자)아이들'] },
   { name: 'Kep1er', nameZh: '葡', type: 'group', baike: 'Kep1er', netease: 'Kep1er', aliases: ['케플러'] },
 
+  // ---------- 扩充：经典/热门团体 ----------
+  { name: 'TVXQ', nameZh: '东方神起', type: 'group', baike: '东方神起', netease: '东方神起', aliases: ['东方神起', '동방신기', 'DBSK', 'Tohoshinki'] },
+  { name: 'KARA', nameZh: 'KARA', type: 'group', baike: 'KARA', netease: 'KARA', aliases: ['카라'] },
+  { name: 'Wonder Girls', nameZh: 'Wonder Girls', type: 'group', baike: 'Wonder Girls', netease: 'Wonder Girls', aliases: ['원더걸스'] },
+  { name: 'f(x)', nameZh: '函数', type: 'group', baike: 'f(x)', netease: 'f(x)', aliases: ['函数', '함수', 'FX'] },
+  { name: 'SISTAR', nameZh: 'SISTAR', type: 'group', baike: 'SISTAR', netease: 'SISTAR', aliases: ['씨스타'] },
+  { name: '2PM', nameZh: '2PM', type: 'group', baike: '2PM', netease: '2PM', aliases: ['투피엠'] },
+  { name: 'BTOB', nameZh: '兔比', type: 'group', baike: 'BTOB', netease: 'BTOB', aliases: ['비투비', 'BtoB'] },
+  { name: 'INFINITE', nameZh: '无限', type: 'group', baike: 'INFINITE', netease: 'INFINITE', aliases: ['인피니트'] },
+  { name: 'VIXX', nameZh: 'VIXX', type: 'group', baike: 'VIXX', netease: 'VIXX', aliases: ['빅스'] },
+  { name: 'EXID', nameZh: 'EXID', type: 'group', baike: 'EXID', netease: 'EXID', aliases: ['이엑스아이디'] },
+  { name: 'T-ara', nameZh: '皇冠', type: 'group', baike: 'T-ara', netease: 'T-ara', aliases: ['TARA', 'T-ARA', '티아라'] },
+  { name: 'XG', nameZh: 'XG', type: 'group', baike: 'XG', netease: 'XG', aliases: ['엑스지'] },
+  { name: 'tripleS', nameZh: 'tripleS', type: 'group', baike: 'tripleS', netease: 'tripleS', aliases: ['트리플에스', 'SIGNAL'] },
+  { name: 'PLAVE', nameZh: 'PLAVE', type: 'group', baike: 'PLAVE', netease: 'PLAVE', aliases: ['플레이브'] },
+
   // ---------- 个人 ----------
   { name: 'IU', nameZh: '李知恩', type: 'solo', baike: 'IU', netease: 'IU', aliases: ['李知恩', '아이유'] },
   { name: 'HyunA', nameZh: '金泫雅', type: 'solo', baike: '泫雅', netease: '金泫雅', aliases: ['泫雅', '현아', 'Kim HyunA'] },
@@ -60,6 +76,21 @@ const TARGETS = [
   { name: 'Taemin', nameZh: '李泰民', type: 'solo', baike: '泰民', netease: '泰民', aliases: ['泰民', '李泰民', '태민'] },
   { name: 'KAI', nameZh: '金钟仁', type: 'solo', baike: 'KAI', netease: '金钟仁', neteaseId: 990210, aliases: ['金钟仁', '카이', 'Kai'] },
   { name: 'Jung Kook', nameZh: '田柾国', type: 'solo', baike: '田柾国', netease: 'Jung Kook', aliases: ['Jungkook', '田柾国', '정국', 'JK'] },
+
+  // ---------- 扩充：核心成员 / 热门个人 ----------
+  { name: 'RM', nameZh: '金南俊', type: 'solo', baike: '金南俊', netease: 'RM', aliases: ['金南俊', 'Rap Monster', '래몬'] },
+  { name: 'Jin', nameZh: '金硕珍', type: 'solo', baike: '金硕珍', netease: 'Jin', aliases: ['金硕珍', '진'] },
+  { name: 'SUGA', nameZh: '闵玧其', type: 'solo', baike: '闵玧其', netease: 'SUGA', aliases: ['闵玧其', '슈가', 'Agust D'] },
+  { name: 'j-hope', nameZh: '郑号锡', type: 'solo', baike: '郑号锡', netease: 'j-hope', aliases: ['郑号锡', '제이홉', 'J-Hope'] },
+  { name: 'Jimin', nameZh: '朴智旻', type: 'solo', baike: '朴智旻', netease: 'Jimin', aliases: ['朴智旻', '지민', 'Park Jimin'] },
+  { name: 'V', nameZh: '金泰亨', type: 'solo', baike: '金泰亨', netease: 'V', aliases: ['金泰亨', '뷔', 'Kim Taehyung'] },
+  { name: 'Nayeon', nameZh: '林娜琏', type: 'solo', baike: '林娜琏', netease: 'Nayeon', aliases: ['林娜琏', '나연'] },
+  { name: 'Irene', nameZh: '裴珠泫', type: 'solo', baike: '裴珠泫', netease: 'Irene', aliases: ['裴珠泫', '아이린'] },
+  { name: 'Seulgi', nameZh: '姜涩琪', type: 'solo', baike: '姜涩琪', netease: 'Seulgi', aliases: ['姜涩琪', '슬기'] },
+  { name: 'Sakura', nameZh: '宫脇咲良', type: 'solo', baike: '宫脇咲良', netease: '宫脇咲良', aliases: ['宫脇咲良', '사쿠라', 'Miyawaki Sakura'] },
+  { name: 'Chaewon', nameZh: '金采源', type: 'solo', baike: '金采源', netease: '金采源', aliases: ['金采源', '채원', 'Kim Chaewon'] },
+  { name: 'Yuqi', nameZh: '宋雨琦', type: 'solo', baike: '宋雨琦', netease: '宋雨琦', aliases: ['宋雨琦', '우기'] },
+  { name: 'Tzuyu', nameZh: '周子瑜', type: 'solo', baike: '周子瑜', netease: '周子瑜', aliases: ['周子瑜', '쯔위'] },
 ];
 
 const normalize = (value) =>
@@ -95,6 +126,11 @@ const EXTRA = [
   ['Hwasa', '华莎', '华莎'],
   ['Zico', '禹智皓', 'ZICO'],
   ['Somi', '全昭弥', 'SOMI'],
+  ['Hanni', 'Hanni', 'Hanni'],
+  ['Karina', '刘知珉', 'Karina'],
+  ['Minji', 'Minji', 'Minji'],
+  ['Winter', '金玟庭', 'Winter'],
+  ['Wonyoung', '张元英', '张元英'],
 ];
 
 const clean = (value) => String(value || '').replace(/\s+/g, ' ').trim();

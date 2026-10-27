@@ -48,6 +48,21 @@ function friendlyError(err) {
   return message.slice(0, 200) || '生成失败，请重试';
 }
 
+/** 把实时抓到的资料（百科/网易云/QQ）转成给模型看的上下文，字段全带上。 */
+function liveToContext(p) {
+  if (!p) return '';
+  const parts = [];
+  const factsLines = (Array.isArray(p.facts) ? p.facts : [])
+    .map((fact) => `${String(fact.label || '').trim()}：${String(fact.value || '').trim()}`)
+    .filter(Boolean);
+  if (p.bio) factsLines.push(`简介：${String(p.bio).trim()}`);
+  if (factsLines.length) parts.push(`【百度百科资料】\n${factsLines.join('\n')}`);
+  if (Array.isArray(p.songs) && p.songs.length) {
+    parts.push(`【网易云音乐资料】\n热门歌曲：${p.songs.join('、')}`);
+  }
+  return parts.join('\n\n');
+}
+
 /**
  * POST /api/chat
  * body: { group: string }
@@ -72,7 +87,7 @@ export async function handleChat(req, res) {
   }
 
   // 来源判定：内置命中就用内置，其余交给 AI 实时生成
-  const { source, entry } = resolveSource(group);
+  const { source, entry, profile: libProfile } = resolveSource(group);
 
   const controller = new AbortController();
   const abortUpstream = () => controller.abort();
@@ -122,13 +137,40 @@ export async function handleChat(req, res) {
       sources: source === 'ai' ? live?.sources || [] : entry?.sources || [],
     });
 
-    if (source === 'builtin' || source === 'profile') {
-      // 内置精选或歌手库资料：直接用真实资料出档案，不调用模型
+    if (source === 'builtin') {
+      // 内置精选：直接用人工核对过的档案
       await streamDemo({ text: entry.text, send, signal: controller.signal });
+    } else if (source === 'profile') {
+      // 歌手库资料：资料齐全直接拼档案（快且真实）；
+      // 关键字段缺太多（如出道/公司/简介/成员都不全）时交给模型按完整模板写，
+      // 模型只基于抓到的真实资料写，不编造；DEMO 模式退回拼档案。
+      const p = libProfile || entry.profile || {};
+      const rich = Boolean(p.debut || p.agency || p.bio || (p.members?.length || 0) >= 2);
+      send({ type: 'context', grounded: true, profileName: p.name || group, sources: entry.sources });
+      if (config.demo || rich) {
+        await streamDemo({ text: entry.text, send, signal: controller.signal });
+      } else {
+        await streamUpstream({
+          group,
+          send,
+          signal: controller.signal,
+          profileContext: liveToContext(p),
+        });
+      }
     } else if (liveReady) {
-      // 实时抓到的百科 / 网易云资料：同样直接成稿
+      // 实时抓到的百科 / 网易云资料：交给模型按完整档案模板写（内容更丰富），
+      // 模型只基于抓到的真实资料写，不编造；没配 Key 时退回拼档案兜底。
       send({ type: 'context', grounded: true, profileName: live.name || group, sources: live.sources });
-      await streamDemo({ text: buildProfileArchive(live), send, signal: controller.signal });
+      if (config.demo) {
+        await streamDemo({ text: buildProfileArchive(live), send, signal: controller.signal });
+      } else {
+        await streamUpstream({
+          group,
+          send,
+          signal: controller.signal,
+          profileContext: liveToContext(live),
+        });
+      }
     } else if (config.demo) {
       // 没配 Key 又没有任何公开资料：明确告知，绝不编造假档案
       throw Object.assign(

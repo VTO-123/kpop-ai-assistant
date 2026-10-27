@@ -1,0 +1,17 @@
+{
+  "name": "K-POP 档案室",
+  "short_name": "K-POP 档案室",
+  "description": "移动端粉丝版 K-POP 档案室：搜索/发现你喜欢的团体，AI 生成专属档案，收藏你的本命。",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0b12",
+  "theme_color": "#0b0b12",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

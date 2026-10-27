@@ -39,6 +39,7 @@ export function renderMarkdown(text, options = {}) {
   const songLinks = options.songLinks || {};
   const members = options.members instanceof Set ? options.members : new Set(options.members || []);
   const artist = options.artist || '';
+  const linkPrefix = options.linkPrefix || '/artist/';
   const out = [];
   let list = null;
   let section = '';
@@ -78,7 +79,7 @@ export function renderMarkdown(text, options = {}) {
         out.push('<ul>');
         list = 'ul';
       }
-      out.push(`<li>${renderBullet(bullet[1], members)}</li>`);
+      out.push(`<li>${renderBullet(bullet[1], members, linkPrefix)}</li>`);
       continue;
     }
 
@@ -156,14 +157,14 @@ function renderSongItem(item, section, songLinks, artist) {
 }
 
 /** 「成员名单」这一行：用 [[名字]] 标记的直接成链，内置数据按已知成员名匹配。 */
-function renderBullet(text, members) {
+function renderBullet(text, members, linkPrefix) {
   const match = /^(成员名单|成员)[:：]\s*(.+)$/.exec(text);
   if (!match) return inline(text);
 
   const label = `${escapeHtml(match[1])}：`;
   const body = match[2];
 
-  if (body.includes('[[')) return `${label}${renderMarkedMembers(body)}`;
+  if (body.includes('[[')) return `${label}${renderMarkedMembers(body, linkPrefix)}`;
   if (members.size === 0) return inline(text);
 
   const parts = body.split(/([、，,；;\/])/);
@@ -181,7 +182,7 @@ function renderBullet(text, members) {
 
       if (name && members.has(key)) {
         return (
-          `<a class="member-link" href="/artist/${encodeURIComponent(name)}">` +
+          `<a class="member-link" href="${linkPrefix}${encodeURIComponent(name)}">` +
           `${escapeHtml(name)}</a>${escapeHtml(rest)}`
         );
       }
@@ -193,7 +194,7 @@ function renderBullet(text, members) {
 }
 
 /** 把输出里的 [[成员名]] 标记渲染成个人页链接。 */
-function renderMarkedMembers(body) {
+function renderMarkedMembers(body, linkPrefix) {
   return body
     .split(/(\[\[[^\]]+\]\])/)
     .map((part) => {
@@ -202,7 +203,7 @@ function renderMarkedMembers(body) {
       const name = marked[1].trim();
       if (!name) return '';
       return (
-        `<a class="member-link" href="/artist/${encodeURIComponent(name)}">` +
+        `<a class="member-link" href="${linkPrefix}${encodeURIComponent(name)}">` +
         `${escapeHtml(name)}</a>`
       );
     })

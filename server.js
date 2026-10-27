@@ -1,6 +1,7 @@
 import http from 'node:http';
 import { renderArtistPage } from './src/artist-page.js';
 import { resolveArtistProfile } from './src/artist-profile.js';
+import { authenticate, login, register } from './src/auth.js';
 import { resolveBilibiliTarget } from './src/bilibili.js';
 import { config } from './src/config.js';
 import { handleChat } from './src/chat.js';
@@ -12,7 +13,51 @@ import { sanitizeGroup } from './src/prompt.js';
 import { renderSongPage } from './src/song-page.js';
 import { listFeaturedSongs, songLinkMap, toCarouselItem } from './src/songs.js';
 import { sendJson, serveStatic } from './src/static.js';
+import {
+  addFavorite,
+  clearSearches,
+  getUserData,
+  pushRecent,
+  pushSearch,
+  removeFavorite,
+} from './src/userstore.js';
 import { serveOgl } from './src/vendor.js';
+
+const AUTH_MAX_BODY_BYTES = 4 * 1024;
+
+function readAuthBody(req) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    let size = 0;
+    req.on('data', (chunk) => {
+      size += chunk.length;
+      if (size > AUTH_MAX_BODY_BYTES) {
+        reject(Object.assign(new Error('payload too large'), { code: 'TOO_LARGE' }));
+        req.destroy();
+        return;
+      }
+      chunks.push(chunk);
+    });
+    req.on('end', () => {
+      try {
+        const text = Buffer.concat(chunks).toString('utf8');
+        resolve(text ? JSON.parse(text) : {});
+      } catch {
+        reject(Object.assign(new Error('invalid json'), { code: 'BAD_JSON' }));
+      }
+    });
+    req.on('error', reject);
+  });
+}
+
+function authUser(req, res) {
+  const user = authenticate(req);
+  if (!user) {
+    sendJson(res, 401, { error: '请先登录' });
+    return null;
+  }
+  return user;
+}
 
 const server = http.createServer(async (req, res) => {
   let pathname = '/';
@@ -40,6 +85,70 @@ const server = http.createServer(async (req, res) => {
     if (pathname === '/api/chat') {
       if (req.method !== 'POST') return sendJson(res, 405, { error: '只支持 POST' });
       return await handleChat(req, res);
+    }
+
+    // —— 账号体系：每个用户独立收藏 / 最近看过 / 搜索历史 ——
+    if (pathname === '/api/register') {
+      if (req.method !== 'POST') return sendJson(res, 405, { error: '只支持 POST' });
+      const body = await readAuthBody(req).catch(() => ({}));
+      const result = register(body.username, body.password);
+      if (!result.ok) return sendJson(res, 400, { error: result.message });
+      return sendJson(res, 200, { token: result.token, username: result.username });
+    }
+
+    if (pathname === '/api/login') {
+      if (req.method !== 'POST') return sendJson(res, 405, { error: '只支持 POST' });
+      const body = await readAuthBody(req).catch(() => ({}));
+      const result = login(body.username, body.password);
+      if (!result.ok) return sendJson(res, 401, { error: result.message });
+      return sendJson(res, 200, { token: result.token, username: result.username });
+    }
+
+    if (pathname === '/api/me') {
+      const user = authUser(req, res);
+      if (!user) return;
+      if (req.method !== 'GET' && req.method !== 'HEAD') {
+        return sendJson(res, 405, { error: '只支持 GET' });
+      }
+      return sendJson(res, 200, { username: user, ...getUserData(user) });
+    }
+
+    if (pathname === '/api/me/favorites') {
+      const user = authUser(req, res);
+      if (!user) return;
+      if (req.method === 'GET' || req.method === 'HEAD') {
+        return sendJson(res, 200, { favorites: getUserData(user).favorites });
+      }
+      if (req.method === 'POST') {
+        const body = await readAuthBody(req).catch(() => ({}));
+        const favorites = addFavorite(user, body);
+        return sendJson(res, 200, { favorites });
+      }
+      if (req.method === 'DELETE') {
+        const name = sanitizeGroup(searchParams.get('name'));
+        if (!name) return sendJson(res, 400, { error: '缺少歌手名称' });
+        return sendJson(res, 200, { favorites: removeFavorite(user, name) });
+      }
+      return sendJson(res, 405, { error: '不支持的请求方式' });
+    }
+
+    if (pathname === '/api/me/recent') {
+      const user = authUser(req, res);
+      if (!user) return;
+      if (req.method !== 'POST') return sendJson(res, 405, { error: '只支持 POST' });
+      const body = await readAuthBody(req).catch(() => ({}));
+      return sendJson(res, 200, { recent: pushRecent(user, body.name) });
+    }
+
+    if (pathname === '/api/me/searches') {
+      const user = authUser(req, res);
+      if (!user) return;
+      if (req.method === 'DELETE') {
+        return sendJson(res, 200, { searches: clearSearches(user) });
+      }
+      if (req.method !== 'POST') return sendJson(res, 405, { error: '只支持 POST' });
+      const body = await readAuthBody(req).catch(() => ({}));
+      return sendJson(res, 200, { searches: pushSearch(user, body.keyword) });
     }
 
     // 歌曲链接解析：bvid 直链 → B 站搜索接口 → 搜索页
