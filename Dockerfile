@@ -15,6 +15,9 @@ ENV NODE_ENV=production \
 
 EXPOSE 4321
 
+# 数据目录（账号/收藏等）给 node 用户写权限；生产环境建议挂持久卷到 /app/data
+RUN mkdir -p /app/data && chown -R node:node /app/data
+
 USER node
 
 HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
