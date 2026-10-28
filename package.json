@@ -21,8 +21,5 @@
     "deepseek",
     "openai"
   ],
-  "license": "MIT",
-  "dependencies": {
-    "ogl": "^1.0.11"
-  }
+  "license": "MIT"
 }

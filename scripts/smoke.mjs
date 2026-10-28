@@ -472,15 +472,6 @@ async function demoSuite() {
     );
     check('轮播：不再有默认示例图', !JSON.stringify(imagesJson).includes('Liquid Metal'));
 
-    // FlexCarousel 依赖：ogl 的 ESM 源码 + 组件样式
-    const oglJs = await fetch(`${app.base}/vendor/ogl/index.js`);
-    check(
-      'GET /vendor/ogl/index.js',
-      oglJs.status === 200 && /javascript/.test(oglJs.headers.get('content-type') || ''),
-    );
-    const flexCss = await fetch(`${app.base}/flex-carousel.css`);
-    check('GET /flex-carousel.css', flexCss.status === 200);
-
     const badProxy = await fetch(
       `${app.base}/api/img?u=${encodeURIComponent('https://evil.example.com/a.jpg')}`,
     );

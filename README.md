@@ -3,7 +3,7 @@
 [![CI](https://github.com/VTO-123/kpop-archive/actions/workflows/ci.yml/badge.svg)](https://github.com/VTO-123/kpop-archive/actions/workflows/ci.yml)
 [![Docker image](https://github.com/VTO-123/kpop-archive/actions/workflows/docker-image.yml/badge.svg)](https://github.com/VTO-123/kpop-archive/actions/workflows/docker-image.yml)
 ![Node](https://img.shields.io/badge/node-%E2%89%A518.17-339933?logo=node.js&logoColor=white)
-![Runtime deps](https://img.shields.io/badge/runtime%20deps-1-4B32C3)
+![Runtime deps](https://img.shields.io/badge/runtime%20deps-0-4B32C3)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
 > 输入任意 K-POP 团体/歌手名，AI 流式生成入坑档案，歌曲直接跳转 B 站观看。移动端 C 端粉丝 App（PWA），前后端同仓的单体工程。
@@ -65,7 +65,7 @@ npm run smoke
 
 ## 四、技术特色
 
-- **前后端同仓单体工程**：一个 Node 原生进程、默认 `4321` 一个端口，同时托管 `public/` 静态资源与 `/api/*` 路由；零 Express / Next.js，运行时依赖只有 `ogl`（3D 轮播）。
+- **前后端同仓单体工程**：一个 Node 原生进程、默认 `4321` 一个端口，同时托管 `public/` 静态资源与 `/api/*` 路由；零 Express / Next.js，运行时零第三方依赖。
 - **移动端 PWA**：`public/manifest.json` 声明应用名 / 图标 / 全屏模式，手机可「添加到主屏幕」以 App 形态运行；移动端三 tab（发现 / 热门 / 我的）用 hash 路由单页切换，`mobile.css` 单独适配触屏。
 - **账号体系**：`src/auth.js` 注册 / 登录 / 鉴权——密码 `scrypt` 加盐哈希（不存明文）、`Bearer` token 会话（30 天过期）、用户名正则 `^[A-Za-z0-9_\u4e00-\u9fa5]{2,20}$` 校验天然防目录穿越；`src/userstore.js` 把每个账号的收藏 / 最近 / 搜索历史落盘到 `data/users/<用户名>.json`，各去重置顶、上限 20 条，`.gitignore` 排除用户数据绝不入库。
 - **SSE 流式响应**：`src/chat.js` 直接写 `text/event-stream`，按 `data: {"type":"delta"}` 逐字下发，15 秒心跳；客户端 `AbortController` 可中断，已输出内容保留；无 Key 自动切 DEMO 流式语料。
@@ -125,7 +125,7 @@ kpop-archive/
 │   ├── app.js               # 移动端单页逻辑：路由 / 登录 / 云端同步
 │   ├── artist.js            # 档案页：流式渲染 / 成员链接 / B 站解析
 │   ├── song.js              # 歌曲页：内嵌 B 站播放器
-│   ├── js/                  # md / stream / store / flex-carousel
+│   ├── js/                  # md / stream / store
 │   ├── mobile.css           # 移动端触屏适配（发现 / 热门 / 我的）
 │   └── manifest.json        # PWA：应用名 / 图标 / 全屏模式
 ├── data/
@@ -242,7 +242,7 @@ data: {"type":"done"}
 
 ### `GET /api/songs` 与 `GET /api/song-links`
 
-- `/api/songs`：首页「热门视频」的 10 首精选，`src` 已换成 `/api/img?...` 同源代理地址（WebGL 纹理要求同源）。
+- `/api/songs`：移动端「热门」tab 的热门 MV 列表，`src` 已换成 `/api/img?...` 同源代理地址（图源直连会偶发限流，统一走代理转发）。
 - `/api/song-links`：返回 `{ total, links: { <规范化歌名>: { title, artist, bvid } } }`。前端渲染时按歌名查表：有 `bvid` 直接生成视频页链接，没有则带上歌名与歌手，点击时交给 `/api/bilibili` 解析。
 
 ### `GET /api/members`
@@ -277,14 +277,6 @@ data: {"type":"done"}
    - **QQ 音乐**：`smartbox_new.fcg` 拿歌手 mid → `musicu.fcg` 的 `get_singer_detail_info` 拿简介、热门歌曲、专辑；
 3. 拿到资料就直接按真实字段成稿，每个字段在页面上标出来源；缺的章节写「暂未收录」；
 4. 所有来源都拿不到时，DEMO 模式明确提示「暂时无法生成」，LIVE 模式才交给模型补写；模型同样只基于抓到的资料，不虚构歌手、成员、公司、年份或作品。
-
-### 关于 FlexCarousel
-
-首页搜索框下方的 3D 轮播在 [public/js/flex-carousel.js](public/js/flex-carousel.js)，是从 React + ogl 的 FlexCarousel 源码逐行移植的原生 ES module：
-
-- 着色器（卡片圆角遮罩 / 液体透镜 / 色散）、弹簧物理、拖拽惯性、滚轮、方向键、点击聚焦、`rise` 入场动画、`liquid` 预设参数全部保留；
-- 用命令式 DOM 更新代替 React state，`DEFAULT_ITEMS` 置空——卡片数据必须来自 `data/songs.json`（歌曲 MV）；
-- 只在首页挂载；WebGL2 不可用或 `ogl` 未安装时，自动降级为图片墙（`.cover-fallback`），不白屏。
 
 ### 图片来源、B 站链接与合规
 
@@ -346,9 +338,6 @@ data: {"type":"done"}
 
 **端口被占用**
 换端口：`PORT=4322 npm start`（PowerShell：`$env:PORT=4322; npm start`）。
-
-**轮播显示成一格格图片，没有 3D 效果**
-说明 WebGL2 不可用或没执行 `npm install`（缺 `node_modules/ogl`）。执行 `npm install` 后重启；仍不行的话浏览器需支持 WebGL2（Chrome/Edge 默认支持，可在 `chrome://gpu` 确认）。
 
 **提示「资料服务暂时不可用」**
 检查网络与 `AI_BASE_URL`；企业代理需要走网关时，把网关地址填进去。

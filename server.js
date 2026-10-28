@@ -21,7 +21,6 @@ import {
   pushSearch,
   removeFavorite,
 } from './src/userstore.js';
-import { serveOgl } from './src/vendor.js';
 
 const AUTH_MAX_BODY_BYTES = 4 * 1024;
 
@@ -283,14 +282,6 @@ const server = http.createServer(async (req, res) => {
         'Cache-Control': 'no-store',
       });
       return res.end(req.method === 'HEAD' ? undefined : page.html);
-    }
-
-    // 浏览器端 ESM 依赖（ogl）
-    if (pathname.startsWith('/vendor/ogl')) {
-      if (req.method !== 'GET' && req.method !== 'HEAD') {
-        return sendJson(res, 405, { error: '只支持 GET' });
-      }
-      return await serveOgl(req, res, pathname);
     }
 
     // 详情页 /artist/[name]：服务端注入标题与封面，正文由前端流式获取
