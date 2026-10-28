@@ -1,7 +1,7 @@
 {
   "name": "K-POP 档案室",
   "short_name": "K-POP 档案室",
-  "description": "移动端粉丝版 K-POP 档案室：搜索/发现你喜欢的团体，AI 生成专属档案，收藏你的本命。",
+  "description": "移动端粉丝版 K-POP 档案室：搜索/发现你喜欢的团体，生成专属档案，收藏你的本命。",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
